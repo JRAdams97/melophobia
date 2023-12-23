@@ -14,6 +14,7 @@ public class StatusConverter implements AttributeConverter<Status, Integer> {
         if (status == null) {
             return null;
         }
+
         return status.getValue();
     }
 
@@ -24,7 +25,7 @@ public class StatusConverter implements AttributeConverter<Status, Integer> {
         }
 
         return Stream.of(Status.values())
-                .filter(c -> c.getValue() == value)
+                .filter(v -> v.getValue() == value)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }

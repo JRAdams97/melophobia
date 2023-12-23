@@ -1,11 +1,10 @@
 package com.jradams.melophobia.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,12 +15,12 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class ReleaseType {
+public class Iswc {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long releaseTypeId;
+    private Long iswcId;
 
-    @Enumerated(EnumType.STRING)
-    private ReleaseTypeName name;
+    @Pattern(regexp = "[A-Z]-\\d{3}.\\d{3}.\\d{3}-\\d", message = "ISWC format: 'A-###.###.###-#'")
+    private String iswc;
 }

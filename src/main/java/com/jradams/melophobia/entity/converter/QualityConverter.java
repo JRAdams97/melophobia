@@ -14,6 +14,7 @@ public class QualityConverter implements AttributeConverter<Quality, String> {
         if (quality == null) {
             return null;
         }
+
         return quality.getGrade();
     }
 
@@ -24,7 +25,7 @@ public class QualityConverter implements AttributeConverter<Quality, String> {
         }
 
         return Stream.of(Quality.values())
-                .filter(c -> c.getGrade().equals(grade))
+                .filter(v -> v.getGrade().equals(grade))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }

@@ -1,30 +1,30 @@
 package com.jradams.melophobia.entity.converter;
 
-import com.jradams.melophobia.entity.TrackType;
+import com.jradams.melophobia.entity.ReleaseTypeName;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 import java.util.stream.Stream;
 
 @Converter(autoApply = true)
-public class TrackTypeConverter implements AttributeConverter<TrackType, String> {
+public class ReleaseTypeNameConverter implements AttributeConverter<ReleaseTypeName, String> {
 
     @Override
-    public String convertToDatabaseColumn(TrackType trackType) {
-        if (trackType == null) {
+    public String convertToDatabaseColumn(ReleaseTypeName releaseTypeName) {
+        if (releaseTypeName == null) {
             return null;
         }
 
-        return trackType.getType();
+        return releaseTypeName.getType();
     }
 
     @Override
-    public TrackType convertToEntityAttribute(String type) {
+    public ReleaseTypeName convertToEntityAttribute(String type) {
         if (type == null) {
             return null;
         }
 
-        return Stream.of(TrackType.values())
+        return Stream.of(ReleaseTypeName.values())
                 .filter(v -> v.getType().equals(type))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);

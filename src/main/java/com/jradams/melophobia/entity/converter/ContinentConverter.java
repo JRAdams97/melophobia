@@ -14,6 +14,7 @@ public class ContinentConverter implements AttributeConverter<Continent, String>
         if (continent == null) {
             return null;
         }
+
         return continent.getTitle();
     }
 
@@ -24,7 +25,7 @@ public class ContinentConverter implements AttributeConverter<Continent, String>
         }
 
         return Stream.of(Continent.values())
-                .filter(c -> c.getTitle().equals(title))
+                .filter(v -> v.getTitle().equals(title))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }

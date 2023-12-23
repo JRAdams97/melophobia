@@ -16,12 +16,12 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class ReleaseType {
+public class Language {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long releaseTypeId;
+    private Long languageId;
 
     @Enumerated(EnumType.STRING)
-    private ReleaseTypeName name;
+    private String name;
 }

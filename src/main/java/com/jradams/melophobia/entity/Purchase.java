@@ -6,6 +6,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,12 +19,19 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class ReleaseType {
+public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long releaseTypeId;
+    private Long purchaseId;
+
+    @NotNull(message = "Price is mandatory")
+    private Double price;
 
     @Enumerated(EnumType.STRING)
-    private ReleaseTypeName name;
+    private Currency currencyCode;
+
+    @ManyToOne
+    @JoinColumn(name = "vendor_id")
+    private Vendor vendor;
 }

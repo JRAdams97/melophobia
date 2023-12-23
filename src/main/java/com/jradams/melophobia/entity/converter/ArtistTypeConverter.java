@@ -14,6 +14,7 @@ public class ArtistTypeConverter implements AttributeConverter<ArtistType, Strin
         if (artistType == null) {
             return null;
         }
+
         return artistType.getType();
     }
 
@@ -24,7 +25,7 @@ public class ArtistTypeConverter implements AttributeConverter<ArtistType, Strin
         }
 
         return Stream.of(ArtistType.values())
-                .filter(c -> c.getType().equals(type))
+                .filter(v -> v.getType().equals(type))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
