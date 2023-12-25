@@ -42,8 +42,6 @@ public class Track {
     private Release firstRelease;
 
     private Boolean favourite;
-
-    @Enumerated(EnumType.STRING)
     private TrackType trackType;
 
     @ManyToMany

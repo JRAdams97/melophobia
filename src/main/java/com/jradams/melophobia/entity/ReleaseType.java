@@ -22,6 +22,5 @@ public class ReleaseType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long releaseTypeId;
 
-    @Enumerated(EnumType.STRING)
     private ReleaseTypeName name;
 }

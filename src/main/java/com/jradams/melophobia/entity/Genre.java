@@ -39,7 +39,4 @@ public class Genre {
     @JoinTable(name = "genre_hierarchy", joinColumns = @JoinColumn(name = "genre_id"),
             inverseJoinColumns = @JoinColumn(name = "parent_genre_id"))
     private Set<Genre> parentGenres;
-
-    @ManyToMany(mappedBy = "genres")
-    private Set<Artist> artists;
 }

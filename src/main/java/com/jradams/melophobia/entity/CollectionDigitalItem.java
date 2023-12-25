@@ -47,15 +47,8 @@ public class CollectionDigitalItem {
     private Integer totalDiscs;
 
     private Integer missingDiscs;
-
-    @Enumerated(EnumType.STRING)
     private Status artQuality;
-
-    @Enumerated(EnumType.STRING)
     private Status tagQuality;
-
-    @Enumerated(EnumType.STRING)
     private Status status;
-
     private String description;
 }

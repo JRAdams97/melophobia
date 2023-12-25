@@ -22,6 +22,5 @@ public class Language {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long languageId;
 
-    @Enumerated(EnumType.STRING)
-    private String name;
+    private LanguageName name;
 }

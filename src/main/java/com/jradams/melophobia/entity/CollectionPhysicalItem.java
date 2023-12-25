@@ -39,10 +39,7 @@ public class CollectionPhysicalItem {
     @JoinColumn(name = "media_id")
     private Media media;
 
-    @Enumerated(EnumType.STRING)
     private Quality packagingQuality;
-
-    @Enumerated(EnumType.STRING)
     private Quality mediaQuality;
 
     @ManyToOne

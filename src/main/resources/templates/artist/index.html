@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Artists</title>
+</head>
+<body>
+<div class="container">
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Genre(s)</th>
+      <th>Formation Date</th>
+      <th>Formation Location</th>
+      <th>Favourite</th>
+      <th>Artist Type</th>
+      <th>ISNI</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="artist: ${artists}">
+      <td th:text="${artist.name}"></td>
+      <td><span th:each="genre, i: ${artist.genres}"
+                th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
+      <td th:text="${artist.formationDate}"></td>
+      <td th:text="${artist.formationLocation.region.country.alpha2Code}"></td>
+      <td th:text="${artist.favourite}"></td>
+      <td th:text="${artist.artistType.type}"></td>
+      <td th:text="${artist.isni}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

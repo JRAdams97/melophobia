@@ -39,9 +39,5 @@ public class Country {
     @Pattern(regexp = "[A-Z]{2}", message = "Alpha 2 code must consist of two uppercase letters")
     private String alpha2Code;
 
-    @Enumerated(EnumType.STRING)
     private Continent countryContinent;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "country")
-    private Set<Region> regions;
 }

@@ -28,7 +28,6 @@ public class Purchase {
     @NotNull(message = "Price is mandatory")
     private Double price;
 
-    @Enumerated(EnumType.STRING)
     private Currency currencyCode;
 
     @ManyToOne

@@ -39,7 +39,4 @@ public class Region {
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
-    private Set<Location> locations;
 }

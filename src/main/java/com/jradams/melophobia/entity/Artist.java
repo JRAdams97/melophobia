@@ -45,7 +45,6 @@ public class Artist {
 
     private Boolean favourite;
 
-    @Enumerated(EnumType.STRING)
     private ArtistType artistType;
 
     @NotBlank
