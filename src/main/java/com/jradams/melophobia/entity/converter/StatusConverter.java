@@ -1,6 +1,6 @@
 package com.jradams.melophobia.entity.converter;
 
-import com.jradams.melophobia.entity.Status;
+import com.jradams.melophobia.entity.backing.Status;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

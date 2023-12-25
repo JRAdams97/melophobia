@@ -1,6 +1,6 @@
 package com.jradams.melophobia.entity.converter;
 
-import com.jradams.melophobia.entity.TrackType;
+import com.jradams.melophobia.entity.backing.TrackType;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

@@ -20,7 +20,7 @@ public class ArtistController {
 
     @GetMapping("/")
     public String showArtistList(Model model) {
-        model.addAttribute("artists", artistRepository.findAll());
+        model.addAttribute("artists", artistRepository.findAllByOrderByNameAsc());
 
         return "artist/index";
     }

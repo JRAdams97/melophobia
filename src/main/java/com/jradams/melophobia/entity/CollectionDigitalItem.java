@@ -1,9 +1,8 @@
 package com.jradams.melophobia.entity;
 
+import com.jradams.melophobia.entity.backing.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;

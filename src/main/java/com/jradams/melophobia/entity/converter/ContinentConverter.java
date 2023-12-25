@@ -1,6 +1,6 @@
 package com.jradams.melophobia.entity.converter;
 
-import com.jradams.melophobia.entity.Continent;
+import com.jradams.melophobia.entity.backing.Continent;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

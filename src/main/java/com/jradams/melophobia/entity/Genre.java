@@ -21,7 +21,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Genre {
+public class Genre implements Comparable<Genre> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,4 +39,9 @@ public class Genre {
     @JoinTable(name = "genre_hierarchy", joinColumns = @JoinColumn(name = "genre_id"),
             inverseJoinColumns = @JoinColumn(name = "parent_genre_id"))
     private Set<Genre> parentGenres;
+
+    @Override
+    public int compareTo(Genre o) {
+        return this.getName().compareTo(o.getName());
+    }
 }
