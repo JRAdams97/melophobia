@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: head (pageTitle='Artists')">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${artist.name}"></h3>
+  <hr/>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <p><span class="fw-bold">Formation Date: </span><span th:text="${artist.formationDate}"></span></p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Disband Date: </span><span th:text="${artist.disbandDate}"></span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <p><span class="fw-bold">Formation Location: </span>
+          <span
+              th:text="${artist.formationLocation.region.regionAbbreviation}
+                  ? ${artist.formationLocation.city} + ', ' + ${artist.formationLocation.region.regionAbbreviation} + ', ' + ${artist.formationLocation.region.country.countryName}
+                  : ${artist.formationLocation.city} + ', ' + ${artist.formationLocation.region.name} + ', ' + ${artist.formationLocation.region.country.countryName}"></span>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Genre(s): </span><span th:each="genre, i: ${artist.genres}"
+                                                        th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span>
+        </p>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-4">
+          <p><span class="fw-bold">Favourite: </span><span th:text="${artist.favourite}"></span></p>
+        </div>
+        <div class="col-4">
+          <p><span class="fw-bold">Artist Type: </span><span th:text="${artist.artistType.type}"></span></p>
+        </div>
+        <div class="col-4">
+          <p><span class="fw-bold">ISNI: </span> <span th:text="${artist.isni}"></span></p>
+        </div>
+      </div>
+      <hr/>
+    </div>
+    <div class="row">
+      <div class="col-4 center-block text-center" th:each="release: ${artist.releases}">
+        <img src="http://placehold.it/250x250"/>
+        <p><span class="fw-bold" th:text="${release.title}"></span><br/>
+          <span class="fst-italic" th:utext="${#strings.substring(release.releaseDate, 0, 4)}"></span></p>
+      </div>
+    </div>
+    <div th:include="fragments/layout :: footer"></div>
+</body>
+</html>

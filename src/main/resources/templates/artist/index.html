@@ -23,7 +23,7 @@
     </thead>
     <tbody>
     <tr scope="row" th:each="artist: ${artists}">
-      <td th:text="${artist.name}"></td>
+      <td><a th:href="@{/artist/{id}(id = ${artist.artistId})}" th:text="${artist.name}"></a></td>
       <td><span th:each="genre, i: ${artist.genres}"
                 th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
       <td th:text="${artist.formationDate}"></td>
