@@ -1,6 +1,7 @@
 package com.jradams.melophobia.entity;
 
 import com.jradams.melophobia.entity.backing.ArtistType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,8 @@ import java.util.SortedSet;
 public class Artist {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "artist_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long artistId;
 
     @NotBlank(message = "Name is mandatory")
@@ -49,8 +51,7 @@ public class Artist {
 
     private ArtistType artistType;
 
-    @NotBlank
-    @Pattern(regexp = "\\d{4} \\d{4} \\d{4} \\d{4}", message = "ISNI format: '#### #### #### ####'")
+    @Pattern(regexp = "\\d{4} \\d{4} \\d{4} [X\\d]{4}", message = "ISNI format: '#### #### #### ###(#/X)'")
     private String isni;
 
     @ManyToMany

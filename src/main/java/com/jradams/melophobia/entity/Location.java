@@ -30,14 +30,4 @@ public class Location {
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
-
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Birth date format: '####-##-##'")
-    private String birthDate;
-
-    @ManyToOne
-    @JoinColumn(name = "birth_location_id")
-    private Location birthLocation;
-
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Death date format: '####-##-##'")
-    private String deathDate;
 }

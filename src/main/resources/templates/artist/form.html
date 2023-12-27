@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: head (pageTitle='Artist : Form')">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3>New Artist</h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#" th:action="@{/artist/add}" th:object="${artist}" method="post">
+      <div class="mb-4">
+        <label for="nameInput" class="form-label">Name</label>
+        <input type="text" class="form-control" id="nameInput" th:field="*{name}"/>
+        <div id="nameValidation" class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errorclass="error"
+             th:errors="*{name}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="genresMultiSelect" class="form-label">Genre(s)</label>
+        <select multiple="multiple" class="form-select" size="10" id="genresMultiSelect" th:field="*{genres}">
+          <option th:each="genre: ${genres}" th:value="${genre.genreId}" th:text="${genre.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="formationDateInput" class="form-label">Formation Date</label>
+        <input type="text" class="form-control" id="formationDateInput" placeholder="####-##-##"
+               th:field="*{formationDate}"/>
+        <div id="formationDateValidation" class="form-text text-danger" th:if="${#fields.hasErrors('formationDate')}"
+             th:errorclass="error" th:errors="*{formationDate}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="formationLocationSelect" class="form-label">Formation Location</label>
+        <select class="form-select" id="formationLocationSelect" th:field="*{formationLocation}">
+          <option th:each="location: ${locations}" th:value="${location.locationId}"
+                  th:text="${location.region.regionAbbreviation}
+                      ? ${location.city} + ', ' + ${location.region.regionAbbreviation} + ', ' + ${location.region.country.alpha2Code}
+                      : ${location.city} + ', ' + ${location.region.name} + ', ' + ${location.region.country.alpha2Code}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="disbandDateInput" class="form-label">Disband Date</label>
+        <input type="text" class="form-control" id="disbandDateInput" placeholder="####-##-##" th:field="*{disbandDate}"/>
+        <div id="disbandDateValidation" class="form-text text-danger" th:if="${#fields.hasErrors('disbandDate')}"
+             th:errorclass="error" th:errors="*{disbandDate}"></div>
+      </div>
+      <div class="mb-4 form-check">
+        <input type="checkbox" class="form-check-input" id="favourite" th:field="*{favourite}"/>
+        <label class="form-check-label" for="favourite">Favourite</label>
+      </div>
+      <div class="mb-4">
+        <label for="artistTypeSelect" class="form-label">Artist Type</label>
+        <select class="form-select" id="artistTypeSelect" th:field="*{artistType}">
+          <option th:each="artistType: ${artistTypes}" th:value="${artistType}" th:text="${artistType.type}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="isniInput" class="form-label">ISNI</label>
+        <input type="text" class="form-control" id="isniInput" placeholder="#### #### #### ####" th:field="*{isni}"/>
+        <div id="isniValidation" class="form-text text-danger" th:if="${#fields.hasErrors('isni')}"
+             th:errorclass="error" th:errors="*{isni}"></div>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:include="fragments/layout :: footer"></div>
+</body>
+</html>
