@@ -69,6 +69,7 @@ public class ArtistController {
         populateArtistForm(model);
 
         model.addAttribute("artist", new Artist());
+        model.addAttribute("action", "New");
 
         return "artist/form";
     }
@@ -78,20 +79,36 @@ public class ArtistController {
         populateArtistForm(model);
 
         Optional<Artist> artist = artistRepository.findById(id);
-
         artist.ifPresent(v -> model.addAttribute("artist", v));
+
+        model.addAttribute("action", "Edit");
 
         return "artist/form";
     }
 
     @PostMapping("/add")
-    public String saveArtist(@Valid Artist artist, BindingResult bindingResult, Model model) {
+    public String saveNewArtist(@Valid Artist artist, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             populateArtistForm(model);
 
             return "artist/form";
         }
 
+        artistRepository.save(artist);
+
+        return "redirect:/artist/";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String saveEditedArtist(@PathVariable("id") long id, @Valid Artist artist, BindingResult bindingResult,
+                                   Model model) {
+        if (bindingResult.hasErrors()) {
+            populateArtistForm(model);
+
+            return "artist/form";
+        }
+
+        artist.setArtistId(id);
         artistRepository.save(artist);
 
         return "redirect:/artist/";

@@ -5,10 +5,11 @@
 </head>
 <body>
 <div class="container mt-5">
-  <h3>New Artist</h3>
+  <h3 th:text="${action} + ' Artist'"></h3>
   <hr/>
   <div class="container-fluid" style="max-width: 800px">
-    <form action="#" th:action="@{/artist/add}" th:object="${artist}" method="post">
+    <form action="#" th:action="${action} == 'Edit' ? @{/artist/edit/{id}(id = ${artist.artistId})} : @{/artist/add}"
+          th:object="${artist}" method="post">
       <div class="mb-4">
         <label for="nameInput" class="form-label">Name</label>
         <input type="text" class="form-control" id="nameInput" th:field="*{name}"/>
