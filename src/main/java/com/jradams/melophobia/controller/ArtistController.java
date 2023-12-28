@@ -29,8 +29,6 @@ import java.util.Optional;
 @RequestMapping("/artist")
 public class ArtistController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ArtistController.class);
-
     private final ArtistRepository artistRepository;
     private final GenreRepository genreRepository;
     private final LocationRepository locationRepository;
@@ -87,7 +85,7 @@ public class ArtistController {
     }
 
     @PostMapping("/add")
-    public String saveNewArtist(@Valid Artist artist, BindingResult bindingResult, Model model) {
+    public String saveArtist(@Valid Artist artist, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             populateArtistForm(model);
 
@@ -100,8 +98,8 @@ public class ArtistController {
     }
 
     @PostMapping("/edit/{id}")
-    public String saveEditedArtist(@PathVariable("id") long id, @Valid Artist artist, BindingResult bindingResult,
-                                   Model model) {
+    public String saveArtist(@PathVariable("id") long id, @Valid Artist artist, BindingResult bindingResult,
+                             Model model) {
         if (bindingResult.hasErrors()) {
             populateArtistForm(model);
 
@@ -110,6 +108,16 @@ public class ArtistController {
 
         artist.setArtistId(id);
         artistRepository.save(artist);
+
+        return "redirect:/artist/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteArtist(@PathVariable("id") long id) {
+        Artist artist = artistRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException(String.format("Invalid Artist ID: %s", id)));
+
+        artistRepository.delete(artist);
 
         return "redirect:/artist/";
     }
