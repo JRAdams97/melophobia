@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: head (pageTitle='Label : Details')">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${label.name}"></h3>
+  <hr/>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <p><span class="fw-bold">Formation Date: </span><span th:text="${label.formationDate}"></span></p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Closing Date: </span><span th:text="${label.closingDate}"></span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <p><span class="fw-bold">Formation Location: </span>
+          <span
+              th:text="${label.formationLocation.region.regionAbbreviation}
+                  ? ${label.formationLocation.city} + ', ' + ${label.formationLocation.region.regionAbbreviation} + ', ' + ${label.formationLocation.region.country.countryName}
+                  : ${label.formationLocation.city} + ', ' + ${label.formationLocation.region.name} + ', ' + ${label.formationLocation.region.country.countryName}"></span>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Label Code: </span><span th:text="${label.labelCode}"></span></p>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-12">
+          <p><span class="fw-bold">Favourite: </span><span th:text="${label.favourite}"></span></p>
+        </div>
+      </div>
+      <hr/>
+    </div>
+    <div class="row">
+      <div class="col-4 center-block text-center" th:each="issue: ${label.issues}">
+        <img src="http://placehold.it/250x250"/>
+        <p><span class="fw-bold" th:text="${issue.catalogueId}"></span><br/>
+          <span class="fw-semibold" th:text="${issue.release.title}"></span><br/>
+          <span th:each="artist, i: ${issue.release.artists}"
+                th:text="!${i.last} ? ${artist.name} + ' / ' : ${artist.name}"></span><br/>
+          <span class="fst-italic" th:text="${issue.releaseDate}"></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:include="fragments/layout :: footer"></div>
+</body>
+</html>

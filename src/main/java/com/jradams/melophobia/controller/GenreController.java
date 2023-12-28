@@ -21,6 +21,7 @@ import java.util.Optional;
 @RequestMapping("/genre")
 public class GenreController {
 
+    private static final String ACTION = "action";
     private static final String GENRE_FORM = "genre/form";
     private static final String GENRES = "genres";
     private static final String REDIRECT_HOME = "redirect:/genre/";
@@ -48,7 +49,7 @@ public class GenreController {
     public String showGenreForm(Model model) {
         model.addAttribute(GENRES, genreRepo.findAllByOrderByNameAsc());
         model.addAttribute("genre", new Genre());
-        model.addAttribute("action", "New");
+        model.addAttribute(ACTION, "New");
 
         return GENRE_FORM;
     }
@@ -60,7 +61,7 @@ public class GenreController {
         Optional<Genre> genre = genreRepo.findById(id);
         genre.ifPresent(v -> model.addAttribute("genre", v));
 
-        model.addAttribute("action", "Edit");
+        model.addAttribute(ACTION, "Edit");
 
         return GENRE_FORM;
     }
@@ -68,6 +69,7 @@ public class GenreController {
     @PostMapping("/add")
     public String saveGenre(@Valid Genre genre, BindingResult bindResult, Model model) {
         if (bindResult.hasErrors()) {
+            model.addAttribute(ACTION, "New");
             model.addAttribute(GENRES, genreRepo.findAllByOrderByNameAsc());
 
             return GENRE_FORM;
@@ -82,6 +84,7 @@ public class GenreController {
     public String saveGenre(@PathVariable("id") long id, @Valid Genre genre, BindingResult bindResult,
                             Model model) {
         if (bindResult.hasErrors()) {
+            model.addAttribute(ACTION, "Edit");
             model.addAttribute(GENRES, genreRepo.findAllByOrderByNameAsc());
 
             return GENRE_FORM;

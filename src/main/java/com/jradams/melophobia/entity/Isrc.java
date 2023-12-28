@@ -1,5 +1,6 @@
 package com.jradams.melophobia.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Isrc {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long isrcId;
 
+    @Column(name = "isrc")
     @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-\\d{2}-\\d{5}", message = "ISRC format: 'AA-AAA-##-#####'")
-    private String isrc;
+    private String isrcCode;
 }

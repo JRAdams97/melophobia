@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: head (pageTitle='Label : Form')">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Label'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#" th:action="${action} == 'Edit' ? @{/label/edit/{id}(id = ${label.labelId})} : @{/label/add}"
+          th:object="${label}" method="post">
+      <div class="mb-4">
+        <label for="nameInput" class="form-label">Name</label>
+        <input type="text" class="form-control" id="nameInput" th:field="*{name}"/>
+        <div id="nameValidation" class="form-text text-danger" th:if="${#fields.hasErrors('name')}"
+             th:errorclass="error" th:errors="*{name}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="formationDateInput" class="form-label">Formation Date</label>
+        <input type="text" class="form-control" id="formationDateInput" placeholder="####-##-##"
+               th:field="*{formationDate}"/>
+        <div id="formationDateValidation" class="form-text text-danger" th:if="${#fields.hasErrors('formationDate')}"
+             th:errorclass="error" th:errors="*{formationDate}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="formationLocationSelect" class="form-label">Formation Location</label>
+        <select class="form-select" id="formationLocationSelect" th:field="*{formationLocation}">
+          <option th:each="location: ${locations}" th:value="${location.locationId}"
+                  th:text="${location.region.regionAbbreviation}
+                      ? ${location.city} + ', ' + ${location.region.regionAbbreviation} + ', ' + ${location.region.country.alpha2Code}
+                      : ${location.city} + ', ' + ${location.region.name} + ', ' + ${location.region.country.alpha2Code}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="closingDateInput" class="form-label">Closing Date</label>
+        <input type="text" class="form-control" id="closingDateInput" placeholder="####-##-##" th:field="*{closingDate}"/>
+        <div id="closingDateValidation" class="form-text text-danger" th:if="${#fields.hasErrors('closingDate')}"
+             th:errorclass="error" th:errors="*{closingDate}"></div>
+      </div>
+      <div class="mb-4 form-check">
+        <input type="checkbox" class="form-check-input" id="favourite" th:field="*{favourite}"/>
+        <label class="form-check-label" for="favourite">Favourite</label>
+      </div>
+      <div class="mb-4">
+        <label for="labelCodeInput" class="form-label">Label Code</label>
+        <input type="text" class="form-control" id="labelCodeInput" placeholder="LC #####" th:field="*{labelCode}"/>
+        <div id="labelCodeValidation" class="form-text text-danger" th:if="${#fields.hasErrors('labelCode')}"
+             th:errorclass="error" th:errors="*{labelCode}"></div>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:include="fragments/layout :: footer"></div>
+</body>
+</html>

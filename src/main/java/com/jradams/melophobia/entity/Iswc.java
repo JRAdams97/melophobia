@@ -1,5 +1,6 @@
 package com.jradams.melophobia.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Iswc {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long iswcId;
 
+    @Column(name = "iswc")
     @Pattern(regexp = "[A-Z]-\\d{3}.\\d{3}.\\d{3}-\\d", message = "ISWC format: 'A-###.###.###-#'")
-    private String iswc;
+    private String iswcCode;
 }

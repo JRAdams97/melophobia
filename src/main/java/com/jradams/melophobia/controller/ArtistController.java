@@ -24,6 +24,7 @@ import java.util.Optional;
 @RequestMapping("/artist")
 public class ArtistController {
 
+    private static final String ACTION = "action";
     private static final String ARTIST = "artist";
     private static final String ARTIST_FORM = "artist/form";
     private static final String REDIRECT_HOME = "redirect:/artist/";
@@ -65,7 +66,7 @@ public class ArtistController {
         populateArtistForm(model);
 
         model.addAttribute(ARTIST, new Artist());
-        model.addAttribute("action", "New");
+        model.addAttribute(ACTION, "New");
 
         return ARTIST_FORM;
     }
@@ -77,7 +78,7 @@ public class ArtistController {
         Optional<Artist> artist = artistRepo.findById(id);
         artist.ifPresent(v -> model.addAttribute(ARTIST, v));
 
-        model.addAttribute("action", "Edit");
+        model.addAttribute(ACTION, "Edit");
 
         return ARTIST_FORM;
     }
@@ -85,6 +86,7 @@ public class ArtistController {
     @PostMapping("/add")
     public String saveArtist(@Valid Artist artist, BindingResult bindResult, Model model) {
         if (bindResult.hasErrors()) {
+            model.addAttribute(ACTION, "New");
             populateArtistForm(model);
 
             return ARTIST_FORM;
@@ -99,6 +101,7 @@ public class ArtistController {
     public String saveArtist(@PathVariable("id") long id, @Valid Artist artist, BindingResult bindResult,
                              Model model) {
         if (bindResult.hasErrors()) {
+            model.addAttribute(ACTION, "Edit");
             populateArtistForm(model);
 
             return ARTIST_FORM;

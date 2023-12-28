@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: head (pageTitle='Labels')">
+  <title></title>
+</head>
+<body>
+<div class="container-fluid mt-5" style="max-width: 1800px">
+  <h3>Labels</h3>
+  <hr/>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Formation Date</th>
+      <th scope="col">Formation Location</th>
+      <th scope="col">Active?</th>
+      <th scope="col">Favourite</th>
+      <th scope="col">Label Code</th>
+      <th scope="col" style="width: 2.5%">Edit</th>
+      <th scope="col" style="width: 2.5%">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr scope="row" th:each="label: ${labels}">
+      <td><a th:href="@{/label/{id}(id = ${label.labelId})}" th:text="${label.name}"></a></td>
+      <td th:text="${label.formationDate}"></td>
+      <td th:text="${label.formationLocation.region.regionAbbreviation}
+          ? ${label.formationLocation.city} + ', ' + ${label.formationLocation.region.regionAbbreviation} + ', ' + ${label.formationLocation.region.country.alpha2Code}
+          : ${label.formationLocation.city} + ', ' + ${label.formationLocation.region.name} + ', ' + ${label.formationLocation.region.country.alpha2Code}"></td>
+      <td th:text="${label.closingDate} != null ? 'false' : 'true'"></td>
+      <td th:text="${label.favourite}"></td>
+      <td th:text="${label.labelCode}"></td>
+      <td>
+        <a th:href="@{/label/edit/{id}(id = ${label.labelId})}">
+          <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/label/delete/{id}(id = ${label.labelId})}">
+          <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid" style="max-width: 1800px">
+    <div class="row text-end mb-4">
+      <div class="col-12">
+        <a th:href="@{/label/add}">
+          <button type="submit" class="btn btn-primary" th:text="Add"></button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:include="fragments/layout :: footer"></div>
+</body>
+</html>
