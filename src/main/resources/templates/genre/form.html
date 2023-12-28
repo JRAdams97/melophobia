@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: head (pageTitle='Genre : Form')">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Genre'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#" th:action="${action} == 'Edit' ? @{/genre/edit/{id}(id = ${genre.genreId})} : @{/genre/add}"
+          th:object="${genre}" method="post">
+      <div class="mb-4">
+        <label for="nameInput" class="form-label">Name</label>
+        <input type="text" class="form-control" id="nameInput" th:field="*{name}"/>
+        <div id="nameValidation" class="form-text text-danger" th:if="${#fields.hasErrors('name')}"
+             th:errorclass="error" th:errors="*{name}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="originYearInput" class="form-label">Origin Year</label>
+        <input type="text" class="form-control" id="originYearInput" th:field="*{originYear}"/>
+        <div id="originYearValidation" class="form-text text-danger" th:if="${#fields.hasErrors('originYear')}"
+             th:errorclass="error" th:errors="*{originYear}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="parentGenresMultiSelect" class="form-label">Parent Genre(s)</label>
+        <select multiple="multiple" class="form-select" size="20" id="parentGenresMultiSelect"
+                th:field="*{parentGenres}">
+          <option th:each="genre: ${genres}" th:value="${genre.genreId}" th:text="${genre.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4 form-check">
+        <input type="checkbox" class="form-check-input" id="favourite" th:field="*{favourite}"/>
+        <label class="form-check-label" for="favourite">Favourite</label>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:include="fragments/layout :: footer"></div>
+</body>
+</html>

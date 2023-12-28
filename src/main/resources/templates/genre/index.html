@@ -1,43 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout :: head (pageTitle='Artists')">
+<head th:replace="fragments/layout :: head (pageTitle='Genres')">
   <title></title>
 </head>
 <body>
 <div class="container-fluid mt-5" style="max-width: 1800px">
-  <h3>Artists</h3>
+  <h3>Genres</h3>
   <hr/>
   <table class="table table-striped">
     <thead>
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">Genre(s)</th>
-      <th scope="col">Formation Date</th>
-      <th scope="col">Formation Country</th>
+      <th scope="col">Origin Year</th>
+      <th scope="col">Parent Genre(s)</th>
       <th scope="col">Favourite</th>
-      <th scope="col">Artist Type</th>
-      <th scope="col">ISNI</th>
       <th scope="col" style="width: 2.5%">Edit</th>
       <th scope="col" style="width: 2.5%">Delete</th>
     </tr>
     </thead>
     <tbody>
-    <tr scope="row" th:each="artist: ${artists}">
-      <td><a th:href="@{/artist/{id}(id = ${artist.artistId})}" th:text="${artist.name}"></a></td>
-      <td><span th:each="genre, i: ${artist.genres}"
+    <tr scope="row" th:each="genre: ${genres}">
+      <td th:text="${genre.name}"></td>
+      <td th:text="${genre.originYear}"></td>
+      <td><span th:each="genre, i: ${genre.parentGenres}"
                 th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
-      <td th:text="${artist.formationDate}"></td>
-      <td th:text="${artist.formationLocation.region.country.alpha2Code}"></td>
-      <td th:text="${artist.favourite}"></td>
-      <td th:text="${artist.artistType.type}"></td>
-      <td th:text="${artist.isni}"></td>
+      <td th:text="${genre.favourite}"></td>
       <td>
-        <a th:href="@{/artist/edit/{id}(id = ${artist.artistId})}">
+        <a th:href="@{/genre/edit/{id}(id = ${genre.genreId})}">
           <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
         </a>
       </td>
       <td>
-        <a th:href="@{/artist/delete/{id}(id = ${artist.artistId})}">
+        <a th:href="@{/genre/delete/{id}(id = ${genre.genreId})}">
           <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
         </a>
       </td>
@@ -47,7 +41,7 @@
   <div class="container-fluid" style="max-width: 1800px">
     <div class="row text-end mb-4">
       <div class="col-12">
-        <a th:href="@{/artist/add}">
+        <a th:href="@{/genre/add}">
           <button type="submit" class="btn btn-primary" th:text="Add"></button>
         </a>
       </div>

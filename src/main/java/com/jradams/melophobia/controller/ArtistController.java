@@ -1,15 +1,11 @@
 package com.jradams.melophobia.controller;
 
 import com.jradams.melophobia.entity.Artist;
-import com.jradams.melophobia.entity.Release;
 import com.jradams.melophobia.entity.backing.ArtistType;
 import com.jradams.melophobia.repository.ArtistRepository;
 import com.jradams.melophobia.repository.GenreRepository;
 import com.jradams.melophobia.repository.LocationRepository;
-import com.jradams.melophobia.repository.ReleaseRepository;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -18,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,16 +24,19 @@ import java.util.Optional;
 @RequestMapping("/artist")
 public class ArtistController {
 
-    private final ArtistRepository artistRepository;
-    private final GenreRepository genreRepository;
-    private final LocationRepository locationRepository;
+    private static final String ARTIST = "artist";
+    private static final String ARTIST_FORM = "artist/form";
+    private static final String REDIRECT_HOME = "redirect:/artist/";
+
+    private final ArtistRepository artistRepo;
+    private final GenreRepository genreRepo;
+    private final LocationRepository locationRepo;
 
     @Autowired
-    ArtistController(ArtistRepository artistRepository, GenreRepository genreRepository,
-                     LocationRepository locationRepository) {
-        this.artistRepository = artistRepository;
-        this.genreRepository = genreRepository;
-        this.locationRepository = locationRepository;
+    ArtistController(ArtistRepository artistRepo, GenreRepository genreRepo, LocationRepository locationRepo) {
+        this.artistRepo = artistRepo;
+        this.genreRepo = genreRepo;
+        this.locationRepo = locationRepo;
     }
 
     @InitBinder
@@ -48,16 +46,16 @@ public class ArtistController {
 
     @GetMapping("/")
     public String showArtistList(Model model) {
-        model.addAttribute("artists", artistRepository.findAllByOrderByNameAsc());
+        model.addAttribute("artists", artistRepo.findAllByOrderByNameAsc());
 
         return "artist/index";
     }
 
     @GetMapping("/{id}")
     public String showArtistDetail(@PathVariable(value = "id") long id, Model model) {
-        Optional<Artist> artist = artistRepository.findById(id);
+        Optional<Artist> artist = artistRepo.findById(id);
 
-        artist.ifPresent(v -> model.addAttribute("artist", v));
+        artist.ifPresent(v -> model.addAttribute(ARTIST, v));
 
         return "artist/detail";
     }
@@ -66,65 +64,65 @@ public class ArtistController {
     public String showArtistForm(Model model) {
         populateArtistForm(model);
 
-        model.addAttribute("artist", new Artist());
+        model.addAttribute(ARTIST, new Artist());
         model.addAttribute("action", "New");
 
-        return "artist/form";
+        return ARTIST_FORM;
     }
 
     @GetMapping("/edit/{id}")
     public String showArtistForm(@PathVariable(value = "id") long id, Model model) {
         populateArtistForm(model);
 
-        Optional<Artist> artist = artistRepository.findById(id);
-        artist.ifPresent(v -> model.addAttribute("artist", v));
+        Optional<Artist> artist = artistRepo.findById(id);
+        artist.ifPresent(v -> model.addAttribute(ARTIST, v));
 
         model.addAttribute("action", "Edit");
 
-        return "artist/form";
+        return ARTIST_FORM;
     }
 
     @PostMapping("/add")
-    public String saveArtist(@Valid Artist artist, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+    public String saveArtist(@Valid Artist artist, BindingResult bindResult, Model model) {
+        if (bindResult.hasErrors()) {
             populateArtistForm(model);
 
-            return "artist/form";
+            return ARTIST_FORM;
         }
 
-        artistRepository.save(artist);
+        artistRepo.save(artist);
 
-        return "redirect:/artist/";
+        return REDIRECT_HOME;
     }
 
     @PostMapping("/edit/{id}")
-    public String saveArtist(@PathVariable("id") long id, @Valid Artist artist, BindingResult bindingResult,
+    public String saveArtist(@PathVariable("id") long id, @Valid Artist artist, BindingResult bindResult,
                              Model model) {
-        if (bindingResult.hasErrors()) {
+        if (bindResult.hasErrors()) {
             populateArtistForm(model);
 
-            return "artist/form";
+            return ARTIST_FORM;
         }
 
         artist.setArtistId(id);
-        artistRepository.save(artist);
+        artistRepo.save(artist);
 
-        return "redirect:/artist/";
+        return REDIRECT_HOME;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteArtist(@PathVariable("id") long id) {
-        Artist artist = artistRepository.findById(id).orElseThrow(
+        Artist artist = artistRepo.findById(id).orElseThrow(
                 () -> new IllegalArgumentException(String.format("Invalid Artist ID: %s", id)));
 
-        artistRepository.delete(artist);
+        artistRepo.delete(artist);
 
-        return "redirect:/artist/";
+        return REDIRECT_HOME;
     }
 
     private void populateArtistForm(Model model) {
-        model.addAttribute("genres", genreRepository.findAllByOrderByNameAsc());
-        model.addAttribute("locations", locationRepository.findAllByOrderByCityAsc());
+        model.addAttribute("genres", genreRepo.findAllByOrderByNameAsc());
+        model.addAttribute("locations", locationRepo.findAllByOrderByCityAsc());
         model.addAttribute("artistTypes", ArtistType.values());
     }
 }
