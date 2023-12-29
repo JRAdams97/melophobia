@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Issue : Details')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${issue.catalogueId} + ': ' + ${issue.release.title}"></h3>
+  <hr/>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Artist(s): </span>
+          <span th:each="artist, i: ${issue.release.artists}"
+                th:text="!${i.last} ? ${artist.name} + ' / ' : ${artist.name}"></span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Genre(s): </span>
+          <span th:each="genre, i: ${issue.release.genres}"
+                th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Release Date: </span><span th:text="${issue.releaseDate}"></span></p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Record Label: </span><span th:text="${issue.label.name}"></span></p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Media: </span><span th:text="${issue.media.name}"></span></p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Edition: </span><span th:text="${issue.edition}"></span></p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Re-Release? </span><span th:text="${issue.isRerelease}"></span></p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Official? </span><span th:text="${issue.isOfficial}"></span></p>
+      </div>
+      <hr/>
+      <div class="col-4">
+        <p>
+          <span class="fw-bold">Issue Countries: </span>
+          <span th:each="country, i: ${issue.countries}"
+                th:text="!${i.last} ? ${country.countryName} + ' / ' : ${country.countryName}"></span>
+        </p>
+      </div>
+      <div class="col-4">
+        <p><span class="fw-bold">Matrix/Runout: </span><span th:text="${issue.matrixRunout}"></span></p>
+      </div>
+      <div class="col-4">
+        <p><span class="fw-bold">Barcode: </span><span th:text="${issue.barcode}"></span></p>
+      </div>
+      <hr/>
+      <div class="col-12">
+        <p><span class="fw-bold">Description: </span><span th:text="${issue.description}"></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

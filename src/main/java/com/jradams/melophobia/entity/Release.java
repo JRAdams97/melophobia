@@ -37,11 +37,13 @@ public class Release {
     @ManyToMany
     @JoinTable(name = "release_artists", joinColumns = @JoinColumn(name = "release_id"),
             inverseJoinColumns = @JoinColumn(name = "artist_id"))
+    @ToString.Exclude
     private Set<Artist> artists;
 
     @ManyToMany
     @JoinTable(name = "release_genres", joinColumns = @JoinColumn(name = "release_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    @ToString.Exclude
     private Set<Genre> genres;
 
     @ManyToMany

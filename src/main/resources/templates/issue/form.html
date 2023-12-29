@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Issue : Form')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Issue'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#" th:action="${action} == 'Edit' ? @{/issue/edit/{id}(id = ${issue.issueId})} : @{/issue/add}"
+          th:object="${issue}" method="post">
+      <div class="mb-4">
+        <label for="catalogueIdInput" class="form-label">Catalogue ID</label>
+        <input type="text" class="form-control" id="catalogueIdInput" th:field="*{catalogueId}"/>
+        <div id="catalogueIdValidation" class="form-text text-danger" th:if="${#fields.hasErrors('catalogueId')}"
+             th:errorclass="error" th:errors="*{catalogueId}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="labelSelect" class="form-label">Label</label>
+        <select class="form-select" id="labelSelect" th:field="*{label}">
+          <option th:each="label: ${labels}" th:value="${label.labelId}" th:text="${label.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="releaseSelect" class="form-label">Release</label>
+        <select class="form-select" id="releaseSelect" th:field="*{release}">
+          <option th:each="release: ${releases}" th:value="${release.releaseId}"
+                  th:text="${release.title} + ' (' + ${#strings.substring(release.releaseDate, 0, 4)} + ')'"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="releaseDateInput" class="form-label">Release Date</label>
+        <input type="text" class="form-control" id="releaseDateInput" th:field="*{releaseDate}"
+               placeholder="####-##-##"/>
+        <div id="releaseDateValidation" class="form-text text-danger" th:if="${#fields.hasErrors('releaseDate')}"
+             th:errorclass="error" th:errors="*{releaseDate}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="mediaSelect" class="form-label">Media</label>
+        <select class="form-select" id="mediaSelect" th:field="*{media}">
+          <option th:each="media: ${mediaList}" th:value="${media.mediaId}" th:text="${media.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="countriesMultiSelect" class="form-label">Countries</label>
+        <select multiple="multiple" class="form-select" size="5" id="countriesMultiSelect" th:field="*{countries}">
+          <option th:each="country: ${countries}" th:value="${country.countryId}"
+                  th:text="${country.countryName}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="editionInput" class="form-label">Edition</label>
+        <input type="text" class="form-control" id="editionInput" th:field="*{edition}"/>
+        <div id="editionValidation" class="form-text text-danger" th:if="${#fields.hasErrors('edition')}"
+             th:errorclass="error" th:errors="*{edition}"></div>
+      </div>
+      <div class="mb-4 form-check">
+        <input type="checkbox" class="form-check-input" id="isRerelease" th:field="*{isRerelease}"/>
+        <label class="form-check-label" for="isRerelease">Re-Release?</label>
+      </div>
+      <div class="mb-4 form-check">
+        <input type="checkbox" class="form-check-input" id="isOfficial" th:field="*{isOfficial}"/>
+        <label class="form-check-label" for="isOfficial">Official?</label>
+      </div>
+      <div class="mb-4">
+        <label for="matrixRunoutInput" class="form-label">Matrix/Runout</label>
+        <input type="text" class="form-control" id="matrixRunoutInput" th:field="*{matrixRunout}"/>
+      </div>
+      <div class="mb-4">
+        <label for="barcodeInput" class="form-label">Barcode</label>
+        <input type="text" class="form-control" id="barcodeInput" th:field="*{barcode}"/>
+      </div>
+      <div class="mb-4">
+        <label for="descriptionInput" class="form-label">Description</label>
+        <input type="text" class="form-control" id="descriptionInput" th:field="*{description}"/>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:include="~{fragments/layout :: footer}"></div>
+</body>
+</html>

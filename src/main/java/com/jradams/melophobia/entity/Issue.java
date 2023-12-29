@@ -1,5 +1,6 @@
 package com.jradams.melophobia.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +26,8 @@ import java.util.Set;
 public class Issue {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "issue_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long issueId;
 
     @ManyToOne
@@ -50,9 +52,7 @@ public class Issue {
     @NotBlank(message = "Edition is mandatory")
     private String edition;
 
-    @NotBlank(message = "Re-release status is mandatory")
     private Boolean isRerelease;
-
     private Boolean isOfficial;
     private String barcode;
 

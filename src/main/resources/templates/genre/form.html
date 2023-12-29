@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout :: head (pageTitle='Genre : Form')">
+<head th:insert="~{fragments/layout :: head(pageTitle='Genre : Form')}">
   <title></title>
 </head>
 <body>
@@ -39,6 +39,6 @@
     </form>
   </div>
 </div>
-<div th:include="fragments/layout :: footer"></div>
+<div th:insert="~{fragments/layout :: footer}"></div>
 </body>
 </html>
