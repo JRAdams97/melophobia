@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface ReleaseRepository extends CrudRepository<Release, Long> {
 
+    List<Release> findAllByOrderByReleaseDateAsc();
+
     List<Release> findAllByOrderByTitleAsc();
 }

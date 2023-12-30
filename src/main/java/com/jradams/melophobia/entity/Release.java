@@ -1,5 +1,6 @@
 package com.jradams.melophobia.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,13 +9,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,8 @@ import java.util.Set;
 public class Release {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "release_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long releaseId;
 
     @NotBlank(message = "Title is mandatory")
@@ -57,7 +59,10 @@ public class Release {
     private Set<ReleaseType> releaseTypes;
 
     private Boolean favourite;
-    private Double rymRating;
+
+    @Column(precision = 3, scale = 2)
+    private BigDecimal rymRating;
+
     private Integer aotyRank;
     private Integer beaRank;
     private String christgauRating;
@@ -75,6 +80,5 @@ public class Release {
             inverseJoinColumns = @JoinColumn(name = "series_id"))
     private Set<Series> series;
 
-    @NotNull(message = "Officiality is mandatory")
     private Boolean isOfficial;
 }

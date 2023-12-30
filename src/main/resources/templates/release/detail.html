@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Release : Details')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${release.title}"></h3>
+  <hr/>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Artist(s): </span>
+          <span th:each="artist, i: ${release.artists}"
+                th:text="!${i.last} ? ${artist.name} + ' / ' : ${artist.name}"></span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Genre(s): </span>
+          <span th:each="genre, i: ${release.genres}"
+                th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Release Date: </span><span th:text="${release.releaseDate}"></span></p>
+      </div>
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Record Type(s): </span>
+          <span th:each="releaseType, i: ${release.releaseTypes}"
+                th:text="!${i.last} ? ${releaseType.name.type} + ' / ' : ${releaseType.name.type}"></span></p>
+      </div>
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Language(s): </span>
+          <span th:each="language, i: ${release.languages}"
+                th:text="!${i.last} ? ${language.name.name} + ' / ' : ${language.name.name}"></span>
+        </p>
+      </div>
+      <hr/>
+      <div class="col-3">
+        <p><span class="fw-bold">Favourite: </span><span th:text="${release.favourite}"></span></p>
+      </div>
+      <div class="col-3">
+        <p><span class="fw-bold">RYM Rating: </span><span th:text="${release.rymRating}"></span></p>
+      </div>
+      <div class="col-3">
+        <p>
+          <span class="fw-bold"
+                th:text="'AOTY Rank (' + ${#strings.substring(release.releaseDate, 0, 4)} + '):'"></span>
+          <span th:text="${release.aotyRank}"></span>
+        </p>
+      </div>
+      <div class="col-3">
+        <p>
+          <span class="fw-bold"
+                th:text="'BEA Rank (' + ${#strings.substring(release.releaseDate, 0, 4)} + '):'"></span>
+          <span th:text="${release.beaRank}"></span>
+        </p>
+      </div>
+      <div class="col-3">
+        <p><span class="fw-bold">Christgau Rating: </span><span th:text="${release.christgauRating}"></span></p>
+      </div>
+      <div class="col-3">
+        <p><span class="fw-bold">Scaruffi Rating: </span><span th:text="${release.scaruffiRating}"></span></p>
+      </div>
+      <div class="col-3">
+        <p><span class="fw-bold">Pitchfork Rating: </span><span th:text="${release.pitchforkRating}"></span></p>
+      </div>
+      <div class="col-3">
+        <p><span class="fw-bold">Metacritic: </span><span th:text="${release.metacritic}"></span></p>
+      </div>
+      <hr/>
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Producer(s): </span>
+          <span th:each="producer, i: ${release.producers}"
+                th:text="!${i.last} ? ${producer.name} + ' / ' : ${producer.name}"></span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Series: </span>
+          <span th:each="series, i: ${release.series}"
+                th:text="!${i.last} ? ${series.name} + ' / ' : ${series.name}"></span>
+        </p>
+      </div>
+      <hr/>
+      <div class="col-12">
+        <p><span class="fw-bold">Is Official? </span><span th:text="${release.isOfficial}"></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

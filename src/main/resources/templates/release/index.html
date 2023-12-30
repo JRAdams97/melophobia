@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Issues')}">
+  <title></title>
+</head>
+<body>
+<div class="container-fluid mt-5" style="max-width: 1800px">
+  <h3>Releases</h3>
+  <hr/>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Release Date</th>
+      <th scope="col">Title</th>
+      <th scope="col">Artist(s)</th>
+      <th scope="col">Genre(s)</th>
+      <th scope="col">Release Type(s)</th>
+      <th scope="col">Favourite</th>
+      <th scope="col">RYM Rating</th>
+      <th scope="col">Metacritic</th>
+      <th scope="col" style="width: 2.5%">Edit</th>
+      <th scope="col" style="width: 2.5%">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr scope="row" th:each="release: ${releases}">
+      <td th:text="${release.releaseDate}"></td>
+      <td><a th:href="@{/release/{id}(id = ${release.releaseId})}" th:text="${release.title}"></a></td>
+      <td><a th:each="artist, i: ${release.artists}" th:href="@{/artist/{id}(id = ${artist.artistId})}"
+             th:text="!${i.last} ? ${artist.name} + ' / ' : ${artist.name}"></a></td>
+      <td><span th:each="genre, i: ${release.genres}"
+                th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
+      <td><span th:each="releaseType, i: ${release.releaseTypes}"
+                th:text="!${i.last} ? ${releaseType.name} + ' / ' : ${releaseType.name}"></span></td>
+      <td th:text="${release.favourite}"></td>
+      <td th:text="${release.rymRating}"></td>
+      <td th:text="${release.metacritic}"></td>
+      <td>
+        <a th:href="@{/release/edit/{id}(id = ${release.releaseId})}">
+          <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/release/delete/{id}(id = ${release.releaseId})}">
+          <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid" style="max-width: 1800px">
+    <div class="row text-end mb-4">
+      <div class="col-12">
+        <a th:href="@{/release/add}">
+          <button type="submit" class="btn btn-primary" th:text="Add"></button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

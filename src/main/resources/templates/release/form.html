@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Release : Form')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Release'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#" th:action="${action} == 'Edit' ? @{/release/edit/{id}(id = ${release.releaseId})} : @{/release/add}"
+          th:object="${release}" method="post">
+      <div class="mb-4">
+        <label for="titleInput" class="form-label">Title</label>
+        <input type="text" class="form-control" id="titleInput" th:field="*{title}"/>
+        <div id="titleValidation" class="form-text text-danger" th:if="${#fields.hasErrors('title')}"
+             th:errorclass="error" th:errors="*{title}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="releaseDateInput" class="form-label">Release Date</label>
+        <input type="text" class="form-control" id="releaseDateInput" th:field="*{releaseDate}"
+               placeholder="####-##-##"/>
+        <div id="releaseDateValidation" class="form-text text-danger" th:if="${#fields.hasErrors('releaseDate')}"
+             th:errorclass="error" th:errors="*{releaseDate}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="artistsMultiSelect" class="form-label">Artists</label>
+        <select multiple="multiple" class="form-select" size="10" id="artistsMultiSelect" th:field="*{artists}">
+          <option th:each="artist: ${artists}" th:value="${artist.artistId}" th:text="${artist.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="genresMultiSelect" class="form-label">Genres</label>
+        <select multiple="multiple" class="form-select" size="10" id="genresMultiSelect" th:field="*{genres}">
+          <option th:each="genre: ${genres}" th:value="${genre.genreId}" th:text="${genre.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="releaseTypesMultiSelect" class="form-label">Release Type(s)</label>
+        <select multiple="multiple" class="form-select" size="5" id="releaseTypesMultiSelect" th:field="*{releaseTypes}">
+          <option th:each="releaseType: ${releaseTypes}" th:value="${releaseType.releaseTypeId}" th:text="${releaseType.name.type}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="languagesMultiSelect" class="form-label">Languages</label>
+        <select multiple="multiple" class="form-select" size="5" id="languagesMultiSelect" th:field="*{languages}">
+          <option th:each="language: ${languages}" th:value="${language.languageId}" th:text="${language.name.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="producersMultiSelect" class="form-label">Producers</label>
+        <select multiple="multiple" class="form-select" size="10" id="producersMultiSelect" th:field="*{producers}">
+          <option th:each="producer: ${producers}" th:value="${producer.producerId}" th:text="${producer.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="seriesMultiSelect" class="form-label">Series</label>
+        <select multiple="multiple" class="form-select" size="5" id="seriesMultiSelect" th:field="*{series}">
+          <option th:each="series: ${seriesList}" th:value="${series.seriesId}" th:text="${series.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4 form-check">
+        <input type="checkbox" class="form-check-input" id="favourite" th:field="*{favourite}"/>
+        <label class="form-check-label" for="favourite">Favourite</label>
+      </div>
+      <div class="mb-4 form-check">
+        <input type="checkbox" class="form-check-input" id="isOfficial" th:field="*{isOfficial}"/>
+        <label class="form-check-label" for="favourite">Is Official?</label>
+      </div>
+      <div class="mb-4">
+        <label for="rymRatingInput" class="form-label">Rate Your Music (RYM) Rating</label>
+        <input type="number" class="form-control" id="rymRatingInput" th:field="*{rymRating}"/>
+      </div>
+      <div class="mb-4">
+        <label for="aotyRankInput" class="form-label">Album Of The Year (AOTY) Rank</label>
+        <input type="number" class="form-control" id="aotyRankInput" th:field="*{aotyRank}"/>
+      </div>
+      <div class="mb-4">
+        <label for="beaRankInput" class="form-label">Best Ever Album (BEA) Rank</label>
+        <input type="number" class="form-control" id="beaRankInput" th:field="*{beaRank}"/>
+      </div>
+      <div class="mb-4">
+        <label for="christgauRatingInput" class="form-label">Robert Christgau Rating</label>
+        <input type="text" class="form-control" id="christgauRatingInput" th:field="*{christgauRating}"/>
+      </div>
+      <div class="mb-4">
+        <label for="scaruffiRatingInput" class="form-label">Piero Scaruffi Rating</label>
+        <input type="number" class="form-control" id="scaruffiRatingInput" th:field="*{scaruffiRating}"/>
+      </div>
+      <div class="mb-4">
+        <label for="pitchforkRatingInput" class="form-label">Pitchfork Rating</label>
+        <input type="number" class="form-control" id="pitchforkRatingInput" th:field="*{pitchforkRating}"/>
+      </div>
+      <div class="mb-4">
+        <label for="metacriticInput" class="form-label">Metacritic</label>
+        <input type="number" class="form-control" id="metacriticInput" th:field="*{metacritic}"/>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>
