@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Composer : Form')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Composer'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#" th:action="${action} == 'Edit' ? @{/composer/edit/{id}(id = ${composer.composerId})} : @{/composer/add}"
+          th:object="${composer}" method="post">
+      <div class="mb-4">
+        <label for="nameInput" class="form-label">Name</label>
+        <input type="text" class="form-control" id="nameInput" th:field="*{name}"/>
+        <div id="nameValidation" class="form-text text-danger" th:if="${#fields.hasErrors('name')}"
+             th:errorclass="error" th:errors="*{name}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="birthDateInput" class="form-label">Birth Date</label>
+        <input type="text" class="form-control" id="birthDateInput" th:field="*{birthDate}" placeholder="####-##-##"/>
+        <div id="birthDateValidation" class="form-text text-danger" th:if="${#fields.hasErrors('birthDate')}"
+             th:errorclass="error" th:errors="*{birthDate}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="birthLocationSelect" class="form-label">Birth Location</label>
+        <select class="form-select" size="10" id="birthLocationSelect" th:field="*{birthLocation}">
+          <option th:each="location: ${locations}" th:value="${location.locationId}"
+                  th:text="${location.region.regionAbbreviation}
+                      ? ${location.city} + ', ' + ${location.region.regionAbbreviation} + ', ' + ${location.region.country.countryName}
+                      : ${location.city} + ', ' + ${location.region.name} + ', ' + ${location.region.country.countryName}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="deathDateInput" class="form-label">Death Date</label>
+        <input type="text" class="form-control" id="deathDateInput" th:field="*{deathDate}" placeholder="####-##-##"/>
+        <div id="deathDateValidation" class="form-text text-danger" th:if="${#fields.hasErrors('deathDate')}"
+             th:errorclass="error" th:errors="*{deathDate}"></div>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>
