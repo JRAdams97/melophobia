@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Track : Details')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${track.title}"></h3>
+  <hr/>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Original Artist(s): </span>
+          <span th:each="artist, i: ${track.originalArtists}"
+                th:text="!${i.last} ? ${artist.name} + ' / ' : ${artist.name}"></span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Recorded Artist(s): </span>
+          <span th:each="artist, i: ${track.recordedArtists}"
+                th:text="!${i.last} ? ${artist.name} + ' / ' : ${artist.name}"></span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">First Release: </span><span th:text="${track.firstRelease.title}"></span></p>
+      </div>
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Composer(s): </span>
+          <span th:each="composer, i: ${track.composers}"
+                th:text="!${i.last} ? ${composer.name} + ' / ' : ${composer.name}"></span>
+        </p>
+      </div>
+      <hr/>
+      <div class="col-6">
+        <p><span class="fw-bold">Favourite: </span><span th:text="${track.favourite}"></span></p>
+      </div>
+      <div class="col-6">
+        <p><span class="fw-bold">Track Type: </span><span th:text="${track.trackType.type}"></span></p>
+      </div>
+      <hr/>
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">ISRC(s): </span>
+          <span th:each="isrc, i: ${track.isrcs}"
+                th:text="!${i.last} ? ${isrc.isrcCode} + ' / ' : ${isrc.isrcCode}"></span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">ISWC(s): </span>
+          <span th:each="iswc, i: ${track.iswcs}"
+                th:text="!${i.last} ? ${iswc.iswcCode} + ' / ' : ${iswc.iswcCode}"></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

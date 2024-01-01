@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Track : Form')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Track'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#" th:action="${action} == 'Edit' ? @{/track/edit/{id}(id = ${track.trackId})} : @{/track/add}"
+          th:object="${track}" method="post">
+      <div class="mb-4">
+        <label for="titleInput" class="form-label">Title</label>
+        <input type="text" class="form-control" id="titleInput" th:field="*{title}"/>
+        <div id="titleValidation" class="form-text text-danger" th:if="${#fields.hasErrors('title')}"
+             th:errorclass="error" th:errors="*{title}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="originalArtistsMultiSelect" class="form-label">Original Artist(s)</label>
+        <select multiple="multiple" class="form-select" size="10" id="originalArtistsMultiSelect"
+                th:field="*{originalArtists}">
+          <option th:each="artist: ${artists}" th:value="${artist.artistId}" th:text="${artist.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="recordedArtistsMultiSelect" class="form-label">Recorded Artist(s)</label>
+        <select multiple="multiple" class="form-select" size="10" id="recordedArtistsMultiSelect"
+                th:field="*{recordedArtists}">
+          <option th:each="artist: ${artists}" th:value="${artist.artistId}" th:text="${artist.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="firstReleaseSelect" class="form-label">First Release</label>
+        <select class="form-select" size="10" id="firstReleaseSelect" th:field="*{firstRelease}">
+          <option th:each="release: ${releases}" th:value="${release.releaseId}" th:text="${release.title}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="composersMultiSelect" class="form-label">Composer(s)</label>
+        <select multiple="multiple" class="form-select" size="5" id="composersMultiSelect" th:field="*{composers}">
+          <option th:each="composer: ${composers}" th:value="${composer.composerId}" th:text="${composer.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="trackTypeSelect" class="form-label">Track Type</label>
+        <select class="form-select" size="5" id="trackTypeSelect" th:field="*{trackType}">
+          <option th:each="trackType: ${trackTypes}" th:value="${trackType}" th:text="${trackType.type}"></option>
+        </select>
+      </div>
+      <div class="mb-4 form-check">
+        <input type="checkbox" class="form-check-input" id="favourite" th:field="*{favourite}"/>
+        <label class="form-check-label" for="favourite">Favourite</label>
+      </div>
+      <div class="mb-4">
+        <label for="isrcsMultiSelect" class="form-label">ISRC(s) </label>
+        <select multiple="multiple" class="form-select" size="10" id="isrcsMultiSelect" th:field="*{isrcs}">
+          <option th:each="isrc: ${isrcs}" th:value="${isrc.isrcId}" th:text="${isrc.isrcCode}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="iswcsMultiSelect" class="form-label">ISWC(s) </label>
+        <select multiple="multiple" class="form-select" size="10" id="iswcsMultiSelect" th:field="*{iswcs}">
+          <option th:each="iswc: ${iswcs}" th:value="${iswc.iswcId}" th:text="${iswc.iswcCode}"></option>
+        </select>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

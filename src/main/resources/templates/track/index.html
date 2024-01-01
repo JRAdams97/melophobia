@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Tracks')}">
+  <title></title>
+</head>
+<body>
+<div class="container-fluid mt-5" style="max-width: 1800px">
+  <h3>Tracks</h3>
+  <hr/>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Recorded Artist(s)</th>
+      <th scope="col">First Release</th>
+      <th scope="col">Composer(s)</th>
+      <th scope="col">Favourite</th>
+      <th scope="col">Track Type</th>
+      <th scope="col">ISRC(s)</th>
+      <th scope="col">ISWC(s)</th>
+      <th scope="col" style="width: 2.5%">Edit</th>
+      <th scope="col" style="width: 2.5%">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr scope="row" th:each="track: ${tracks}">
+      <td><a th:href="@{/track/{id}(id = ${track.trackId})}" th:text="${track.title}"></a></td>
+      <td><a th:each="artist, i: ${track.recordedArtists}" th:href="@{/artist/{id}(id = ${artist.artistId})}"
+             th:text="!${i.last} ? ${artist.name} + ' / ' : ${artist.name}"></a></td>
+      <td th:text="${track.firstRelease.title}"></td>
+      <td><a th:each="composer, i: ${track.composers}"
+             th:text="!${i.last} ? ${composer.name} + ' / ' : ${composer.name}"></a></td>
+      <td th:text="${track.favourite}"></td>
+      <td th:text="${track.trackType.type}"></td>
+      <td><span th:each="isrc, i: ${track.isrcs}"
+                th:text="!${i.last} ? ${isrc.isrcCode} + ' / ' : ${isrc.isrcCode}"></span></td>
+      <td><span th:each="iswc, i: ${track.iswcs}"
+                th:text="!${i.last} ? ${iswc.iswcCode} + ' / ' : ${iswc.iswcCode}"></span></td>
+      <td>
+        <a th:href="@{/track/edit/{id}(id = ${track.trackId})}">
+          <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/track/delete/{id}(id = ${track.trackId})}">
+          <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid" style="max-width: 1800px">
+    <div class="row text-end mb-4">
+      <div class="col-12">
+        <a th:href="@{/track/add}">
+          <button type="submit" class="btn btn-primary" th:text="Add"></button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

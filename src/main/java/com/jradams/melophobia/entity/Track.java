@@ -1,6 +1,7 @@
 package com.jradams.melophobia.entity;
 
 import com.jradams.melophobia.entity.backing.TrackType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +26,8 @@ import java.util.Set;
 public class Track {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "track_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long trackId;
 
     @NotBlank(message = "Title is mandatory")
