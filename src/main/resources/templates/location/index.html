@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head (pageTitle='Locations')}">
+  <title></title>
+</head>
+<body>
+<div class="container-fluid mt-5" style="max-width: 1800px">
+  <h3>Locations</h3>
+  <hr/>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">City</th>
+      <th scope="col">Region</th>
+      <th scope="col">Country</th>
+      <th scope="col" style="width: 2.5%">Edit</th>
+      <th scope="col" style="width: 2.5%">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr scope="row" th:each="location: ${locations}">
+      <td th:text="${location.city}"></td>
+      <td th:if="${location.region}" th:text="${location.region.regionAbbreviation}
+           ? ${location.region.name} + ' (' + ${location.region.regionAbbreviation} + ')'
+           : ${location.region.name}"></td>
+      <td th:text="${location.region.country.countryName}"></td>
+      <td>
+        <a th:href="@{/location/edit/{id}(id = ${location.locationId})}">
+          <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/location/delete/{id}(id = ${location.locationId})}">
+          <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid" style="max-width: 1800px">
+    <div class="row text-end mb-4">
+      <div class="col-12">
+        <a th:href="@{/location/add}">
+          <button type="submit" class="btn btn-primary" th:text="Add"></button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>
