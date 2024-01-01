@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Language : Form')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Language'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#" th:action="${action} == 'Edit' ? @{/language/edit/{id}(id = ${language.languageId})} : @{/language/add}"
+          th:object="${language}" method="post">
+      <div class="mb-4">
+        <label for="nameSelect" class="form-label">Name</label>
+        <select class="form-select" size="10" id="nameSelect" th:field="*{name}">
+          <th:block th:each="languageName: ${languageNames}" th:if="${!#lists.contains(languageNameList, languageName)}">
+            <option th:value="${languageName}" th:text="${languageName.name}"></option>
+          </th:block>
+        </select>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>
