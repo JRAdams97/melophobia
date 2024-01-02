@@ -21,7 +21,8 @@ import lombok.ToString;
 public class Media {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "media_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long mediaId;
 
     @NotBlank(message = "Name is mandatory")
