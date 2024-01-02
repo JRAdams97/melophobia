@@ -22,7 +22,8 @@ import lombok.ToString;
 public class Country {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long countryId;
 
     @NotBlank(message = "Country name is mandatory")
@@ -30,7 +31,7 @@ public class Country {
     private String countryName;
 
     @Column(name = "alpha_2_code")
-    @NotBlank
+    @NotBlank(message = "Alpha2 Code is mandatory")
     @Pattern(regexp = "[A-Z]{2}", message = "Alpha 2 code must consist of two uppercase letters")
     private String alpha2Code;
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Region : Form')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Region'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#"
+          th:action="${action} == 'Edit' ? @{/region/edit/{id}(id = ${region.regionId})} : @{/region/add}"
+          th:object="${region}" method="post">
+      <div class="mb-4">
+        <label for="nameInput" class="form-label">Name</label>
+        <input type="text" class="form-control" id="nameInput" th:field="*{name}"/>
+        <div id="nameValidation" class="form-text text-danger" th:if="${#fields.hasErrors('name')}"
+             th:errorclass="error" th:errors="*{name}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="regionAbbreviationInput" class="form-label">Region Abbreviation</label>
+        <input type="text" class="form-control" id="regionAbbreviationInput" th:field="*{regionAbbreviation}"/>
+        <div id="regionAbbreviationValidation" class="form-text text-danger"
+             th:if="${#fields.hasErrors('regionAbbreviation')}" th:errorclass="error" th:errors="*{name}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="countrySelect" class="form-label">Country</label>
+        <select class="form-select" size="10" id="countrySelect" th:field="*{country}">
+          <option th:each="country: ${countries}" th:value="${country.countryId}"
+                  th:text="${country.countryName}"></option>
+        </select>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

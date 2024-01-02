@@ -22,7 +22,8 @@ import lombok.ToString;
 public class Region {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "region_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long regionId;
 
     @NotBlank(message = "Name is mandatory")

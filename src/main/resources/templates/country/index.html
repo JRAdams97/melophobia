@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head (pageTitle='Countries')}">
+  <title></title>
+</head>
+<body>
+<div class="container-fluid mt-5" style="max-width: 1800px">
+  <h3>Countries</h3>
+  <hr/>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Alpha2 Code</th>
+      <th scope="col">Continent</th>
+      <th scope="col" style="width: 2.5%">Edit</th>
+      <th scope="col" style="width: 2.5%">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr scope="row" th:each="country: ${countries}">
+      <td th:text="${country.countryName}"></td>
+      <td th:text="${country.alpha2Code}"></td>
+      <td th:text="${country.countryContinent.title}"></td>
+      <td>
+        <a th:href="@{/country/edit/{id}(id = ${country.countryId})}">
+          <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/country/delete/{id}(id = ${country.countryId})}">
+          <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid" style="max-width: 1800px">
+    <div class="row text-end mb-4">
+      <div class="col-12">
+        <a th:href="@{/country/add}">
+          <button type="submit" class="btn btn-primary" th:text="Add"></button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>
