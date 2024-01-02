@@ -1,5 +1,6 @@
 package com.jradams.melophobia.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +22,8 @@ import lombok.ToString;
 public class Producer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "producer_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long producerId;
 
     @NotBlank(message = "Name is mandatory")

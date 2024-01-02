@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head (pageTitle='Producers')}">
+  <title></title>
+</head>
+<body>
+<div class="container-fluid mt-5" style="max-width: 1800px">
+  <h3>Producers</h3>
+  <hr/>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Birth Date</th>
+      <th scope="col">Birth Location</th>
+      <th scope="col">Death Date</th>
+      <th scope="col" style="width: 2.5%">Edit</th>
+      <th scope="col" style="width: 2.5%">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr scope="row" th:each="producer: ${producers}">
+      <td th:text="${producer.name}"></td>
+      <td th:text="${producer.birthDate}"></td>
+      <td>
+        <th:block th:if="${producer.birthLocation}">
+          <span th:text="${producer.birthLocation.region.regionAbbreviation}
+              ? ${producer.birthLocation.city} + ', ' + ${producer.birthLocation.region.regionAbbreviation} + ', ' + ${producer.birthLocation.region.country.countryName}
+              : ${producer.birthLocation.city} + ', ' + ${producer.birthLocation.region.name} + ', ' + ${producer.birthLocation.region.country.countryName}"></span>
+        </th:block>
+      </td>
+      <td th:text="${producer.deathDate}"></td>
+      <td>
+        <a th:href="@{/producer/edit/{id}(id = ${producer.producerId})}">
+          <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/producer/delete/{id}(id = ${producer.producerId})}">
+          <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid" style="max-width: 1800px">
+    <div class="row text-end mb-4">
+      <div class="col-12">
+        <a th:href="@{/producer/add}">
+          <button type="submit" class="btn btn-primary" th:text="Add"></button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>
