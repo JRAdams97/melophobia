@@ -23,18 +23,14 @@ import lombok.ToString;
 @ToString
 public class CollectionPhysicalItem {
 
-    @Column(name = "p_collection_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "p_collection_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long physicalCollectionId;
 
     @OneToOne
     @JoinColumn(name = "issue_id")
     private Issue issue;
-
-    @ManyToOne
-    @JoinColumn(name = "media_id")
-    private Media media;
 
     private Quality packagingQuality;
     private Quality mediaQuality;

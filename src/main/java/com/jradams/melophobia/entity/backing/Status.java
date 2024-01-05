@@ -5,16 +5,16 @@ import lombok.Getter;
 @Getter
 public enum Status {
 
-    UNKNOWN(0),
-    POOR(1),
-    OK(2),
-    GOOD(3),
-    VERY_GOOD(4),
-    PERFECT(5);
+    UNKNOWN("Unknown"),
+    POOR("Poor"),
+    OK("OK"),
+    GOOD("Good"),
+    VERY_GOOD("Very Good"),
+    PERFECT("Perfect");
 
-    private final int value;
+    private final String value;
 
-    Status(int value) {
+    Status(String value) {
         this.value = value;
     }
 }

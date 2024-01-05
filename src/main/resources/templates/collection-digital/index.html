@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Digital Collection')}">
+  <title></title>
+</head>
+<body>
+<div class="container-fluid mt-5" style="max-width: 1800px">
+  <h3>Digital Collection</h3>
+  <hr/>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Artist(s)</th>
+      <th scope="col">Genre(s)</th>
+      <th scope="col">Release Date</th>
+      <th scope="col">Media</th>
+      <th scope="col">Tracks</th>
+      <th scope="col">Discs</th>
+      <th scope="col">Art Quality</th>
+      <th scope="col">Tag Quality</th>
+      <th scope="col">Status</th>
+      <th scope="col" style="width: 2.5%">Edit</th>
+      <th scope="col" style="width: 2.5%">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr scope="row" th:each="collectionDigitalItem: ${collectionDigitalItems}">
+      <td><a th:href="@{/collection-digital/{id}(id = ${collectionDigitalItem.collectionDigitalItemId})}"
+             th:text="${collectionDigitalItem.release.title}"></a></td>
+      <td><span th:each="artist, i: ${collectionDigitalItem.release.artists}"
+                th:text="!${i.last} ? ${artist.name} + ' / ' : ${artist.name}"></span></td>
+      <td><span th:each="genre, i: ${collectionDigitalItem.release.genres}"
+                th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
+      <td th:text="${collectionDigitalItem.release.releaseDate}"></td>
+      <td th:text="${collectionDigitalItem.media}"></td>
+      <td th:text="${collectionDigitalItem.totalTracks} + ' (' + ${collectionDigitalItem.missingTracks} + ')'"></td>
+      <td th:text="${collectionDigitalItem.totalDiscs} + ' (' + ${collectionDigitalItem.missingDiscs} + ')'"></td>
+      <td th:text="${collectionDigitalItem.artQuality}"></td>
+      <td th:text="${collectionDigitalItem.tagQuality}"></td>
+      <td th:text="${collectionDigitalItem.status}"></td>
+      <td>
+        <a th:href="@{/collection-digital/edit/{id}(id = ${collectionDigitalItem.collectionDigitalItemId})}">
+          <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/collection-digital/delete/{id}(id = ${collectionDigitalItem.collectionDigitalItemId})}">
+          <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid" style="max-width: 1800px">
+    <div class="row text-end mb-4">
+      <div class="col-12">
+        <a th:href="@{/collection-digital/add}">
+          <button type="submit" class="btn btn-primary" th:text="Add"></button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

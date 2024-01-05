@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Physical Collection')}">
+  <title></title>
+</head>
+<body>
+<div class="container-fluid mt-5" style="max-width: 1800px">
+  <h3>Physical Collection</h3>
+  <hr/>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Artist(s)</th>
+      <th scope="col">Genre(s)</th>
+      <th scope="col">Release Date</th>
+      <th scope="col">Record Label</th>
+      <th scope="col">Media</th>
+      <th scope="col">Edition</th>
+      <th scope="col">Barcode</th>
+      <th scope="col" style="width: 2.5%">Edit</th>
+      <th scope="col" style="width: 2.5%">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr scope="row" th:each="collectionPhysicalItem: ${collectionPhysicalItems}">
+      <td><a th:href="@{/collection-physical/{id}(id = ${collectionPhysicalItem.collectionPhysicalItemId})}"
+             th:text="${collectionPhysicalItem.issue.release.title}"></a></td>
+      <td><span th:each="artist, i: ${collectionPhysicalItem.issue.release.artists}"
+                th:text="!${i.last} ? ${artist.name} + ' / ' : ${artist.name}"></span></td>
+      <td><span th:each="genre, i: ${collectionPhysicalItem.issue.release.genres}"
+                th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
+      <td th:text="${collectionPhysicalItem.issue.releaseDate}"></td>
+      <td th:text="${collectionPhysicalItem.issue.label.name}"></td>
+      <td th:text="${collectionPhysicalItem.issue.media}"></td>
+      <td th:text="${collectionPhysicalItem.issue.edition}"></td>
+      <td th:text="${collectionPhysicalItem.issue.barcode}"></td>
+      <td>
+        <a th:href="@{/collection-physical/edit/{id}(id = ${collectionPhysicalItem.collectionPhysicalItemId})}">
+          <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/collection-physical/delete/{id}(id = ${collectionPhysicalItem.collectionPhysicalItemId})}">
+          <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid" style="max-width: 1800px">
+    <div class="row text-end mb-4">
+      <div class="col-12">
+        <a th:href="@{/collection-physical/add}">
+          <button type="submit" class="btn btn-primary" th:text="Add"></button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

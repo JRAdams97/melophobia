@@ -5,12 +5,12 @@ import lombok.Getter;
 @Getter
 public enum Quality {
 
-    GOOD("Good"),
-    MINT("Mint"),
-    NEAR_MINT("Near Mint"),
     POOR("Poor"),
+    GOOD("Good"),
     VERY_GOOD("Very Good"),
-    VERY_GOOD_PLUS("Very Good Plus");
+    VERY_GOOD_PLUS("Very Good Plus"),
+    NEAR_MINT("Near Mint"),
+    MINT("Mint");
 
     private final String grade;
 

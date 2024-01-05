@@ -24,9 +24,9 @@ import lombok.ToString;
 @ToString
 public class CollectionDigitalItem {
 
-    @Column(name = "d_collection_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "d_collection_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long digitalCollectionId;
 
     @OneToOne
@@ -37,12 +37,12 @@ public class CollectionDigitalItem {
     @JoinColumn(name = "media_id")
     private Media media;
 
-    @NotNull(message = "Total track # is mandatory")
+    @NotNull(message = "Total Track # is mandatory")
     private Integer totalTracks;
 
     private Integer missingTracks;
 
-    @NotNull(message = "Total disc # is mandatory")
+    @NotNull(message = "Total Disc # is mandatory")
     private Integer totalDiscs;
 
     private Integer missingDiscs;

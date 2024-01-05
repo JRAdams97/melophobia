@@ -1,6 +1,7 @@
 package com.jradams.melophobia.entity;
 
 import com.jradams.melophobia.entity.backing.Currency;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -24,8 +27,9 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long purchaseId;
 
+    @Column(precision = 7, scale = 2)
     @NotNull(message = "Price is mandatory")
-    private Double price;
+    private BigDecimal price;
 
     private Currency currencyCode;
 

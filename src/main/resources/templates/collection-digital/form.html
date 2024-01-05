@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Digital Collection Item : Form')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Digital Collection Item'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#"
+          th:action="${action} == 'Edit' ? @{/collection-digital/edit/{id}(id = ${collectionDigitalItem.collectionDigitalItemId})} : @{/collection-digital/add}"
+          th:object="${collectionDigitalItem}" method="post">
+      <div class="mb-4">
+        <label for="releaseSelect" class="form-label">Release</label>
+        <select class="form-select" id="releaseSelect" th:field="*{release}">
+          <option th:each="release: ${releases}" th:value="${release.releaseId}"
+                  th:text="${release.title} + ' (' + ${#strings.substring(release.releaseDate, 0, 4)} + ')'"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="mediaSelect" class="form-label">Media</label>
+        <select class="form-select" id="mediaSelect" th:field="*{media}">
+          <option th:each="media: ${mediaList}" th:value="${media.mediaId}"
+                  th:text="${media.name}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="totalTracksInput" class="form-label">Total Tracks</label>
+        <input type="number" class="form-control" id="totalTracksInput" th:field="*{totalTracks}"/>
+        <div id="totalTracksValidation" class="form-text text-danger" th:if="${#fields.hasErrors('totalTracks')}"
+             th:errorclass="error" th:errors="*{totalTracks}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="missingTracksInput" class="form-label">Missing Tracks</label>
+        <input type="number" class="form-control" id="missingTracksInput" th:field="*{missingTracks}"/>
+      </div>
+      <div class="mb-4">
+        <label for="totalDiscsInput" class="form-label">Total Discs</label>
+        <input type="number" class="form-control" id="totalDiscsInput" th:field="*{totalDiscs}"/>
+        <div id="totalDiscsValidation" class="form-text text-danger" th:if="${#fields.hasErrors('totalDiscs')}"
+             th:errorclass="error" th:errors="*{totalDiscs}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="missingDiscsInput" class="form-label">Missing Discs</label>
+        <input type="number" class="form-control" id="missingDiscsInput" th:field="*{missingDiscs}"/>
+      </div>
+      <div class="mb-4">
+        <label for="artQualitySelect" class="form-label">Art Quality</label>
+        <select class="form-select" id="artQualitySelect" th:field="*{artQuality}">
+          <option th:each="status: ${statuses}" th:value="${status}" th:text="${status.value}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="tagQualitySelect" class="form-label">Tag Quality</label>
+        <select class="form-select" id="tagQualitySelect" th:field="*{tagQuality}">
+          <option th:each="status: ${statuses}" th:value="${status}" th:text="${status.value}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="statusSelect" class="form-label">Overall Status</label>
+        <select class="form-select" id="statusSelect" th:field="*{status}">
+          <option th:each="status: ${statuses}" th:value="${status}" th:text="${status.value}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="descriptionInput" class="form-label">Description</label>
+        <input type="number" class="form-control" id="descriptionInput" th:field="*{description}"/>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

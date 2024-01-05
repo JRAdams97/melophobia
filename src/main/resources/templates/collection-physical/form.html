@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Physical Collection Item : Form')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Physical Collection Item'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#"
+          th:action="${action} == 'Edit' ? @{/collection-physical/edit/{id}(id = ${collectionPhysicalItem.collectionPhysicalItemId})} : @{/collection-physical/add}"
+          th:object="${collectionPhysicalItem}" method="post">
+      <div class="mb-4">
+        <label for="issueSelect" class="form-label">Issue</label>
+        <select class="form-select" id="issueSelect" th:field="*{issue}">
+          <option th:each="issue: ${issues}" th:value="${issue.issueId}"
+                  th:text="${issue.release.title} + ' (' + ${#strings.substring(issue.release.releaseDate, 0, 4)} + ')'"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="packagingQualitySelect" class="form-label">Packaging Quality</label>
+        <select class="form-select" id="packagingQualitySelect" th:field="*{packagingQuality}">
+          <option th:each="quality: ${qualities}" th:value="${quality}"
+                  th:text="${quality.grade}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="mediaQualitySelect" class="form-label">Media Quality</label>
+        <select class="form-select" id="mediaQualitySelect" th:field="*{mediaQuality}">
+          <option th:each="quality: ${qualities}" th:value="${quality}"
+                  th:text="${quality.grade}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="purchaseSelect" class="form-label">Purchase</label>
+        <select class="form-select" id="purchaseSelect" th:field="*{purchase}">
+          <option th:each="purchase: ${purchases}" th:value="${purchase.purchaseId}"
+                  th:text="${purchase.price} + ' (' + ${purchase.vendor.name} + ')'"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="descriptionInput" class="form-label">Description</label>
+        <input type="text" class="form-control" id="descriptionInput" th:field="*{description}"/>
+        <div id="decriptionValidation" class="form-text text-danger" th:if="${#fields.hasErrors('description')}"
+             th:errorclass="error" th:errors="*{description}"></div>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>
