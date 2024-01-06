@@ -54,14 +54,6 @@ public class CollectionPhysicalItemController {
         return "collection-physical/index";
     }
 
-    @GetMapping("/{id}")
-    public String showCollectionPhysicalItemDetail(@PathVariable(value = "id") long id, Model model) {
-        Optional<CollectionPhysicalItem> collectionPhysicalItem = collectionPhysicalItemRepo.findById(id);
-        collectionPhysicalItem.ifPresent(v -> model.addAttribute(COLLECTION_PHYSICAL_ITEM, v));
-
-        return "collection-physical/detail";
-    }
-
     @GetMapping("/add")
     public String showCollectionPhysicalItemForm(Model model) {
         populateCollectionPhysicalItemForm(model);

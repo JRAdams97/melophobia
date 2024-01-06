@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{fragments/layout :: head (pageTitle='Media')}">
+<head th:insert="~{fragments/layout :: head (pageTitle='Purchases')}">
   <title></title>
 </head>
 <body>
 <div class="container-fluid mt-5" style="max-width: 1800px">
-  <h3>Media</h3>
+  <h3>Purchases</h3>
   <hr/>
   <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Abbreviation</th>
-      <th scope="col">Origin Year</th>
-      <th scope="col">Classification</th>
+      <th scope="col">Price</th>
+      <th scope="col">Currency</th>
+      <th scope="col">Vendor</th>
       <th scope="col" style="width: 2.5%">Edit</th>
       <th scope="col" style="width: 2.5%">Delete</th>
     </tr>
     </thead>
     <tbody>
-    <tr scope="row" th:each="media: ${mediaList}">
-      <td th:text="${media.name}"></td>
-      <td th:text="${media.mediaAbbreviation}"></td>
-      <td th:text="${media.originYear}"></td>
-      <td th:text="${media.classification}"></td>
+    <tr scope="row" th:each="purchase: ${purchases}">
+      <td th:text="${purchase.price}"></td>
+      <td th:text="${purchase.currencyCode}"></td>
+      <td><a th:href="@{/vendor/{id}(id = ${purchase.vendor.vendorId})" th:text="${purchase.vendor}"></a></td>
       <td>
-        <a th:href="@{/media/edit/{id}(id = ${media.mediaId})}">
+        <a th:href="@{/purchase/edit/{id}(id = ${purchase.purchaseId})}">
           <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>
         </a>
       </td>
       <td>
-        <a th:href="@{/media/delete/{id}(id = ${media.mediaId})}">
+        <a th:href="@{/purchase/delete/{id}(id = ${purchase.purchaseId})}">
           <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
         </a>
       </td>
@@ -40,7 +38,7 @@
   <div class="container-fluid" style="max-width: 1800px">
     <div class="row text-end mb-4">
       <div class="col-12">
-        <a th:href="@{/media/add}">
+        <a th:href="@{/purchase/add}">
           <button type="submit" class="btn btn-primary" th:text="Add"></button>
         </a>
       </div>

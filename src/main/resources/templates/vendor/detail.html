@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Vendor : Details')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${vendor.name}"></h3>
+  <hr/>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Address: </span>
+          <span th:text="${vendor.address}"></span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p>
+          <span class="fw-bold">Postcode: </span>
+          <span th:text="${vendor.postcode}"></span>
+        </p>
+      </div>
+      <div class="col-12">
+        <p>
+          <span class="fw-bold">Location: </span>
+          <span th:text="${vendor.location.region.regionAbbreviation}
+                    ? ${vendor.location.city} + ', ' + ${vendor.location.region.regionAbbreviation} + ', ' + ${vendor.location.region.country.countryName}
+                    : ${vendor.location.city} + ', ' + ${vendor.location.region.name} + ', ' + ${vendor.location.region.country.countryName}"></span>
+        </p>
+      </div>
+      <hr/>
+      <div class="col-12">
+        <ul class="list-group">
+          <li class="list-group-item" th:each="purchase: ${purchases}"
+              th:text="${purchase.price} + ' (' + ${purchase.currencyCode} + ')"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>

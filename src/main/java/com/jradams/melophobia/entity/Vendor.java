@@ -1,5 +1,6 @@
 package com.jradams.melophobia.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +26,8 @@ import java.util.Set;
 public class Vendor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "vendor_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vendorId;
 
     @NotBlank(message = "Name is mandatory")

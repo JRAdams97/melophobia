@@ -53,14 +53,6 @@ public class CollectionDigitalItemController {
         return "collection-digital/index";
     }
 
-    @GetMapping("/{id}")
-    public String showCollectionDigitalItemDetail(@PathVariable(value = "id") long id, Model model) {
-        Optional<CollectionDigitalItem> collectionDigitalItem = collectionDigitalItemRepo.findById(id);
-        collectionDigitalItem.ifPresent(v -> model.addAttribute(COLLECTION_DIGITAL_ITEM, v));
-
-        return "collection-digital/detail";
-    }
-
     @GetMapping("/add")
     public String showCollectionDigitalItemForm(Model model) {
         populateCollectionDigitalItemForm(model);

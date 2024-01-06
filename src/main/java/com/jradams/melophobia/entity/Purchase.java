@@ -24,7 +24,8 @@ import java.math.BigDecimal;
 public class Purchase {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "purchase_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long purchaseId;
 
     @Column(precision = 7, scale = 2)

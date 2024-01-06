@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/layout :: head(pageTitle='Purchase : Form')}">
+  <title></title>
+</head>
+<body>
+<div class="container mt-5">
+  <h3 th:text="${action} + ' Purchase'"></h3>
+  <hr/>
+  <div class="container-fluid" style="max-width: 800px">
+    <form action="#"
+          th:action="${action} == 'Edit' ? @{/purchase/edit/{id}(id = ${purchase.purchaseId})} : @{/purchase/add}"
+          th:object="${purchase}" method="post">
+      <div class="mb-4">
+        <label for="priceInput" class="form-label">Price</label>
+        <input type="number" class="form-control" id="priceInput" th:field="*{price}" />
+        <div id="priceValidation" class="form-text text-danger" th:if="${#fields.hasErrors('price')}"
+             th:errorclass="error" th:errors="*{price}"></div>
+      </div>
+      <div class="mb-4">
+        <label for="currencySelect" class="form-label">Currency</label>
+        <select class="form-select" size="5" id="currencySelect" th:field="*{currencyCode}">
+          <option th:each="currency: ${currencies}" th:value="${currency}" th:text="${currency}"></option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="vendorSelect" class="form-label">Vendor</label>
+        <select class="form-select" size="5" id="vendorSelect" th:field="*{vendor}">
+          <option th:each="vendor: ${vendors}" th:value="${vendor.vendorId}" th:text="${vendor.name}"></option>
+        </select>
+      </div>
+      <div class="text-end mb-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div th:insert="~{fragments/layout :: footer}"></div>
+</body>
+</html>
