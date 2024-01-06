@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{fragments/layout :: head(pageTitle='Release : Form')}">
+<head th:insert="~{fragments/layout :: head(pageTitle='Release Form')}">
   <title></title>
 </head>
 <body>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
 <div class="container mt-5">
   <h3 th:text="${action} + ' Release'"></h3>
   <hr/>

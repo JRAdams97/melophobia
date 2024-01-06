@@ -1,0 +1,73 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+  <div class="container-fluid pt-2">
+    <p class="navbar-brand fw-bold ms-5">Melophobia</p>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item pe-4">
+          <a class="nav-link active" aria-current="page" th:href="@{/}" th:text="Home"></a>
+        </li>
+        <li class="nav-item pe-4">
+          <a class="nav-link" th:href="@{/artist/}">Artists</a>
+        </li>
+        <li class="nav-item dropdown pe-4">
+          <p class="nav-link dropdown-toggle" id="collectionsDropdown" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">Collections</p>
+          <ul class="dropdown-menu" aria-labelledby="collectionsDropdown">
+            <li><a class="dropdown-item" th:href="@{/collection-digital/}">Digital Collection</a></li>
+            <li><a class="dropdown-item" th:href="@{/collection-physical/}">Physical Collection</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" th:href="@{/purchase/}">Purchases</a></li>
+            <li><a class="dropdown-item" th:href="@{/vendor/}">Vendors</a></li>
+          </ul>
+        </li>
+        <li class="nav-item pe-4">
+          <a class="nav-link" th:href="@{/genre/}">Genres</a>
+        </li>
+        <li class="nav-item pe-4">
+          <a class="nav-link" th:href="@{/label/}">Labels</a>
+        </li>
+        <li class="nav-item dropdown pe-4">
+          <p class="nav-link dropdown-toggle" id="releasesDropdown" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">Releases</p>
+          <ul class="dropdown-menu" aria-labelledby="releasesDropdown">
+            <li><a class="dropdown-item" th:href="@{/release/}">Releases</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a class="dropdown-item" th:href="@{/issue/}">Issues</a></li>
+            <li><a class="dropdown-item" th:href="@{/release/release-types/}">Release Types</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown pe-4">
+          <p class="nav-link dropdown-toggle" id="tracksDropdown" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">Tracks</p>
+          <ul class="dropdown-menu" aria-labelledby="tracksDropdown">
+            <li><a class="dropdown-item" th:href="@{/track/}">Tracks</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a class="dropdown-item" th:href="@{/isrc/}">ISRCs</a></li>
+            <li><a class="dropdown-item" th:href="@{/isrc/}">ISWCs</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <p class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">Extras</p>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" th:href="@{/media/}">Media</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a class="dropdown-item" th:href="@{/composer/}">Composers</a></li>
+            <li><a class="dropdown-item" th:href="@{/producer/}">Producers</a></li>
+            <li><a class="dropdown-item" th:href="@{/series/}">Series</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a class="dropdown-item" th:href="@{/language/}">Languages</a></li>
+            <li><a class="dropdown-item" th:href="@{/location/}">Locations</a></li>
+            <li><a class="dropdown-item" th:href="@{/region/}">Regions</a></li>
+            <li><a class="dropdown-item" th:href="@{/country/}">Countries</a></li>
+          </ul>
+      </ul>
+    </div>
+  </div>
+</nav>
+</html>
