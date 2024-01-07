@@ -3,7 +3,7 @@
 <head th:insert="~{fragments/layout :: head(pageTitle='Physical Collection Form')}">
   <title></title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 <div class="container mt-5">
   <h3 th:text="${action} + ' Physical Collection Item'"></h3>
@@ -52,6 +52,7 @@
     </form>
   </div>
 </div>
-<div th:insert="~{fragments/layout :: footer}"></div>
+<th:block th:insert="~{fragments/footer :: footer}"></th:block>
+<div th:insert="~{fragments/layout :: scripts}"></div>
 </body>
 </html>

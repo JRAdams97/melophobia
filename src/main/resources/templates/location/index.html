@@ -3,7 +3,7 @@
 <head th:insert="~{fragments/layout :: head (pageTitle='Locations')}">
   <title></title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 <div class="container-fluid mt-5" style="max-width: 1800px">
   <h3>Locations</h3>
@@ -48,6 +48,7 @@
     </div>
   </div>
 </div>
-<div th:insert="~{fragments/layout :: footer}"></div>
+<th:block th:insert="~{fragments/footer :: footer}"></th:block>
+<div th:insert="~{fragments/layout :: scripts}"></div>
 </body>
 </html>
