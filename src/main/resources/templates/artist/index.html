@@ -29,7 +29,10 @@
                 th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
       <td th:text="${artist.formationDate}"></td>
       <td th:text="${artist.formationLocation.region.country.alpha2Code}"></td>
-      <td th:text="${artist.favourite}"></td>
+      <th:block th:switch="${artist.favourite}">
+        <td th:case="true"><i class="bi-star-fill text-warning"></i></td>
+        <td th:case="false"><i class="bi-star text-secondary"></i></td>
+      </th:block>
       <td th:text="${artist.artistType.type}"></td>
       <td th:text="${artist.isni}"></td>
       <td>

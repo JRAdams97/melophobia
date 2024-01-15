@@ -25,7 +25,10 @@
       <td th:text="${genre.originYear}"></td>
       <td><span th:each="genre, i: ${genre.parentGenres}"
                 th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
-      <td th:text="${genre.favourite}"></td>
+      <th:block th:switch="${genre.favourite}">
+        <td th:case="true"><i class="bi-star-fill text-warning"></i></td>
+        <td th:case="false"><i class="bi-star text-secondary"></i></td>
+      </th:block>
       <td>
         <a th:href="@{/genre/edit/{id}(id = ${genre.genreId})}">
           <button class="btn btn-primary btn-sm"><i class="bi-pencil-fill"></i></button>

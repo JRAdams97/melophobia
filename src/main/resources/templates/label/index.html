@@ -29,7 +29,10 @@
           ? ${label.formationLocation.city} + ', ' + ${label.formationLocation.region.regionAbbreviation} + ', ' + ${label.formationLocation.region.country.alpha2Code}
           : ${label.formationLocation.city} + ', ' + ${label.formationLocation.region.name} + ', ' + ${label.formationLocation.region.country.alpha2Code}"></td>
       <td th:text="${label.closingDate} != null ? 'false' : 'true'"></td>
-      <td th:text="${label.favourite}"></td>
+      <th:block th:switch="${label.favourite}">
+        <td th:case="true"><i class="bi-star-fill text-warning"></i></td>
+        <td th:case="false"><i class="bi-star text-secondary"></i></td>
+      </th:block>
       <td th:text="${label.labelCode}"></td>
       <td>
         <a th:href="@{/label/edit/{id}(id = ${label.labelId})}">

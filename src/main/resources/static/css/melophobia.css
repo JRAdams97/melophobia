@@ -9,3 +9,15 @@
     display: inline-block;
     float:none;
 }
+
+.bg-pink {
+    background-color: #D63384;
+}
+
+.bg-orange {
+    background-color: #FD7E14;
+}
+
+.bg-purple {
+    background-color: #6F42C1;
+}

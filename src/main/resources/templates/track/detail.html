@@ -36,7 +36,13 @@
       </div>
       <hr/>
       <div class="col-6">
-        <p><span class="fw-bold">Favourite: </span><span th:text="${track.favourite}"></span></p>
+        <p>
+          <span class="fw-bold">Favourite: </span>
+          <th:block th:switch="${track.favourite}">
+            <span th:case="true"><i class="bi-star-fill text-warning"></i></span>
+            <span th:case="false"><i class="bi-star text-secondary"></i></span>
+          </th:block>
+        </p>
       </div>
       <div class="col-6">
         <p><span class="fw-bold">Track Type: </span><span th:text="${track.trackType.type}"></span></p>

@@ -2,6 +2,7 @@ package com.jradams.melophobia.controller;
 
 import com.jradams.melophobia.entity.Purchase;
 import com.jradams.melophobia.entity.backing.Currency;
+import com.jradams.melophobia.repository.IssueRepository;
 import com.jradams.melophobia.repository.PurchaseRepository;
 import com.jradams.melophobia.repository.VendorRepository;
 import jakarta.validation.Valid;
@@ -26,13 +27,14 @@ public class PurchaseController {
     private static final String ACTION = "action";
     private static final String PURCHASE_FORM = "purchase/form";
     private static final String REDIRECT_HOME = "redirect:/purchase/";
-    private static final String VENDORS = "vendors";
 
+    private final IssueRepository issueRepo;
     private final PurchaseRepository purchaseRepo;
     private final VendorRepository vendorRepo;
 
     @Autowired
-    PurchaseController(PurchaseRepository purchaseRepo, VendorRepository vendorRepo) {
+    PurchaseController(IssueRepository issueRepo, PurchaseRepository purchaseRepo, VendorRepository vendorRepo) {
+        this.issueRepo = issueRepo;
         this.purchaseRepo = purchaseRepo;
         this.vendorRepo = vendorRepo;
     }
@@ -111,6 +113,7 @@ public class PurchaseController {
 
     private void populatePurchaseForm(Model model) {
         model.addAttribute("currencies", Currency.values());
+        model.addAttribute("issues", issueRepo.findAll());
         model.addAttribute("vendors", vendorRepo.findAllByOrderByNameAsc());
     }
 }

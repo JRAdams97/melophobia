@@ -33,7 +33,10 @@
                 th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
       <td><span th:each="releaseType, i: ${release.releaseTypes}"
                 th:text="!${i.last} ? ${releaseType.name} + ' / ' : ${releaseType.name}"></span></td>
-      <td th:text="${release.favourite}"></td>
+      <th:block th:switch="${release.favourite}">
+        <td th:case="true"><i class="bi-star-fill text-warning"></i></td>
+        <td th:case="false"><i class="bi-star text-secondary"></i></td>
+      </th:block>
       <td th:text="${release.rymRating}"></td>
       <td th:text="${release.metacritic}"></td>
       <td>

@@ -8,6 +8,214 @@
 <div class="container-fluid mt-5" style="max-width: 1800px">
   <h3>Dashboard</h3>
   <hr/>
+  <div class="card mb-5">
+    <h5 class="card-header">Collections</h5>
+    <div class="card-body row">
+      <div class="col-6 px-5 py-4 text-center">
+        <h4>Physical Collection Items</h4>
+        <hr class="mx-auto" style="width: 24rem"/>
+        <div class="card mx-auto border-dark bg-purple" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-vinyl-fill text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${physicalCollectionItemTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 px-5 py-4 text-center">
+        <h4>Digital Collection Items</h4>
+        <hr class="mx-auto" style="width: 24rem"/>
+        <div class="card mx-auto border-dark bg-purple" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-music-player-fill text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${digitalCollectionItemTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mb-5">
+    <h5 class="card-header">Primary</h5>
+    <div class="card-body row">
+      <div class="col-4 px-5 py-4 text-center">
+        <h4>Artists</h4>
+        <hr class="mx-auto" style="width: 24rem"/>
+        <div class="card mx-auto border-dark bg-info" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-person-fill text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${artistTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 px-5 py-4 text-center">
+        <h4>Genres</h4>
+        <hr class="mx-auto" style="width: 24rem"/>
+        <div class="card mx-auto border-dark bg-success" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-tag-fill text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${genreTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 px-5 py-4 text-center">
+        <h4>Labels</h4>
+        <hr class="mx-auto" style="width: 24rem"/>
+        <div class="card mx-auto border-dark bg-warning" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-building-fill pe-4"></i>
+              <span class="card-title text-center" th:text="${labelTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 px-5 py-4 text-center">
+        <h4>Releases</h4>
+        <hr class="mx-auto" style="width: 24rem"/>
+        <div class="card mx-auto border-dark bg-primary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-music-note-beamed text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${releaseTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 px-5 py-4 text-center">
+        <h4>Issues</h4>
+        <hr class="mx-auto" style="width: 24rem"/>
+        <div class="card mx-auto border-dark bg-primary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-list-ul text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${issueTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 px-5 py-4 text-center">
+        <h4>Tracks</h4>
+        <hr class="mx-auto" style="width: 24rem"/>
+        <div class="card mx-auto border-dark bg-danger" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-music-note-list text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${trackTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mb-5">
+    <h5 class="card-header">Secondary</h5>
+    <div class="card-body row">
+      <div class="col-3 px-5 py-4 text-center">
+        <h4>Languages</h4>
+        <hr class="mx-auto" style="width: 22rem"/>
+        <div class="card mx-auto border-dark bg-secondary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-translate text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${languageTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 px-5 py-4 text-center">
+        <h4>Locations</h4>
+        <hr class="mx-auto" style="width: 22rem"/>
+        <div class="card mx-auto border-dark bg-secondary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-geo-alt text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${locationTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 px-5 py-4 text-center">
+        <h4>Regions</h4>
+        <hr class="mx-auto" style="width: 22rem"/>
+        <div class="card mx-auto border-dark bg-secondary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-crosshair text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${regionTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 px-5 py-4 text-center">
+        <h4>Countries</h4>
+        <hr class="mx-auto" style="width: 22rem"/>
+        <div class="card mx-auto border-dark bg-secondary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-globe text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${countryTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 px-5 py-4 text-center">
+        <h4>Media</h4>
+        <hr class="mx-auto" style="width: 22rem"/>
+        <div class="card mx-auto border-dark bg-secondary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-cassette-fill text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${mediaTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 px-5 py-4 text-center">
+        <h4>Composers</h4>
+        <hr class="mx-auto" style="width: 22rem"/>
+        <div class="card mx-auto border-dark bg-secondary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-pen-fill text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${composerTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 px-5 py-4 text-center">
+        <h4>Producers</h4>
+        <hr class="mx-auto" style="width: 22rem"/>
+        <div class="card mx-auto border-dark bg-secondary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-headphones text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${producerTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 px-5 py-4 text-center">
+        <h4>Series</h4>
+        <hr class="mx-auto" style="width: 22rem"/>
+        <div class="card mx-auto border-dark bg-secondary" style="width: 20rem">
+          <div class="card-body">
+            <h1>
+              <i class="bi-collection text-white pe-4"></i>
+              <span class="card-title text-white text-center" th:text="${seriesTotal}"></span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 <th:block th:insert="~{fragments/footer :: footer}"></th:block>
 <div th:insert="~{fragments/layout :: scripts}"></div>

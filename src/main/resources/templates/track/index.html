@@ -31,7 +31,10 @@
       <td th:text="${track.firstRelease.title}"></td>
       <td><a th:each="composer, i: ${track.composers}"
              th:text="!${i.last} ? ${composer.name} + ' / ' : ${composer.name}"></a></td>
-      <td th:text="${track.favourite}"></td>
+      <th:block th:switch="${track.favourite}">
+        <td th:case="true"><i class="bi-star-fill text-warning"></i></td>
+        <td th:case="false"><i class="bi-star text-secondary"></i></td>
+      </th:block>
       <td th:text="${track.trackType.type}"></td>
       <td><span th:each="isrc, i: ${track.isrcs}"
                 th:text="!${i.last} ? ${isrc.isrcCode} + ' / ' : ${isrc.isrcCode}"></span></td>

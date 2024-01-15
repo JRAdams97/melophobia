@@ -20,7 +20,7 @@
       </div>
       <div class="mb-4">
         <label for="regionSelect" class="form-label">Region & Country</label>
-        <select class="form-select" size="10" id="regionSelect" th:field="*{region}">
+        <select class="form-select" id="regionSelect" th:field="*{region}">
           <option th:each="region: ${regions}" th:value="${region.regionId}"
                   th:text="${region.name}
                       ? ${region.name} + ', ' + ${region.country.countryName}

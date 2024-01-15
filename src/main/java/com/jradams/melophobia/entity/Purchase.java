@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,11 @@ public class Purchase {
     @Column(name = "purchase_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long purchaseId;
+
+    @OneToOne
+    @JoinColumn(name = "issue_id")
+    @NotNull(message = "Issue is mandatory")
+    private Issue issue;
 
     @Column(precision = 7, scale = 2)
     @NotNull(message = "Price is mandatory")
