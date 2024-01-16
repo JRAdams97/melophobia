@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{fragments/layout :: head(pageTitle='Language Form')}">
+<head th:insert="~{fragments/layout :: head(pageTitle='Release Type Form')}">
   <title></title>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 <div class="container mt-5">
-  <h3>Language</h3>
+  <h3>New Release Type</h3>
   <hr/>
   <div class="container-fluid" style="max-width: 800px">
-    <form action="#" th:action="@{/language/add}" th:object="${language}" method="post">
+    <form action="#" th:action="@{/release/type/add}" th:object="${releaseType}" method="post">
       <div class="mb-4">
         <label for="nameSelect" class="form-label">Name</label>
         <select class="form-select" id="nameSelect" th:field="*{name}">
-          <th:block th:each="languageName: ${languageNames}"
-                    th:if="${!#lists.contains(languageNameList, languageName)}">
-            <option th:value="${languageName}" th:text="${languageName.name}"></option>
+          <th:block th:each="releaseTypeName: ${releaseTypeNames}"
+                    th:if="${!#lists.contains(releaseTypeList, releaseTypeName)}">
+            <option th:value="${releaseTypeName}" th:text="${releaseTypeName.type}"></option>
           </th:block>
         </select>
       </div>

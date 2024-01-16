@@ -95,7 +95,13 @@
       </div>
       <hr/>
       <div class="col-12">
-        <p><span class="fw-bold">Is Official? </span><span th:text="${release.isOfficial}"></span></p>
+        <p>
+          <span class="fw-bold">Is Official? </span>
+          <th:block th:switch="${release.isOfficial}">
+            <span th:case="true"><i class="bi-check-lg text-success"></i></span>
+            <span th:case="false"><i class="bi-x-lg text-error"></i></span>
+          </th:block>
+        </p>
       </div>
     </div>
   </div>

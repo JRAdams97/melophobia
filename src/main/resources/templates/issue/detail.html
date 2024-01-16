@@ -36,10 +36,22 @@
         <p><span class="fw-bold">Edition: </span><span th:text="${issue.edition}"></span></p>
       </div>
       <div class="col-6">
-        <p><span class="fw-bold">Re-Release? </span><span th:text="${issue.isRerelease}"></span></p>
+        <p>
+          <span class="fw-bold">Re-Release? </span>
+          <th:block th:switch="${issue.isRerelease}">
+            <span th:case="true"><i class="bi-check-lg text-success"></i></span>
+            <span th:case="false"><i class="bi-x-lg text-error"></i></span>
+          </th:block>
+        </p>
       </div>
       <div class="col-6">
-        <p><span class="fw-bold">Official? </span><span th:text="${issue.isOfficial}"></span></p>
+        <p>
+          <span class="fw-bold">Official? </span>
+          <th:block th:switch="${issue.isOfficial}">
+            <span th:case="true"><i class="bi-check-lg text-success"></i></span>
+            <span th:case="false"><i class="bi-x-lg text-error"></i></span>
+          </th:block>
+        </p>
       </div>
       <hr/>
       <div class="col-4">

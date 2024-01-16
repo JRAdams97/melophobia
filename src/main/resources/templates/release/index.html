@@ -32,7 +32,7 @@
       <td><span th:each="genre, i: ${release.genres}"
                 th:text="!${i.last} ? ${genre.name} + ' / ' : ${genre.name}"></span></td>
       <td><span th:each="releaseType, i: ${release.releaseTypes}"
-                th:text="!${i.last} ? ${releaseType.name} + ' / ' : ${releaseType.name}"></span></td>
+                th:text="!${i.last} ? ${releaseType.name.type} + ' / ' : ${releaseType.name.type}"></span></td>
       <th:block th:switch="${release.favourite}">
         <td th:case="true"><i class="bi-star-fill text-warning"></i></td>
         <td th:case="false"><i class="bi-star text-secondary"></i></td>
@@ -54,10 +54,9 @@
   </table>
   <div class="container-fluid" style="max-width: 1800px">
     <div class="row text-end mb-4">
-      <div class="col-12">
-        <a th:href="@{/release/add}">
-          <button type="submit" class="btn btn-primary" th:text="Add"></button>
-        </a>
+      <div class="col-12 pe-0">
+        <a th:href="@{/release/add}" class="pe-2"><button type="submit" class="btn btn-primary">Add</button></a>
+        <a th:href="@{/release/type/}"><button type="submit" class="btn btn-secondary">Manage Release Types</button></a>
       </div>
     </div>
   </div>

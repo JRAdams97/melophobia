@@ -1,6 +1,7 @@
 package com.jradams.melophobia.entity;
 
 import com.jradams.melophobia.entity.backing.ReleaseTypeName;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,8 @@ import lombok.ToString;
 public class ReleaseType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "release_type_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long releaseTypeId;
 
     private ReleaseTypeName name;

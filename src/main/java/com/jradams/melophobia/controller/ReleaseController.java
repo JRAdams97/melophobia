@@ -1,6 +1,8 @@
 package com.jradams.melophobia.controller;
 
 import com.jradams.melophobia.entity.Release;
+import com.jradams.melophobia.entity.ReleaseType;
+import com.jradams.melophobia.entity.backing.ReleaseTypeName;
 import com.jradams.melophobia.repository.ArtistRepository;
 import com.jradams.melophobia.repository.GenreRepository;
 import com.jradams.melophobia.repository.LanguageRepository;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -111,7 +114,7 @@ public class ReleaseController {
 
     @PostMapping("/edit/{id}")
     public String saveRelease(@PathVariable("id") long id, @Valid Release release, BindingResult bindResult,
-                            Model model) {
+                              Model model) {
         if (bindResult.hasErrors()) {
             populateReleaseForm(model);
             model.addAttribute(ACTION, "Edit");
@@ -135,6 +138,47 @@ public class ReleaseController {
         return REDIRECT_HOME;
     }
 
+    // ReleaseType mappings
+    @GetMapping("/type/")
+    public String showReleaseTypeList(Model model) {
+        model.addAttribute("releaseTypes", releaseTypeRepo.findAllByOrderByNameAsc());
+
+        return "release/type/index";
+    }
+
+    @GetMapping("/type/add")
+    public String showReleaseTypeForm(Model model) {
+        populateReleaseTypeList(model);
+        model.addAttribute("releaseType", new ReleaseType());
+        model.addAttribute("releaseTypeNames", ReleaseTypeName.values());
+
+        return "release/type/form";
+    }
+
+    @PostMapping("/type/add")
+    public String saveReleaseType(@Valid ReleaseType releaseType, BindingResult bindResult, Model model) {
+        if (bindResult.hasErrors()) {
+            populateReleaseTypeList(model);
+            model.addAttribute("releaseTypeNames", ReleaseTypeName.values());
+
+            return "release/type/form";
+        }
+
+        releaseTypeRepo.save(releaseType);
+
+        return REDIRECT_HOME;
+    }
+
+    @GetMapping("/type/delete/{id}")
+    public String deleteReleaseType(@PathVariable("id") long id) {
+        ReleaseType releaseType = releaseTypeRepo.findById(id).orElseThrow(
+                () -> new IllegalArgumentException(String.format("Invalid Release Type ID: %s", id)));
+
+        releaseTypeRepo.delete(releaseType);
+
+        return REDIRECT_HOME;
+    }
+
     private void populateReleaseForm(Model model) {
         model.addAttribute("artists", artistRepo.findAllByOrderByNameAsc());
         model.addAttribute("genres", genreRepo.findAllByOrderByNameAsc());
@@ -142,5 +186,10 @@ public class ReleaseController {
         model.addAttribute("producers", producerRepo.findAllByOrderByNameAsc());
         model.addAttribute("releaseTypes", releaseTypeRepo.findAllByOrderByNameAsc());
         model.addAttribute("seriesList", seriesRepo.findAllByOrderByNameAsc());
+    }
+
+    private void populateReleaseTypeList(Model model) {
+        List<ReleaseType> releaseTypes = releaseTypeRepo.findAllByOrderByNameAsc();
+        model.addAttribute("releaseTypeList", releaseTypes.stream().map(ReleaseType::getName).toList());
     }
 }

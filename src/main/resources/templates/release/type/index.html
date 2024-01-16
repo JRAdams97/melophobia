@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{fragments/layout :: head (pageTitle='Languages')}">
+<head th:insert="~{fragments/layout :: head(pageTitle='Release Types')}">
   <title></title>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 <div class="container-fluid mt-5" style="max-width: 1800px">
-  <h3>Languages</h3>
+  <h3>Release Types</h3>
   <hr/>
   <table class="table table-striped">
     <thead>
@@ -16,10 +16,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr scope="row" th:each="language: ${languages}">
-      <td th:text="${language.name.name}"></td>
+    <tr scope="row" th:each="releaseType: ${releaseTypes}">
+      <td th:text="${releaseType.name.type}"></td>
       <td>
-        <a th:href="@{/language/delete/{id}(id = ${language.languageId})}">
+        <a th:href="@{/release/type/delete/{id}(id = ${releaseType.releaseTypeId})}">
           <button class="btn btn-danger btn-sm"><i class="bi-trash-fill"></i></button>
         </a>
       </td>
@@ -29,7 +29,7 @@
   <div class="container-fluid" style="max-width: 1800px">
     <div class="row text-end mb-4">
       <div class="col-12">
-        <a th:href="@{/language/add}">
+        <a th:href="@{/release/type/add}">
           <button type="submit" class="btn btn-primary" th:text="Add"></button>
         </a>
       </div>

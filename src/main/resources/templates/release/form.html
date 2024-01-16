@@ -70,7 +70,7 @@
       </div>
       <div class="mb-4">
         <label for="rymRatingInput" class="form-label">Rate Your Music (RYM) Rating</label>
-        <input type="number" class="form-control" id="rymRatingInput" th:field="*{rymRating}"/>
+        <input type="number" step="0.01" class="form-control" id="rymRatingInput" th:field="*{rymRating}"/>
       </div>
       <div class="mb-4">
         <label for="aotyRankInput" class="form-label">Album Of The Year (AOTY) Rank</label>
@@ -86,11 +86,11 @@
       </div>
       <div class="mb-4">
         <label for="scaruffiRatingInput" class="form-label">Piero Scaruffi Rating</label>
-        <input type="number" class="form-control" id="scaruffiRatingInput" th:field="*{scaruffiRating}"/>
+        <input type="number" step="0.5" class="form-control" id="scaruffiRatingInput" th:field="*{scaruffiRating}"/>
       </div>
       <div class="mb-4">
         <label for="pitchforkRatingInput" class="form-label">Pitchfork Rating</label>
-        <input type="number" class="form-control" id="pitchforkRatingInput" th:field="*{pitchforkRating}"/>
+        <input type="number" step="0.1" class="form-control" id="pitchforkRatingInput" th:field="*{pitchforkRating}"/>
       </div>
       <div class="mb-4">
         <label for="metacriticInput" class="form-label">Metacritic</label>

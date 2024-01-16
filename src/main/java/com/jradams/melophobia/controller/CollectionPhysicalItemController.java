@@ -4,7 +4,6 @@ import com.jradams.melophobia.entity.CollectionPhysicalItem;
 import com.jradams.melophobia.entity.backing.Quality;
 import com.jradams.melophobia.repository.CollectionPhysicalItemRepository;
 import com.jradams.melophobia.repository.IssueRepository;
-import com.jradams.melophobia.repository.MediaRepository;
 import com.jradams.melophobia.repository.PurchaseRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

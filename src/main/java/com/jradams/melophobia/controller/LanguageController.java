@@ -17,13 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/language")
 public class LanguageController {
 
-    private static final String ACTION = "action";
     private static final String LANGUAGE_FORM = "language/form";
     private static final String LANGUAGE_NAMES = "languageNames";
     private static final String REDIRECT_HOME = "redirect:/language/";
@@ -49,22 +47,9 @@ public class LanguageController {
 
     @GetMapping("/add")
     public String showLanguageForm(Model model) {
+        populateLanguageNameList(model);
         model.addAttribute("language", new Language());
-        populateLanguageNameList(model);
         model.addAttribute(LANGUAGE_NAMES, LanguageName.values());
-        model.addAttribute(ACTION, "New");
-
-        return LANGUAGE_FORM;
-    }
-
-    @GetMapping("/edit/{id}")
-    public String showLanguageForm(@PathVariable(value = "id") long id, Model model) {
-        Optional<Language> language = languageRepo.findById(id);
-        language.ifPresent(v -> model.addAttribute("language", v));
-
-        populateLanguageNameList(model);
-        model.addAttribute(LANGUAGE_NAMES, LanguageName.values());
-        model.addAttribute(ACTION, "Edit");
 
         return LANGUAGE_FORM;
     }
@@ -74,28 +59,10 @@ public class LanguageController {
         if (bindResult.hasErrors()) {
             populateLanguageNameList(model);
             model.addAttribute(LANGUAGE_NAMES, LanguageName.values());
-            model.addAttribute(ACTION, "New");
 
             return LANGUAGE_FORM;
         }
 
-        languageRepo.save(language);
-
-        return REDIRECT_HOME;
-    }
-
-    @PostMapping("/edit/{id}")
-    public String saveLanguage(@PathVariable("id") long id, @Valid Language language, BindingResult bindResult,
-                               Model model) {
-        if (bindResult.hasErrors()) {
-            populateLanguageNameList(model);
-            model.addAttribute(LANGUAGE_NAMES, LanguageName.values());
-            model.addAttribute(ACTION, "Edit");
-
-            return LANGUAGE_FORM;
-        }
-
-        language.setLanguageId(id);
         languageRepo.save(language);
 
         return REDIRECT_HOME;

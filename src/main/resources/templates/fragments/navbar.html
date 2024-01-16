@@ -40,11 +40,11 @@
              aria-expanded="false"><i class="bi-music-note-beamed pe-1"></i> Releases</p>
           <ul class="dropdown-menu" aria-labelledby="releasesDropdown">
             <li><a class="dropdown-item" th:href="@{/release/}"><i class="bi-music-note-beamed pe-1"></i> Releases</a></li>
+            <li><a class="dropdown-item" th:href="@{/release/type/}"><i class="bi-type pe-1"></i> Release Types</a></li>
             <li>
               <hr class="dropdown-divider"/>
             </li>
             <li><a class="dropdown-item" th:href="@{/issue/}"><i class="bi-list-ul pe-1"></i> Issues</a></li>
-            <li><a class="dropdown-item" th:href="@{/release/release-types/}"><i class="bi-type pe-1"></i> Release Types</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown pe-4">
@@ -56,7 +56,7 @@
               <hr class="dropdown-divider"/>
             </li>
             <li><a class="dropdown-item" th:href="@{/isrc/}"><i class="bi-code pe-1"></i> ISRCs</a></li>
-            <li><a class="dropdown-item" th:href="@{/isrc/}"><i class="bi-braces pe-1"></i> ISWCs</a></li>
+            <li><a class="dropdown-item" th:href="@{/iswc/}"><i class="bi-braces pe-1"></i> ISWCs</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
