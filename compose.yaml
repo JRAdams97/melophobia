@@ -1,0 +1,7 @@
+﻿services:
+  melophobia:
+    image: melophobia
+    build:
+      context: .
+      dockerfile: Melophobia/Dockerfile
+
