@@ -20,6 +20,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.MapControllers();
 
-app.UseCors(policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+app.UseCors(policyBuilder => policyBuilder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
 
 app.Run();
