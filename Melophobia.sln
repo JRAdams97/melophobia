@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Melophobia", "Melophobia\Melophobia.csproj", "{9BFD57FD-CDCC-4A85-9270-120C3C63273C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{9BFD57FD-CDCC-4A85-9270-120C3C63273C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2704738D-4F8C-4A50-A8C0-E3A5BAAB4853}"
 	ProjectSection(SolutionItems) = preProject
