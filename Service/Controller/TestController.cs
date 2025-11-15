@@ -7,9 +7,9 @@ namespace Melophobia.Controller
     public class TestController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<string> Get()
         {
-            return new JsonResult("Hello World!");
+            return "Hello World!";
         }
     }
 }
