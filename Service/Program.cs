@@ -10,8 +10,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 // Add PostgreSQL via EFCore
-builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseNpgsql(builder.Configuration.GetConnectionString("BaseConnection")));
+builder.Services.AddDbContext<MelophobiaContext>();
 
 WebApplication app = builder.Build();
 

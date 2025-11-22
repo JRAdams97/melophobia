@@ -6,7 +6,7 @@ namespace Melophobia.Controller
 
     [ApiController]
     [Route("api/[controller]")]
-    public class CountryController(AppDbContext dbContext) : ControllerBase
+    public class CountryController(MelophobiaContext dbContext) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> Get() => Ok(await dbContext.Countries.ToListAsync());

@@ -1,24 +1,19 @@
-namespace Melophobia.Model
+﻿namespace Melophobia.Model
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
-    [Table("country")]
-    public class Country
+    public partial class Country
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public long Id { get; set; }
+        public int Id { get; init; }
 
-        [Required(ErrorMessage = "Country name is required")]
-        [Column("name")]
-        public string Name { get; set; } = "";
+        public string Name { get; init; } = null!;
 
-        [Required(ErrorMessage = "alpha-2 code (ISO 3166) is required")]
-        [Column("alpha2_code")]
-        public string Alpha2Code { get; set; } = "";
+        public string Alpha2Code { get; init; } = null!;
+
+        public virtual ICollection<Chart> Charts { get; init; } = new List<Chart>();
+
+        public virtual ICollection<Region> Regions { get; init; } = new List<Region>();
+
+        public virtual ICollection<Series> Series { get; init; } = new List<Series>();
+
+        public virtual ICollection<Issue> Issues { get; init; } = new List<Issue>();
     }
 }
-
-
