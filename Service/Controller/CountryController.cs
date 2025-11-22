@@ -5,7 +5,7 @@ namespace Melophobia.Controller
     using Microsoft.EntityFrameworkCore;
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/countries")]
     public class CountryController(MelophobiaContext dbContext) : ControllerBase
     {
         [HttpGet]
