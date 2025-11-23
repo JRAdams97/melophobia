@@ -1,6 +1,7 @@
 ﻿namespace Melophobia.Data
 {
         using System.Collections.Generic;
+        using Enum;
         using Microsoft.EntityFrameworkCore;
         using Model;
 
@@ -87,7 +88,6 @@
                     .HasPostgresEnum("e_artist_type", ["Choir", "Group", "Orchestra", "Other", "Person"])
                     .HasPostgresEnum("e_cover_grade", ["Excellent", "Good", "[none]", "Poor"])
                     .HasPostgresEnum("e_entity_type", ["Artist", "Composer", "Label", "Producer"])
-                    .HasPostgresEnum("e_gender", ["F", "M", "O"])
                     .HasPostgresEnum("e_grade", ["G", "F", "M", "NM", "P", "VG", "VG+"])
                     .HasPostgresEnum("e_label_type", ["Bootlegs", "Originals", "Reissues"])
                     .HasPostgresEnum("e_release_type",
@@ -274,6 +274,7 @@
 
                 entity.Property(e => e.Name).HasColumnName("name");
                 entity.Property(e => e.SortName).HasColumnName("sort_name");
+                entity.Property(e => e.Gender).HasColumnName("gender");
 
                 entity.HasOne(d => d.BirthLocation).WithMany(p => p.Composers)
                         .HasForeignKey(d => d.BirthLocationId)
@@ -798,6 +799,7 @@
 
                 entity.Property(e => e.Name).HasColumnName("name");
                 entity.Property(e => e.SortName).HasColumnName("sort_name");
+                entity.Property(e => e.Gender).HasColumnName("gender");
 
                 entity.HasOne(d => d.BirthLocation).WithMany(p => p.Producers)
                         .HasForeignKey(d => d.BirthLocationId)
