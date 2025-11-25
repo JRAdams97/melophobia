@@ -24,8 +24,8 @@ namespace Melophobia.Controller
                                     .Select(la => la.Alias)
                                     .ToList(),
                             FormationDate = l.FormationDate!,
-                            FormationLocation =
-                                    $"{l.FormationLocation!.Address!}, {l.FormationLocation!.Region.Name}, {l.FormationLocation!.Region!.Country!.Alpha2Code}",
+                            FormationLocation = $"{l.FormationLocation!.Address!}, {l.FormationLocation!.Region.Name}, "
+                                                + $"{l.FormationLocation!.Region!.Country!.Alpha2Code}",
                             ClosureDate = l.ClosureDate!,
                             IsFavourite = l.IsFavourite,
                             LabelCode = l.LabelCode!,

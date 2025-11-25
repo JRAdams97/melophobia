@@ -1,7 +1,5 @@
 ﻿namespace Melophobia.Data
 {
-        using System.Collections.Generic;
-        using Enum;
         using Microsoft.EntityFrameworkCore;
         using Model;
 
@@ -95,9 +93,7 @@
                             "Live", "Mixtape", "Other", "Remix", "Single", "Soundtrack", "Studio"
                     ])
                     .HasPostgresEnum("e_rip_state", ["Cleaned", "Ripped", "Tagged", "Todo"])
-                    .HasPostgresEnum("e_track_type", ["Cover", "Original"])
-                    .HasPostgresEnum("e_vendor_type",
-                            ["MusicStore", "Online", "Other", "RetailStore", "ThriftStore", "Wholesale"]);
+                    .HasPostgresEnum("e_track_type", ["Cover", "Original"]);
 
             modelBuilder.Entity<Artist>(entity =>
             {
@@ -1246,6 +1242,7 @@
 
                 entity.Property(e => e.LocationId).HasColumnName("location_id");
                 entity.Property(e => e.Name).HasColumnName("name");
+                entity.Property(e => e.Type).HasColumnName("type");
                 entity.Property(e => e.Website).HasColumnName("website");
 
                 entity.HasOne(d => d.Location).WithMany(p => p.Vendors)

@@ -13,8 +13,10 @@ builder.Services.AddControllers();
 // Add PostgreSQL via EFCore
 builder.Services.AddDbContext<MelophobiaContext>(options => options.UseNpgsql(
         "Host=localhost;Port=5432;Database=melophobia;Username=postgres;Password=",
-        e => e.MapEnum<Gender>("e_gender")
-                .MapEnum<LabelType>("e_label_type")));
+        e => e
+                .MapEnum<Gender>("e_gender")
+                .MapEnum<LabelType>("e_label_type")
+                .MapEnum<VendorType>("e_vendor_type")));
 
 WebApplication app = builder.Build();
 
