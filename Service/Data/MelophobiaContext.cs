@@ -89,7 +89,6 @@
                     .HasPostgresEnum("e_cover_grade", ["Excellent", "Good", "[none]", "Poor"])
                     .HasPostgresEnum("e_entity_type", ["Artist", "Composer", "Label", "Producer"])
                     .HasPostgresEnum("e_grade", ["G", "F", "M", "NM", "P", "VG", "VG+"])
-                    .HasPostgresEnum("e_label_type", ["Bootlegs", "Originals", "Reissues"])
                     .HasPostgresEnum("e_release_type",
                     [
                             "Audiobook", "Broadcast", "Compilation", "Demo", "DJ-Mix", "EP", "Interview",
@@ -599,6 +598,7 @@
 
                 entity.Property(e => e.Name).HasColumnName("name");
                 entity.Property(e => e.SortName).HasColumnName("sort_name");
+                entity.Property(e => e.Type).HasColumnName("type");
 
                 entity.HasOne(d => d.FormationLocation).WithMany(p => p.Labels)
                         .HasForeignKey(d => d.FormationLocationId)

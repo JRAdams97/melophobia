@@ -1,5 +1,7 @@
 ﻿namespace Melophobia.Model
 {
+    using Data.Enum;
+
     public partial class Label
     {
         public int Id { get; init; }
@@ -19,6 +21,8 @@
         public string? LabelCode { get; init; }
 
         public string? Isni { get; init; }
+
+        public LabelType Type { get; init; }
 
         public virtual Location? FormationLocation { get; init; }
 
