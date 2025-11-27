@@ -1,11 +1,13 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class LabelAlias
+    using System.ComponentModel.DataAnnotations;
+
+    public class LabelAlias
     {
         public int LabelId { get; init; }
 
-        public string Alias { get; init; } = null!;
+        [MaxLength(256)] public string Alias { get; init; } = null!;
 
-        public virtual Label Label { get; init; } = null!;
+        public Label Label { get; init; } = null!;
     }
 }

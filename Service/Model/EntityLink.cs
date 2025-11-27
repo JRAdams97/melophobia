@@ -1,6 +1,8 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class EntityLink
+    using System.ComponentModel.DataAnnotations;
+
+    public class EntityLink
     {
         public int Id { get; init; }
 
@@ -8,6 +10,6 @@
 
         public int RightId { get; init; }
 
-        public string Relationship { get; init; } = null!;
+        [MaxLength(100)] public string Relationship { get; init; } = null!;
     }
 }

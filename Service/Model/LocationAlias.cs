@@ -1,11 +1,13 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class LocationAlias
+    using System.ComponentModel.DataAnnotations;
+
+    public class LocationAlias
     {
         public int LocationId { get; init; }
 
-        public string Alias { get; init; } = null!;
+        [MaxLength(256)] public string Alias { get; init; } = null!;
 
-        public virtual Location Location { get; init; } = null!;
+        public Location Location { get; init; } = null!;
     }
 }

@@ -1,14 +1,15 @@
 ﻿namespace Melophobia.Model
 {
+    using System.ComponentModel.DataAnnotations;
     using Data.Enum;
 
-    public partial class Label
+    public class Label
     {
         public int Id { get; init; }
 
-        public string Name { get; init; } = null!;
+        [MaxLength(256)] public string Name { get; init; } = null!;
 
-        public string? SortName { get; init; }
+        [MaxLength(256)] public string? SortName { get; init; }
 
         public string? FormationDate { get; init; }
 
@@ -24,18 +25,18 @@
 
         public LabelType Type { get; init; }
 
-        public virtual Location? FormationLocation { get; init; }
+        public Location? FormationLocation { get; init; }
 
-        public virtual ICollection<Issue> Issues { get; init; } = new List<Issue>();
+        public ICollection<Issue> Issues { get; init; } = new List<Issue>();
 
-        public virtual ICollection<LabelAlias> LabelAliases { get; init; } = new List<LabelAlias>();
+        public ICollection<LabelAlias> LabelAliases { get; init; } = new List<LabelAlias>();
 
-        public virtual ICollection<LabelIpi> LabelIpis { get; init; } = new List<LabelIpi>();
+        public ICollection<LabelIpi> LabelIpis { get; init; } = new List<LabelIpi>();
 
-        public virtual ICollection<Artist> Artists { get; init; } = new List<Artist>();
+        public ICollection<Artist> Artists { get; init; } = new List<Artist>();
 
-        public virtual ICollection<Label> Labels { get; init; } = new List<Label>();
+        public ICollection<Label> Labels { get; init; } = new List<Label>();
 
-        public virtual ICollection<Label> ParentLabels { get; init; } = new List<Label>();
+        public ICollection<Label> ParentLabels { get; init; } = new List<Label>();
     }
 }

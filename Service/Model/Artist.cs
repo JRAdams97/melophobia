@@ -1,12 +1,14 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class Artist
+    using System.ComponentModel.DataAnnotations;
+
+    public class Artist
     {
         public int Id { get; init; }
 
-        public string Name { get; init; } = null!;
+        [MaxLength(256)] public string Name { get; init; } = null!;
 
-        public string? SortName { get; init; }
+        [MaxLength(256)] public string? SortName { get; init; }
 
         public short? FormationYear { get; init; }
 
@@ -18,20 +20,20 @@
 
         public string? Isni { get; init; }
 
-        public string? Website { get; init; }
+        [MaxLength(256)] public string? Website { get; init; }
 
-        public virtual ICollection<ArtistAlias> ArtistAliases { get; init; } = new List<ArtistAlias>();
+        public ICollection<ArtistAlias> ArtistAliases { get; init; } = new List<ArtistAlias>();
 
-        public virtual Location? FormationLocation { get; init; }
+        public Location? FormationLocation { get; init; }
 
-        public virtual ICollection<Genre> Genres { get; init; } = new List<Genre>();
+        public ICollection<Genre> Genres { get; init; } = new List<Genre>();
 
-        public virtual ICollection<Label> Labels { get; init; } = new List<Label>();
+        public ICollection<Label> Labels { get; init; } = new List<Label>();
 
-        public virtual ICollection<Release> Releases { get; init; } = new List<Release>();
+        public ICollection<Release> Releases { get; init; } = new List<Release>();
 
-        public virtual ICollection<Track> Tracks { get; init; } = new List<Track>();
+        public ICollection<Track> Tracks { get; init; } = new List<Track>();
 
-        public virtual ICollection<Track> TracksNavigation { get; init; } = new List<Track>();
+        public ICollection<Track> TracksNavigation { get; init; } = new List<Track>();
     }
 }

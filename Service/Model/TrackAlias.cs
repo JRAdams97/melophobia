@@ -1,11 +1,13 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class TrackAlias
+    using System.ComponentModel.DataAnnotations;
+
+    public class TrackAlias
     {
         public int TrackId { get; init; }
 
-        public string Alias { get; init; } = null!;
+        [MaxLength(512)] public string Alias { get; init; } = null!;
 
-        public virtual Track Track { get; init; } = null!;
+        public Track Track { get; init; } = null!;
     }
 }

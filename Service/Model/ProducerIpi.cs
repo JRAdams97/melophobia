@@ -1,6 +1,6 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class ProducerIpi
+    public class ProducerIpi
     {
         public string Ipi { get; init; } = null!;
 
@@ -8,6 +8,6 @@
 
         public string? Comment { get; init; }
 
-        public virtual Producer? Producer { get; init; }
+        public Producer? Producer { get; init; }
     }
 }

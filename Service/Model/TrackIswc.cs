@@ -1,11 +1,11 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class TrackIswc
+    public class TrackIswc
     {
         public int TrackId { get; init; }
 
         public string Iswc { get; init; } = null!;
 
-        public virtual Track Track { get; init; } = null!;
+        public Track Track { get; init; } = null!;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class LabelIpi
+    public class LabelIpi
     {
         public string Ipi { get; init; } = null!;
 
@@ -8,6 +8,6 @@
 
         public string? Comment { get; init; }
 
-        public virtual Label? Label { get; init; }
+        public Label? Label { get; init; }
     }
 }

@@ -1,11 +1,13 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class GenreAlias
+    using System.ComponentModel.DataAnnotations;
+
+    public class GenreAlias
     {
         public int GenreId { get; init; }
 
-        public string Alias { get; init; } = null!;
+        [MaxLength(256)] public string Alias { get; init; } = null!;
 
-        public virtual Genre Genre { get; init; } = null!;
+        public Genre Genre { get; init; } = null!;
     }
 }

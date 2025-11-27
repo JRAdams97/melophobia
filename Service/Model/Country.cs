@@ -1,6 +1,6 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class Country
+    public class Country
     {
         public int Id { get; init; }
 
@@ -8,12 +8,12 @@
 
         public string Alpha2Code { get; init; } = null!;
 
-        public virtual ICollection<Chart> Charts { get; init; } = new List<Chart>();
+        public ICollection<Chart> Charts { get; init; } = new List<Chart>();
 
-        public virtual ICollection<Region> Regions { get; init; } = new List<Region>();
+        public ICollection<Region> Regions { get; init; } = new List<Region>();
 
-        public virtual ICollection<Series> Series { get; init; } = new List<Series>();
+        public ICollection<Series> Series { get; init; } = new List<Series>();
 
-        public virtual ICollection<Issue> Issues { get; init; } = new List<Issue>();
+        public ICollection<Issue> Issues { get; init; } = new List<Issue>();
     }
 }

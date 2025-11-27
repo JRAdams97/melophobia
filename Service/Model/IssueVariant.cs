@@ -1,12 +1,14 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class IssueVariant
+    using System.ComponentModel.DataAnnotations;
+
+    public class IssueVariant
     {
         public int Id { get; init; }
 
         public int? IssueId { get; init; }
 
-        public string? MatrixRunout { get; init; }
+        [MaxLength(256)] public string? MatrixRunout { get; init; }
 
         public string? MasteringSidCode { get; init; }
 
@@ -14,6 +16,8 @@
 
         public string? SparsCode { get; init; }
 
-        public virtual Issue? Issue { get; init; }
+        public Guid? Discid { get; init; }
+
+        public Issue? Issue { get; init; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class TrackChart
+    public class TrackChart
     {
         public int TrackId { get; init; }
 
@@ -12,8 +12,8 @@
 
         public short Peak { get; init; }
 
-        public virtual Chart Chart { get; init; } = null!;
+        public Chart Chart { get; init; } = null!;
 
-        public virtual Track Track { get; init; } = null!;
+        public Track Track { get; init; } = null!;
     }
 }

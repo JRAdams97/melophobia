@@ -1,9 +1,9 @@
 ﻿namespace Melophobia.Data
 {
-        using Microsoft.EntityFrameworkCore;
-        using Model;
+    using Microsoft.EntityFrameworkCore;
+    using Model;
 
-        public partial class MelophobiaContext : DbContext
+    public class MelophobiaContext : DbContext
     {
         public MelophobiaContext()
         {
@@ -531,6 +531,7 @@
                 entity.HasIndex(e => e.IssueId, "idx_issue_variant__issue");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Discid).HasColumnName("discid");
                 entity.Property(e => e.IssueId).HasColumnName("issue_id");
 
                 entity.Property(e => e.MasteringSidCode)
@@ -546,8 +547,7 @@
                         .HasColumnName("mould_sid_code");
 
                 entity.Property(e => e.SparsCode)
-                        .HasMaxLength(3)
-                        .IsFixedLength()
+                        .HasMaxLength(7)
                         .HasColumnName("spars_code");
 
                 entity.HasOne(d => d.Issue).WithMany(p => p.IssueVariants)
@@ -907,7 +907,7 @@
                 entity.Property(e => e.RymRating)
                         .HasPrecision(3, 2)
                         .HasColumnName("rym_rating");
-
+                entity.Property(e => e.RymYearRank).HasColumnName("rym_year_rank");
                 entity.Property(e => e.ScaruffiRating)
                         .HasPrecision(3, 1)
                         .HasColumnName("scaruffi_rating");
@@ -1249,10 +1249,6 @@
                         .HasForeignKey(d => d.LocationId)
                         .HasConstraintName("vendor_location_id_fkey");
             });
-
-            OnModelCreatingPartial(modelBuilder);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

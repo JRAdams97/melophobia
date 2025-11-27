@@ -1,6 +1,6 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class CollectionItem
+    public class CollectionItem
     {
         public int Id { get; init; }
 
@@ -22,6 +22,6 @@
 
         public string? Comment { get; init; }
 
-        public virtual Issue Issue { get; init; } = null!;
+        public Issue Issue { get; init; } = null!;
     }
 }

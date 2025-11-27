@@ -1,6 +1,6 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class Issue
+    public class Issue
     {
         public int Id { get; init; }
 
@@ -30,18 +30,18 @@
 
         public string? Comment { get; init; }
 
-        public virtual ICollection<CollectionItem> CollectionItems { get; init; } = new List<CollectionItem>();
+        public ICollection<CollectionItem> CollectionItems { get; init; } = new List<CollectionItem>();
 
-        public virtual ICollection<IssueVariant> IssueVariants { get; init; } = new List<IssueVariant>();
+        public ICollection<IssueVariant> IssueVariants { get; init; } = new List<IssueVariant>();
 
-        public virtual Label Label { get; init; } = null!;
+        public Label Label { get; init; } = null!;
 
-        public virtual Medium? Media { get; init; }
+        public Medium? Media { get; init; }
 
-        public virtual Release Release { get; init; } = null!;
+        public Release Release { get; init; } = null!;
 
-        public virtual ICollection<Country> Countries { get; init; } = new List<Country>();
+        public ICollection<Country> Countries { get; init; } = new List<Country>();
 
-        public virtual ICollection<Track> Tracks { get; init; } = new List<Track>();
+        public ICollection<Track> Tracks { get; init; } = new List<Track>();
     }
 }

@@ -1,12 +1,14 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class Release
+    using System.ComponentModel.DataAnnotations;
+
+    public class Release
     {
         public int Id { get; init; }
 
-        public string Title { get; init; } = null!;
+        [MaxLength(512)] public string Title { get; init; } = null!;
 
-        public string? OriginalTitle { get; init; }
+        [MaxLength(512)] public string? OriginalTitle { get; init; }
 
         public string? ReleaseDate { get; init; }
 
@@ -45,6 +47,8 @@
         public decimal? ScaruffiRating { get; init; }
 
         public bool IsOfficial { get; init; }
+
+        public short? RymYearRank { get; init; }
 
         public ICollection<Issue> Issues { get; init; } = new List<Issue>();
 

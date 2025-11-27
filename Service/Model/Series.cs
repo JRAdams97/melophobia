@@ -1,17 +1,19 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class Series
+    using System.ComponentModel.DataAnnotations;
+
+    public class Series
     {
         public int Id { get; init; }
 
-        public string Name { get; init; } = null!;
+        [MaxLength(256)] public string Name { get; init; } = null!;
 
         public short? YearOfOrigin { get; init; }
 
         public int? CountryId { get; init; }
 
-        public virtual Country? Country { get; init; }
+        public Country? Country { get; init; }
 
-        public virtual ICollection<Release> Releases { get; init; } = new List<Release>();
+        public ICollection<Release> Releases { get; init; } = new List<Release>();
     }
 }

@@ -1,11 +1,11 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class ReleaseLanguage
+    public class ReleaseLanguage
     {
         public int ReleaseId { get; init; }
 
         public string Language { get; init; } = null!;
 
-        public virtual Release Release { get; init; } = null!;
+        public Release Release { get; init; } = null!;
     }
 }

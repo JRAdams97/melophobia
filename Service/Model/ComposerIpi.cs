@@ -1,6 +1,6 @@
 ﻿namespace Melophobia.Model
 {
-    public partial class ComposerIpi
+    public class ComposerIpi
     {
         public string Ipi { get; init; } = null!;
 
@@ -8,6 +8,6 @@
 
         public string? Comment { get; init; }
 
-        public virtual Composer? Composer { get; init; }
+        public Composer? Composer { get; init; }
     }
 }
