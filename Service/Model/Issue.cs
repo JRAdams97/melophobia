@@ -1,5 +1,7 @@
 ﻿namespace Melophobia.Model
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Issue
     {
         public int Id { get; init; }
@@ -14,7 +16,7 @@
 
         public int? MediaId { get; init; }
 
-        public int? Edition { get; init; }
+        public string? Edition { get; init; }
 
         public bool? IsReissue { get; init; }
 

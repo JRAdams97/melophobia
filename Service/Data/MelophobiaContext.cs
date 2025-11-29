@@ -432,7 +432,8 @@
                         .HasColumnName("comment");
 
                 entity.Property(e => e.Edition)
-                        .HasDefaultValue(1)
+                        .HasMaxLength(50)
+                        .HasDefaultValue("Standard")
                         .HasColumnName("edition");
 
                 entity.Property(e => e.HasDataTrack)
