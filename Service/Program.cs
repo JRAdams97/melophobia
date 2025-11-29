@@ -16,6 +16,7 @@ builder.Services.AddDbContext<MelophobiaContext>(options => options.UseNpgsql(
         e => e
                 .MapEnum<Gender>("e_gender")
                 .MapEnum<LabelType>("e_label_type")
+                .MapEnum<ReleaseType>("e_release_type")
                 .MapEnum<VendorType>("e_vendor_type")));
 
 WebApplication app = builder.Build();

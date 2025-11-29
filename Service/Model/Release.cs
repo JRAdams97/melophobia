@@ -50,6 +50,8 @@
 
         public short? RymYearRank { get; init; }
 
+        public List<Data.Enum.ReleaseType> Types { get; } = [];
+
         public ICollection<Issue> Issues { get; init; } = new List<Issue>();
 
         public ICollection<ReleaseLanguage> ReleaseLanguages { get; init; } = new List<ReleaseLanguage>();
