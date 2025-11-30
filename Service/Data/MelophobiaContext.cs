@@ -1060,7 +1060,7 @@
                         .HasColumnName("is_favourite");
 
                 entity.Property(e => e.Length)
-                        .HasMaxLength(9)
+                        .HasMaxLength(8)
                         .HasDefaultValueSql("'00:00:00'::bpchar")
                         .IsFixedLength()
                         .HasColumnName("length");
@@ -1195,7 +1195,7 @@
 
                 entity.Property(e => e.TrackId).HasColumnName("track_id");
                 entity.Property(e => e.Isrc)
-                        .HasMaxLength(15)
+                        .HasMaxLength(12)
                         .IsFixedLength()
                         .HasColumnName("isrc");
 
