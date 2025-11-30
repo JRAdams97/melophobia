@@ -1,6 +1,7 @@
 ﻿namespace Melophobia.Model
 {
     using System.ComponentModel.DataAnnotations;
+    using Data.Enum;
 
     public class Artist
     {
@@ -9,6 +10,8 @@
         [MaxLength(256)] public string Name { get; init; } = null!;
 
         [MaxLength(256)] public string? SortName { get; init; }
+
+        public Gender? Gender { get; init; }
 
         public short? FormationYear { get; init; }
 
@@ -19,6 +22,8 @@
         public bool? IsFavourite { get; init; }
 
         public string? Isni { get; init; }
+
+        public ArtistType Type { get; init; }
 
         [MaxLength(256)] public string? Website { get; init; }
 

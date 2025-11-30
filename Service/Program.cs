@@ -11,12 +11,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 // Add PostgreSQL via EFCore
-builder.Services.AddDbContext<MelophobiaContext>(options => options.UseNpgsql(
-        "Host=localhost;Port=5432;Database=melophobia;Username=postgres;Password=",
+builder.Services.AddDbContext<MelophobiaContext>(options => options.UseNpgsql("",
         e => e
+                .MapEnum<ArtistType>("e_artist_type")
+                .MapEnum<CoverGrade>("e_cover_grade")
                 .MapEnum<Gender>("e_gender")
+                .MapEnum<Grade>("e_grade")
                 .MapEnum<LabelType>("e_label_type")
                 .MapEnum<ReleaseType>("e_release_type")
+                .MapEnum<RipState>("e_rip_state")
+                .MapEnum<TrackType>("e_track_type")
                 .MapEnum<VendorType>("e_vendor_type")));
 
 WebApplication app = builder.Build();

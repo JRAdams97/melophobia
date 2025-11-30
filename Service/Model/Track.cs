@@ -1,6 +1,7 @@
 ﻿namespace Melophobia.Model
 {
     using System.ComponentModel.DataAnnotations;
+    using Data.Enum;
 
     public class Track
     {
@@ -13,6 +14,8 @@
         public bool? IsFavourite { get; init; }
 
         public string? Length { get; init; }
+
+        public TrackType? Type { get; init; } = TrackType.Original;
 
         public Release? FirstRelease { get; init; }
 

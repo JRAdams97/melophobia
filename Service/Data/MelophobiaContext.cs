@@ -82,18 +82,7 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder
-                    .HasPostgresEnum("e_artist_type", ["Choir", "Group", "Orchestra", "Other", "Person"])
-                    .HasPostgresEnum("e_cover_grade", ["Excellent", "Good", "[none]", "Poor"])
-                    .HasPostgresEnum("e_entity_type", ["Artist", "Composer", "Label", "Producer"])
-                    .HasPostgresEnum("e_grade", ["G", "F", "M", "NM", "P", "VG", "VG+"])
-                    .HasPostgresEnum("e_release_type",
-                    [
-                            "Audiobook", "Broadcast", "Compilation", "Demo", "DJ-Mix", "EP", "Interview",
-                            "Live", "Mixtape", "Other", "Remix", "Single", "Soundtrack", "Studio"
-                    ])
-                    .HasPostgresEnum("e_rip_state", ["Cleaned", "Ripped", "Tagged", "Todo"])
-                    .HasPostgresEnum("e_track_type", ["Cover", "Original"]);
+                modelBuilder.HasPostgresEnum("e_entity_type", ["Artist", "Composer", "Label", "Producer"]);
 
             modelBuilder.Entity<Artist>(entity =>
             {
@@ -119,6 +108,8 @@
 
                 entity.Property(e => e.Name).HasColumnName("name");
                 entity.Property(e => e.SortName).HasColumnName("sort_name");
+                entity.Property(e => e.Gender).HasColumnName("gender");
+                entity.Property(e => e.Type).HasColumnName("type");
                 entity.Property(e => e.Website).HasColumnName("website");
 
                 entity.HasOne(d => d.FormationLocation).WithMany(p => p.Artists)
@@ -223,6 +214,10 @@
                 entity.Property(e => e.IsMissingMedia).HasColumnName("is_missing_media");
                 entity.Property(e => e.IsMissingPackaging).HasColumnName("is_missing_packaging");
                 entity.Property(e => e.IssueId).HasColumnName("issue_id");
+                entity.Property(e => e.PackagingGrade).HasColumnName("packaging_grade");
+                entity.Property(e => e.MediaGrade).HasColumnName("media_grade");
+                entity.Property(e => e.AppCoverQuality).HasColumnName("app_cover_quality");
+                entity.Property(e => e.RipState).HasColumnName("rip_state");
 
                 entity.Property(e => e.MediaComment)
                         .HasMaxLength(100)
@@ -1058,6 +1053,7 @@
 
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.FirstReleaseId).HasColumnName("first_release_id");
+                entity.Property(e => e.Type).HasColumnName("type");
 
                 entity.Property(e => e.IsFavourite)
                         .HasDefaultValue(false)
