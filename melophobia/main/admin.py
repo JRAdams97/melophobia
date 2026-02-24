@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from melophobia.main.models import Location, Region, Country
+
+admin.site.register(Country)
+admin.site.register(Region)
+admin.site.register(Location)
