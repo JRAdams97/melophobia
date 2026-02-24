@@ -1,3 +1,25 @@
 from django.db import models
 
-# Create your models here.
+class Country(models.Model):
+    name = models.CharField(db_index=True, max_length=50, unique=True)
+    alpha2_code = models.CharField(max_length=2, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class Region(models.Model):
+    name = models.CharField(db_index=True, max_length=100)
+    abbreviation = models.CharField(max_length=30)
+    country_id = models.ForeignKey(Country, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class Location(models.Model):
+    name = models.CharField(db_index=True, max_length=255)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE)
+    latitude = models.DecimalField(max_digits=7, decimal_places=4)
+    longitude = models.DecimalField(max_digits=7, decimal_places=4)
+
+    def __str__(self):
+        return self.name
