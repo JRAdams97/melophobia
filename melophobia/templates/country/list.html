@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Countries</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Alpha-2 Code</th>
+            <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for country in countries %}
+
+        <tr>
+            <td>{{ country.name }}</td>
+            <td>{{ country.alpha2_code }}</td>
+            <td>
+                <form action="{% url 'country_delete' country.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
