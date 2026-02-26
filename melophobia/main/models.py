@@ -35,3 +35,16 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Genre(models.Model):
+    name = models.CharField(db_index=True, max_length=50)
+    origin_year = models.IntegerField(default=0)
+    is_favourite = models.BooleanField(default=False)
+    parent_genres = models.ManyToManyField('Genre', blank=True)
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name

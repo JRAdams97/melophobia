@@ -1,6 +1,6 @@
 from django import forms
 
-from melophobia.main.models import Country, Region, Location
+from melophobia.main.models import Country, Region, Location, Genre
 
 
 class CountryForm(forms.ModelForm):
@@ -13,6 +13,18 @@ class CountryForm(forms.ModelForm):
         }
 
 
+class GenreForm(forms.ModelForm):
+    class Meta:
+        model = Genre
+        fields = ['name', 'parent_genres', 'origin_year', 'is_favourite']
+        labels = {
+            'name': 'Name',
+            'parent_genres': 'Parent Genres',
+            'origin_year': 'Origin Year',
+            'is_favourite': 'Favourite?'
+        }
+
+
 class RegionForm(forms.ModelForm):
     class Meta:
         model = Region
@@ -22,4 +34,4 @@ class RegionForm(forms.ModelForm):
 class LocationForm(forms.ModelForm):
     class Meta:
         model = Location
-        fields = '__all__'
+        fields = ['name', 'region', 'latitude', 'longitude']

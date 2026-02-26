@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Genres</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Parent Genre(s)</th>
+            <th>Origin Year</th>
+            <th>Favourite</th>
+            <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for genre in genres %}
+
+        <tr>
+            <td>{{ genre.name }}</td>
+            <td>
+                {% for parent_genre in genre.parent_genres.all %}
+                {{ parent_genre.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ genre.origin_year }}</td>
+            <td>{{ genre.is_favourite }}</td>
+            <td>
+                <form action="{% url 'genre_delete' genre.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
