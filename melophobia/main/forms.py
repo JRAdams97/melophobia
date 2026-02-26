@@ -1,6 +1,6 @@
 from django import forms
 
-from melophobia.main.models import Country, Region
+from melophobia.main.models import Country, Region, Location
 
 
 class CountryForm(forms.ModelForm):
@@ -17,8 +17,9 @@ class RegionForm(forms.ModelForm):
     class Meta:
         model = Region
         fields = ['name', 'abbreviation', 'country']
-        labels = {
-            'name': 'Name',
-            'abbreviation': 'Abbreviation',
-            'country': 'Country'
-        }
+
+
+class LocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = '__all__'

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Locations</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Region</th>
+            <th>Country</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for location in locations %}
+
+        <tr>
+            <td>{{ location.name }}</td>
+            <td>
+                {% if location.region.abbreviation is not null %}
+                {{ location.region.abbreviation }}
+                {% else %}
+                {{ location.region.name }}
+                {% endif %}
+            </td>
+            <td>{{ location.region.country.alpha2_code }}</td>
+            <td>{{ location.latitude }}</td>
+            <td>{{ location.longitude }}</td>
+            <td>
+                <form action="{% url 'location_delete' location.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
