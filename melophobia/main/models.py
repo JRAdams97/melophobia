@@ -15,7 +15,7 @@ class Country(models.Model):
 class Region(models.Model):
     name = models.CharField(db_index=True, max_length=100)
     abbreviation = models.CharField(max_length=30)
-    country_id = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('name',)

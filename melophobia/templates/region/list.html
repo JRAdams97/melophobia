@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Regions</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Abbreviation</th>
+            <th>Country</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for region in regions %}
+
+        <tr>
+            <td>{{ region.name }}</td>
+            <td>{{ region.abbreviation }}</td>
+            <td>{{ region.country.alpha2_code }}</td>
+            <td>
+                <form action="{% url 'region_delete' region.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
