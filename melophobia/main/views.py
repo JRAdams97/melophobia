@@ -2,8 +2,8 @@ from django.db.models import QuerySet
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from melophobia.main.forms import CountryForm, RegionForm, LocationForm, GenreForm
-from melophobia.main.models import Country, Region, Location, Genre
+from melophobia.main.forms import CountryForm, RegionForm, LocationForm, GenreForm, LabelForm
+from melophobia.main.models import Country, Region, Location, Genre, Label
 
 
 class CountryCreateView(CreateView):
@@ -62,6 +62,35 @@ class GenreUpdateView(UpdateView):
 class GenreDeleteView(DeleteView):
     model = Genre
     success_url = reverse_lazy('genre_list')
+
+
+class LabelCreateView(CreateView):
+    model = Label
+    form_class = LabelForm
+    template_name = 'label/form.html'
+    success_url = reverse_lazy('label_list')
+
+
+class LabelListView(ListView):
+    model = Label
+    template_name = 'label/list.html'
+    context_object_name = 'labels'
+    paginate_by = 25
+
+    def get_queryset(self) -> QuerySet:
+        return Label.objects.all()
+
+
+class LabelUpdateView(UpdateView):
+    model = Label
+    form_class = LabelForm
+    template_name = 'label/form.html'
+    success_url = reverse_lazy('label_list')
+
+
+class LabelDeleteView(DeleteView):
+    model = Label
+    success_url = reverse_lazy('label_list')
 
 
 class LocationCreateView(CreateView):

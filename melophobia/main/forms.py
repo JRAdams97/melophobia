@@ -1,6 +1,6 @@
 from django import forms
 
-from melophobia.main.models import Country, Region, Location, Genre
+from melophobia.main.models import Country, Region, Location, Genre, Label
 
 
 class CountryForm(forms.ModelForm):
@@ -22,6 +22,23 @@ class GenreForm(forms.ModelForm):
             'parent_genres': 'Parent Genres',
             'origin_year': 'Origin Year',
             'is_favourite': 'Favourite?'
+        }
+
+
+class LabelForm(forms.ModelForm):
+    class Meta:
+        model = Label
+        fields = ['name', 'sort_name', 'formation_year', 'formation_location', 'closure_year', 'is_favourite',
+                  'labelcode', 'type']
+        labels = {
+            'name': 'Name',
+            'sort_name': 'Sort Name',
+            'formation_year': 'Formation Year',
+            'formation_location': 'Formation Location',
+            'closure_year': 'Closure Year',
+            'is_favourite': 'Favourite?',
+            'labelcode': 'Labelcode',
+            'type': 'Type'
         }
 
 

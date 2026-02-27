@@ -3,7 +3,8 @@ from django.urls import path
 
 from melophobia.main.views import CountryListView, CountryCreateView, CountryUpdateView, CountryDeleteView, \
     RegionListView, RegionCreateView, RegionUpdateView, RegionDeleteView, LocationListView, LocationCreateView, \
-    LocationUpdateView, LocationDeleteView, GenreListView, GenreCreateView, GenreUpdateView, GenreDeleteView
+    LocationUpdateView, LocationDeleteView, GenreListView, GenreCreateView, GenreUpdateView, GenreDeleteView, \
+    LabelListView, LabelCreateView, LabelUpdateView, LabelDeleteView
 
 urlpatterns = [
     path('country/list', CountryListView.as_view(), name='country_list'),
@@ -14,6 +15,10 @@ urlpatterns = [
     path('genre/add', GenreCreateView.as_view(), name='genre_add'),
     path('genre/edit/<int:pk>', GenreUpdateView.as_view(), name='genre_edit'),
     path('genre/delete/<int:pk>', GenreDeleteView.as_view(), name='genre_delete'),
+    path('label/list', LabelListView.as_view(), name='label_list'),
+    path('label/add', LabelCreateView.as_view(), name='label_add'),
+    path('label/edit/<int:pk>', LabelUpdateView.as_view(), name='label_edit'),
+    path('label/delete/<int:pk>', LabelDeleteView.as_view(), name='label_delete'),
     path('location/list', LocationListView.as_view(), name='location_list'),
     path('location/add', LocationCreateView.as_view(), name='location_add'),
     path('location/edit/<int:pk>', LocationUpdateView.as_view(), name='location_edit'),

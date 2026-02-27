@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Record Labels</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Formation Year</th>
+            <th>Formation Location</th>
+            <th>Closure Year</th>
+            <th>Labelcode</th>
+            <th>Favourite?</th>
+            <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for label in labels %}
+
+        <tr>
+            <td>{{ label.name }}</td>
+            <td>{{ label.formation_year }}</td>
+            <td>{{ label.formation_location }}</td>
+            <td>{{ label.closure_year }}</td>
+            <td>{{ label.labelcode }}</td>
+            <td>{{ label.is_favourite }}</td>
+            <td>
+                <form action="{% url 'label_delete' label.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

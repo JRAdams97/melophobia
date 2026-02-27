@@ -1,6 +1,18 @@
 from django.db import models
 
+"""
+Choices/Enumerates
+"""
+class LabelType(models.TextChoices):
+    BOOTLEGS = 'BOOTLEGS', 'Bootlegs'
+    DISTRIBUTION = 'DISTRIBUTION', 'Distribution'
+    ORIGINALS = 'ORIGINALS', 'Originals'
+    REISSUES = 'REISSUES', 'Reissues'
 
+
+"""
+Models
+"""
 class Country(models.Model):
     name = models.CharField(db_index=True, max_length=50, unique=True)
     alpha2_code = models.CharField(max_length=2, unique=True)
@@ -13,7 +25,7 @@ class Country(models.Model):
 
 
 class Region(models.Model):
-    name = models.CharField(db_index=True, max_length=100)
+    name = models.CharField(db_index=True, max_length=100, blank=True)
     abbreviation = models.CharField(max_length=30)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
@@ -21,11 +33,14 @@ class Region(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return self.name
+        if self.name is None:
+            return str(self.country.alpha2_code)
+        else:
+            return self.name + ', ' + str(self.country.alpha2_code)
 
 
 class Location(models.Model):
-    name = models.CharField(db_index=True, max_length=255)
+    name = models.CharField(db_index=True, max_length=255, blank=True)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     latitude = models.DecimalField(max_digits=7, decimal_places=4)
     longitude = models.DecimalField(max_digits=7, decimal_places=4)
@@ -34,17 +49,34 @@ class Location(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return self.name
+        return self.name + ', ' + str(self.region.name) + ', ' + str(self.region.country.alpha2_code)
 
 
 class Genre(models.Model):
     name = models.CharField(db_index=True, max_length=50)
-    origin_year = models.IntegerField(default=0)
+    origin_year = models.IntegerField(null=True)
     is_favourite = models.BooleanField(default=False)
-    parent_genres = models.ManyToManyField('Genre', blank=True)
+    parent_genres = models.ManyToManyField('Genre')
 
     class Meta:
         ordering = ('name',)
 
     def __str__(self):
         return self.name
+
+
+class Label(models.Model):
+    name = models.CharField(db_index=True)
+    sort_name = models.CharField(blank=True)
+    formation_year = models.IntegerField(blank=True, null=True)
+    formation_location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    closure_year = models.IntegerField(blank=True, null=True)
+    is_favourite = models.BooleanField(default=False)
+    labelcode = models.IntegerField(blank=True, null=True)
+    type = models.CharField(choices=LabelType.choices)
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name + ' (' + self.formation_location.region.country.alpha2_code + ')'
