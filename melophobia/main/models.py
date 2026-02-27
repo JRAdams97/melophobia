@@ -23,6 +23,18 @@ class LabelType(models.TextChoices):
     REISSUES = 'REISSUES', 'Reissues'
 
 
+class MediaClass(models.TextChoices):
+    CARTRIDGE = 'CARTRIDGE', 'Cartridge'
+    CASSETTE = 'CASSETTE', 'Cassette'
+    DIGITAL = 'DIGITAL', 'Digital'
+    FLASH_DRIVE = 'FLASH_DRIVE', 'Flash Drive'
+    MAGNETIC_DISK = 'MAGNETIC_DISK', 'Magnetic Disk'
+    OPTICAL_DISC = 'OPTICAL_DISC', 'Optical Disk'
+    OTHER = 'OTHER', 'Other'
+    PHONOGRAPHIC_RECORD = 'PHONOGRAPHIC_RECORD', 'Phonographic Record'
+    UNKNOWN = 'UNKNOWN', 'Unknown'
+
+
 """
 Models
 """
@@ -65,6 +77,19 @@ class Location(models.Model):
         return self.name + ', ' + str(self.region.name) + ', ' + str(self.region.country.alpha2_code)
 
 
+class Media(models.Model):
+    name = models.CharField(db_index=True, max_length=100)
+    abbreviation = models.CharField(max_length=30)
+    classification = models.CharField(choices=MediaClass)
+    origin_year = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name
+
+
 class Genre(models.Model):
     name = models.CharField(db_index=True, max_length=50)
     origin_year = models.IntegerField(null=True)
@@ -86,7 +111,7 @@ class Label(models.Model):
     closure_year = models.IntegerField(blank=True, null=True)
     is_favourite = models.BooleanField(default=False)
     labelcode = models.IntegerField(blank=True, null=True)
-    type = models.CharField(choices=LabelType.choices)
+    type = models.CharField(choices=LabelType)
 
     class Meta:
         ordering = ('name',)
