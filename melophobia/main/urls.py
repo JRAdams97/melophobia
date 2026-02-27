@@ -4,9 +4,14 @@ from django.urls import path
 from melophobia.main.views import CountryListView, CountryCreateView, CountryUpdateView, CountryDeleteView, \
     RegionListView, RegionCreateView, RegionUpdateView, RegionDeleteView, LocationListView, LocationCreateView, \
     LocationUpdateView, LocationDeleteView, GenreListView, GenreCreateView, GenreUpdateView, GenreDeleteView, \
-    LabelListView, LabelCreateView, LabelUpdateView, LabelDeleteView
+    LabelListView, LabelCreateView, LabelUpdateView, LabelDeleteView, ArtistListView, ArtistCreateView, \
+    ArtistUpdateView, ArtistDeleteView
 
 urlpatterns = [
+    path('artist/list', ArtistListView.as_view(), name='artist_list'),
+    path('artist/add', ArtistCreateView.as_view(), name='artist_add'),
+    path('artist/edit/<int:pk>', ArtistUpdateView.as_view(), name='artist_edit'),
+    path('artist/delete/<int:pk>', ArtistDeleteView.as_view(), name='artist_delete'),
     path('country/list', CountryListView.as_view(), name='country_list'),
     path('country/add', CountryCreateView.as_view(), name='country_add'),
     path('country/edit/<int:pk>', CountryUpdateView.as_view(), name='country_edit'),

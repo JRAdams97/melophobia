@@ -3,6 +3,19 @@ from django.db import models
 """
 Choices/Enumerates
 """
+class ArtistType(models.TextChoices):
+    GROUP = 'GROUP', 'Group'
+    ORCHESTRA ='ORCHESTRA', 'Orchestra'
+    OTHER = 'OTHER', 'Other'
+    PERSON = 'PERSON', 'Person'
+
+
+class Gender(models.TextChoices):
+    MALE = 'MALE', 'Male'
+    FEMALE = 'FEMALE', 'Female'
+    OTHER = 'OTHER', 'Other'
+
+
 class LabelType(models.TextChoices):
     BOOTLEGS = 'BOOTLEGS', 'Bootlegs'
     DISTRIBUTION = 'DISTRIBUTION', 'Distribution'
@@ -56,7 +69,7 @@ class Genre(models.Model):
     name = models.CharField(db_index=True, max_length=50)
     origin_year = models.IntegerField(null=True)
     is_favourite = models.BooleanField(default=False)
-    parent_genres = models.ManyToManyField('Genre')
+    parent_genres = models.ManyToManyField('Genre', blank=True)
 
     class Meta:
         ordering = ('name',)
@@ -80,3 +93,21 @@ class Label(models.Model):
 
     def __str__(self):
         return self.name + ' (' + self.formation_location.region.country.alpha2_code + ')'
+
+
+class Artist(models.Model):
+    name = models.CharField(db_index=True)
+    sort_name = models.CharField(blank=True)
+    type = models.CharField(choices=ArtistType)
+    gender = models.CharField(choices=Gender, blank=True)
+    formation_year = models.IntegerField(blank=True, null=True)
+    formation_location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    disband_year = models.IntegerField(blank=True, null=True)
+    genres = models.ManyToManyField(Genre)
+    is_favourite = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name

@@ -1,6 +1,25 @@
 from django import forms
 
-from melophobia.main.models import Country, Region, Location, Genre, Label
+from melophobia.main.models import Country, Region, Location, Genre, Label, Artist
+
+FAVOURITE_LABEL = 'Favourite?'
+
+class ArtistForm(forms.ModelForm):
+    class Meta:
+        model = Artist
+        fields = ['name', 'sort_name', 'type', 'gender', 'formation_year', 'formation_location', 'disband_year',
+                  'genres', 'is_favourite']
+        labels = {
+            'name': 'Name',
+            'sort_name': 'Sort Name',
+            'type': 'Type',
+            'gender': 'Gender',
+            'formation_year': 'Formation Year',
+            'formation_location': 'Formation Location',
+            'disband_year': 'Disband Year',
+            'genres': 'Genres',
+            'is_favourite': FAVOURITE_LABEL
+        }
 
 
 class CountryForm(forms.ModelForm):
@@ -21,7 +40,7 @@ class GenreForm(forms.ModelForm):
             'name': 'Name',
             'parent_genres': 'Parent Genres',
             'origin_year': 'Origin Year',
-            'is_favourite': 'Favourite?'
+            'is_favourite': FAVOURITE_LABEL
         }
 
 
@@ -36,7 +55,7 @@ class LabelForm(forms.ModelForm):
             'formation_year': 'Formation Year',
             'formation_location': 'Formation Location',
             'closure_year': 'Closure Year',
-            'is_favourite': 'Favourite?',
+            'is_favourite': FAVOURITE_LABEL,
             'labelcode': 'Labelcode',
             'type': 'Type'
         }

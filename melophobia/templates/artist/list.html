@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Artists</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Years Active</th>
+            <th>Formation Location</th>
+            <th>Genre(s)</th>
+            <th>Favourite?</th>
+            <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for artist in artists %}
+
+        <tr>
+            <td>{{ artist.name }}</td>
+            <td>{{ artist.formation_year }} - {% if artist.disband_year %}{{ artist.disband_year }}{% endif %}</td>
+            <td>{{ artist.formation_location }}</td>
+            <td>
+                {% for genre in artist.genres.all %}
+                {{ genre.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ artist.is_favourite }}</td>
+            <td>
+                <form action="{% url 'artist_delete' artist.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
