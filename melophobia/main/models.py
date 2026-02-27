@@ -90,6 +90,17 @@ class Media(models.Model):
         return self.name
 
 
+class Language(models.Model):
+    name = models.CharField(db_index=True)
+    script = models.CharField()
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name
+
+
 class Genre(models.Model):
     name = models.CharField(db_index=True, max_length=50)
     origin_year = models.IntegerField(null=True)

@@ -5,7 +5,8 @@ from melophobia.main.views import CountryListView, CountryCreateView, CountryUpd
     RegionListView, RegionCreateView, RegionUpdateView, RegionDeleteView, LocationListView, LocationCreateView, \
     LocationUpdateView, LocationDeleteView, GenreListView, GenreCreateView, GenreUpdateView, GenreDeleteView, \
     LabelListView, LabelCreateView, LabelUpdateView, LabelDeleteView, ArtistListView, ArtistCreateView, \
-    ArtistUpdateView, ArtistDeleteView, MediaListView, MediaCreateView, MediaUpdateView, MediaDeleteView
+    ArtistUpdateView, ArtistDeleteView, MediaListView, MediaCreateView, MediaUpdateView, MediaDeleteView, \
+    LanguageListView, LanguageCreateView, LanguageUpdateView, LanguageDeleteView
 
 urlpatterns = [
     path('artist/list', ArtistListView.as_view(), name='artist_list'),
@@ -24,6 +25,10 @@ urlpatterns = [
     path('label/add', LabelCreateView.as_view(), name='label_add'),
     path('label/edit/<int:pk>', LabelUpdateView.as_view(), name='label_edit'),
     path('label/delete/<int:pk>', LabelDeleteView.as_view(), name='label_delete'),
+    path('language/list', LanguageListView.as_view(), name='language_list'),
+    path('language/add', LanguageCreateView.as_view(), name='language_add'),
+    path('language/edit/<int:pk>', LanguageUpdateView.as_view(), name='language_edit'),
+    path('language/delete/<int:pk>', LanguageDeleteView.as_view(), name='language_delete'),
     path('location/list', LocationListView.as_view(), name='location_list'),
     path('location/add', LocationCreateView.as_view(), name='location_add'),
     path('location/edit/<int:pk>', LocationUpdateView.as_view(), name='location_edit'),

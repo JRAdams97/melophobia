@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Languages</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Script</th>
+            <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for language in languages %}
+
+        <tr>
+            <td>{{ language.name }}</td>
+            <td>{{ language.script }}</td>
+            <td>
+                <form action="{% url 'language_delete' language.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

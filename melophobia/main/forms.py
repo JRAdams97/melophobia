@@ -1,6 +1,6 @@
 from django import forms
 
-from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media
+from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media, Language
 
 FAVOURITE_LABEL = 'Favourite?'
 
@@ -61,6 +61,18 @@ class LabelForm(forms.ModelForm):
         }
 
 
+class LanguageForm(forms.ModelForm):
+    class Meta:
+        model = Language
+        fields = ['name', 'script']
+
+
+class LocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ['name', 'region', 'latitude', 'longitude']
+
+
 class MediaForm(forms.ModelForm):
     class Meta:
         model = Media
@@ -77,9 +89,3 @@ class RegionForm(forms.ModelForm):
     class Meta:
         model = Region
         fields = ['name', 'abbreviation', 'country']
-
-
-class LocationForm(forms.ModelForm):
-    class Meta:
-        model = Location
-        fields = ['name', 'region', 'latitude', 'longitude']
