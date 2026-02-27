@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Media</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Abbreviation</th>
+            <th>Classification</th>
+            <th>Origin Year</th>
+            <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for media in media_list %}
+
+        <tr>
+            <td>{{ media.name }}</td>
+            <td>{{ media.abbreviation }}</td>
+            <td>{{ media.classification }}</td>
+            <td>{{ media.origin_year }}</td>
+            <td>
+                <form action="{% url 'media_delete' media.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
