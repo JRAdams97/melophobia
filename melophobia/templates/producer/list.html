@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Producer</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Birth Date</th>
+            <th>Birth Location</th>
+            <th>Death Date</th>
+            <th>Favourite?</th>
+            <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for producer in producers %}
+
+        <tr>
+            <td>{{ producer.name }}</td>
+            <td>{{ producer.gender }}</td>
+            <td>{{ producer.birth_date }}</td>
+            <td>{{ producer.birth_location }}</td>
+            <td>{{ producer.death_date }}</td>
+            <td>{{ producer.is_favourite }}</td>
+            <td>
+                <form action="{% url 'producer_delete' producer.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from melophobia.main.forms import CountryForm, RegionForm, LocationForm, GenreForm, LabelForm, ArtistForm, MediaForm, \
-    LanguageForm
-from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media, Language
+    LanguageForm, ProducerForm
+from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media, Language, Producer
 
 
 class ArtistCreateView(CreateView):
@@ -208,6 +208,35 @@ class MediaUpdateView(UpdateView):
 class MediaDeleteView(DeleteView):
     model = Location
     success_url = reverse_lazy('media_list')
+
+
+class ProducerCreateView(CreateView):
+    model = Producer
+    form_class = ProducerForm
+    template_name = 'producer/form.html'
+    success_url = reverse_lazy('producer_list')
+
+
+class ProducerListView(ListView):
+    model = Producer
+    template_name = 'producer/list.html'
+    context_object_name = 'producers'
+    paginate_by = 25
+
+    def get_queryset(self) -> QuerySet:
+        return Producer.objects.all()
+
+
+class ProducerUpdateView(UpdateView):
+    model = Producer
+    form_class = ProducerForm
+    template_name = 'producer/form.html'
+    success_url = reverse_lazy('producer_list')
+
+
+class ProducerDeleteView(DeleteView):
+    model = Producer
+    success_url = reverse_lazy('producer_list')
 
 
 class RegionCreateView(CreateView):

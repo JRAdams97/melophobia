@@ -101,6 +101,22 @@ class Language(models.Model):
         return self.name
 
 
+class Producer(models.Model):
+    name = models.CharField(db_index=True)
+    sort_name = models.CharField(blank=True)
+    gender = models.CharField(choices=Gender)
+    birth_date = models.CharField(default='0000-00-00')
+    birth_location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    death_date = models.CharField(blank=True)
+    is_favourite = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name
+
+
 class Genre(models.Model):
     name = models.CharField(db_index=True, max_length=50)
     origin_year = models.IntegerField(null=True)
