@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Issues</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Artist(s)</th>
+            <th>Release Year</th>
+            <th>Release Country</th>
+            <th>Label</th>
+            <th>Catalogue #</th>
+            <th>Media</th>
+            <th>Reissue?</th>
+            <th>Barcode</th>
+            <th>Total Variants</th>
+            <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for issue in issues %}
+
+        <tr>
+            <td>{{ issue.parent_release.title }}</td>
+            <td>
+                {% for artist in issue.parent_release.artists.all %}
+                {{ artist.name }}{% if not forloop.last %} / {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ issue.release_year }}</td>
+            <td>{{ issue.release_country }}</td>
+            <td>{{ issue.label.name }}</td>
+            <td>{{ issue.catalogue_number }}</td>
+            <td>{{ issue.media.name }}</td>
+            <td>{{ issue.is_reissue }}</td>
+            <td>{{ issue.barcode }}</td>
+            <td>{{ issue.issue_variants.all|length }}</td>
+            <td>
+                <form action="{% url 'issue_delete' issue.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

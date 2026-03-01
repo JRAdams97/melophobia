@@ -1,4 +1,3 @@
-from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
 from melophobia.main.views import CountryListView, CountryCreateView, CountryUpdateView, CountryDeleteView, \
@@ -7,7 +6,8 @@ from melophobia.main.views import CountryListView, CountryCreateView, CountryUpd
     LabelListView, LabelCreateView, LabelUpdateView, LabelDeleteView, ArtistListView, ArtistCreateView, \
     ArtistUpdateView, ArtistDeleteView, MediaListView, MediaCreateView, MediaUpdateView, MediaDeleteView, \
     LanguageListView, LanguageCreateView, LanguageUpdateView, LanguageDeleteView, ProducerListView, ProducerCreateView, \
-    ProducerUpdateView, ProducerDeleteView
+    ProducerUpdateView, ProducerDeleteView, ReleaseListView, ReleaseCreateView, ReleaseUpdateView, ReleaseDeleteView, \
+    IssueListView, IssueCreateView, IssueUpdateView, IssueDeleteView
 
 urlpatterns = [
     path('artist/list', ArtistListView.as_view(), name='artist_list'),
@@ -22,6 +22,10 @@ urlpatterns = [
     path('genre/add', GenreCreateView.as_view(), name='genre_add'),
     path('genre/edit/<int:pk>', GenreUpdateView.as_view(), name='genre_edit'),
     path('genre/delete/<int:pk>', GenreDeleteView.as_view(), name='genre_delete'),
+    path('issue/list', IssueListView.as_view(), name='issue_list'),
+    path('issue/add', IssueCreateView.as_view(), name='issue_add'),
+    path('issue/edit/<int:pk>', IssueUpdateView.as_view(), name='issue_edit'),
+    path('issue/delete/<int:pk>', IssueDeleteView.as_view(), name='issue_delete'),
     path('label/list', LabelListView.as_view(), name='label_list'),
     path('label/add', LabelCreateView.as_view(), name='label_add'),
     path('label/edit/<int:pk>', LabelUpdateView.as_view(), name='label_edit'),
@@ -45,5 +49,9 @@ urlpatterns = [
     path('region/list', RegionListView.as_view(), name='region_list'),
     path('region/add', RegionCreateView.as_view(), name='region_add'),
     path('region/edit/<int:pk>', RegionUpdateView.as_view(), name='region_edit'),
-    path('region/delete/<int:pk>', RegionDeleteView.as_view(), name='region_delete')
+    path('region/delete/<int:pk>', RegionDeleteView.as_view(), name='region_delete'),
+    path('release/list', ReleaseListView.as_view(), name='release_list'),
+    path('release/add', ReleaseCreateView.as_view(), name='release_add'),
+    path('release/edit/<int:pk>', ReleaseUpdateView.as_view(), name='release_edit'),
+    path('release/delete/<int:pk>', ReleaseDeleteView.as_view(), name='release_delete')
 ]

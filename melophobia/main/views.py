@@ -3,8 +3,9 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from melophobia.main.forms import CountryForm, RegionForm, LocationForm, GenreForm, LabelForm, ArtistForm, MediaForm, \
-    LanguageForm, ProducerForm
-from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media, Language, Producer
+    LanguageForm, ProducerForm, ReleaseForm, IssueVariantFormSet, IssueForm
+from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media, Language, Producer, Release, \
+    Issue, ReleaseType
 
 
 class ArtistCreateView(CreateView):
@@ -92,6 +93,83 @@ class GenreUpdateView(UpdateView):
 class GenreDeleteView(DeleteView):
     model = Genre
     success_url = reverse_lazy('genre_list')
+
+
+class IssueCreateView(CreateView):
+    model = Issue
+    form_class = IssueForm
+    template_name = 'issue/form.html'
+    success_url = reverse_lazy('issue_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.POST:
+            context['issue_variant_formset'] = IssueVariantFormSet(self.request.POST)
+        else:
+            context['issue_variant_formset'] = IssueVariantFormSet()
+
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        issue_variant_formset = context["issue_variant_formset"]
+
+        if issue_variant_formset.is_valid():
+            self.object = form.save()
+            issue_variant_formset.instance = self.object
+            issue_variant_formset.save()
+
+            return super().form_valid(form)
+
+        else:
+            return self.form_invalid(form)
+
+
+class IssueListView(ListView):
+    model = Issue
+    template_name = 'issue/list.html'
+    context_object_name = 'issues'
+    paginate_by = 25
+
+    def get_queryset(self) -> QuerySet:
+        return Issue.objects.all()
+
+
+class IssueUpdateView(UpdateView):
+    model = Issue
+    form_class = IssueVariantFormSet
+    template_name = 'issue/form.html'
+    success_url = reverse_lazy('issue_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.POST:
+            context["variant_formset"] = IssueVariantFormSet(self.request.POST)
+        else:
+            context["variant_formset"] = IssueVariantFormSet()
+
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        variant_formset = context["variant_formset"]
+
+        if variant_formset.is_valid():
+            self.object = form.save()
+            variant_formset.instance = self.object
+            variant_formset.save()
+
+            return super().form_valid(form)
+
+        else:
+            return self.form_invalid(form)
+
+
+class IssueDeleteView(DeleteView):
+    model = Issue
+    success_url = reverse_lazy('issue_list')
 
 
 class LabelCreateView(CreateView):
@@ -266,3 +344,32 @@ class RegionUpdateView(UpdateView):
 class RegionDeleteView(DeleteView):
     model = Region
     success_url = reverse_lazy('region_list')
+
+
+class ReleaseCreateView(CreateView):
+    model = Release
+    form_class = ReleaseForm
+    template_name = 'release/form.html'
+    success_url = reverse_lazy('release_list')
+
+
+class ReleaseListView(ListView):
+    model = Release
+    template_name = 'release/list.html'
+    context_object_name = 'releases'
+    paginate_by = 25
+
+    def get_queryset(self) -> QuerySet:
+        return Release.objects.all()
+
+
+class ReleaseUpdateView(UpdateView):
+    model = Release
+    form_class = ReleaseForm
+    template_name = 'release/form.html'
+    success_url = reverse_lazy('release_list')
+
+
+class ReleaseDeleteView(DeleteView):
+    model = Release
+    success_url = reverse_lazy('release_list')

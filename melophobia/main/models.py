@@ -35,6 +35,23 @@ class MediaClass(models.TextChoices):
     UNKNOWN = 'UNKNOWN', 'Unknown'
 
 
+class ReleaseTypeValue(models.TextChoices):
+    AUDIOBOOK = 'AUDIOBOOK', 'Audiobook'
+    BROADCAST = 'BROADCAST', 'Broadcast'
+    COMPILATION = 'COMPILATION', 'Compilation'
+    DEMO = 'DEMO', 'Demo'
+    DJMIX = 'DJMIX', 'DJ Mix'
+    EP = 'EP', 'Extended Play'
+    INTERVIEW = 'INTERVIEW', 'Interview'
+    LIVE = 'LIVE', 'Live'
+    MIXTAPE = 'MIXTAPE', 'Mixtape'
+    OTHER = 'OTHER', 'Other'
+    REMIX = 'REMIX', 'Remix'
+    SINGLE = 'SINGLE', 'Single'
+    SOUNDTRACK = 'SOUNDTRACK', 'Soundtrack'
+    STUDIO = 'STUDIO', 'Studio'
+
+
 """
 Models
 """
@@ -163,3 +180,76 @@ class Artist(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ReleaseType(models.Model):
+    type = models.CharField(unique=True, choices=ReleaseTypeValue)
+
+    class Meta:
+        ordering = ('type',)
+
+    def __str__(self):
+        return self.type
+
+
+class Release(models.Model):
+    title = models.CharField(db_index=True)
+    alternate_title = models.CharField(blank=True)
+    release_date = models.CharField(default='0000-00-00')
+    artists = models.ManyToManyField(Artist)
+    genres = models.ManyToManyField(Genre)
+    is_favourite = models.BooleanField(default=False)
+    languages = models.ManyToManyField(Language)
+    producers = models.ManyToManyField(Producer, blank=True)
+    aoty_rank = models.IntegerField(blank=True, null=True)
+    bea_rank = models.IntegerField(blank=True, null=True)
+    christgau_rating = models.CharField(blank=True, max_length=5)
+    metacritic_rating = models.IntegerField(blank=True, null=True)
+    rym_rank = models.IntegerField(blank=True, null=True)
+    rym_rating = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
+    is_official = models.BooleanField(default=True)
+    types = models.ManyToManyField(ReleaseType)
+
+    class Meta:
+        ordering = ('title',)
+
+    def __str__(self):
+        return f"{self.title} ({self.release_date[:4] if self.release_date != '' else 'Unknown'})"
+
+
+class Issue(models.Model):
+    parent_release = models.ForeignKey(Release, on_delete=models.CASCADE, related_name='issues')
+    label = models.ForeignKey(Label, on_delete=models.SET_NULL, null=True)
+    release_year = models.IntegerField(blank=True, null=True)
+    release_country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
+    catalogue_number = models.CharField(blank=True)
+    media = models.ForeignKey(Media, on_delete=models.SET_NULL, null=True)
+    edition = models.CharField(blank=True)
+    is_reissue = models.BooleanField(default=False)
+    is_official = models.BooleanField(default=True)
+    is_promo = models.BooleanField(default=False)
+    has_pregap = models.BooleanField(default=False)
+    has_data_track = models.BooleanField(default=False)
+    barcode = models.CharField(blank=True, max_length=14)
+    comment = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ('catalogue_number',)
+
+    def __str__(self):
+        return self.parent_release.title + ' (' + self.release_year + ': ' + self.media.name + ')'
+
+
+class IssueVariant(models.Model):
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='issue_variants')
+    matrix_runout = models.CharField(blank=True)
+    master_sid = models.CharField(blank=True)
+    mould_sid = models.CharField(blank=True)
+    spars_code = models.CharField(blank=True)
+    comment = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ('matrix_runout',)
+
+    def __str__(self):
+        return self.matrix_runout

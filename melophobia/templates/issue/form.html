@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Issue Form</h1>
+    <hr/>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        {{ issue_variant_formset.management_form }}
+
+        {% for form in issue_variant_formset %}
+        <div class="variant-form">
+            {{ form.as_p }}
+        </div>
+        {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
