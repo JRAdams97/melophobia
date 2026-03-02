@@ -10,10 +10,38 @@ class ArtistType(models.TextChoices):
     PERSON = 'PERSON', 'Person'
 
 
+class BackupState(models.TextChoices):
+    CLEANED = 'CLEANED', 'Cleaned'
+    DAMAGED = 'DAMAGED', 'Damaged'
+    OTHER = 'OTHER', 'Other'
+    RIPPED = 'RIPPED', 'Ripped'
+    TAGGED = 'TAGGED', 'Tagged'
+    TODO = 'TODO', 'TODO'
+
+
+class CoverGrade(models.TextChoices):
+    EXCELLENT = 'EXCELLENT', 'Excellent'
+    FAIR = 'FAIR', 'Fair'
+    GOOD = 'GOOD', 'Good'
+    POOR = 'POOR', 'Poor'
+    NONE = 'NONE', 'None'
+
+
 class Gender(models.TextChoices):
     MALE = 'MALE', 'Male'
     FEMALE = 'FEMALE', 'Female'
     OTHER = 'OTHER', 'Other'
+
+
+class Grade(models.TextChoices):
+  GOOD = 'GOOD', 'Good'
+  FAIR = 'FAIR', 'Fair'
+  MINT = 'MINT', 'Mint'
+  NEARMINT = 'NEARMINT', 'Near Mint'
+  POOR = 'POOR', 'Poor'
+  UNKNOWN = 'UNKNOWN', 'Unknown'
+  VERYGOOD = 'VERYGOOD', 'Very Good'
+  VERYGOODPLUS = 'VERYGOODPLUS', 'Very Good +'
 
 
 class LabelType(models.TextChoices):
@@ -237,7 +265,7 @@ class Issue(models.Model):
         ordering = ('catalogue_number',)
 
     def __str__(self):
-        return self.parent_release.title + ' (' + self.release_year + ': ' + self.media.name + ')'
+        return f"{self.parent_release.title} ({str(self.release_year)}: {self.media.name})"
 
 
 class IssueVariant(models.Model):
@@ -253,3 +281,26 @@ class IssueVariant(models.Model):
 
     def __str__(self):
         return self.matrix_runout
+
+
+class CollectionItem(models.Model):
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
+    packaging_grade = models.CharField(blank=True, choices=Grade)
+    packaging_comment = models.TextField(blank=True)
+    media_grade = models.CharField(blank=True, choices=Grade)
+    media_comment = models.TextField(blank=True)
+    is_missing_content = models.BooleanField(default=False)
+    missing_content_comment = models.TextField(blank=True)
+    has_promo_material = models.BooleanField(default=False)
+    remaining_tracks = models.IntegerField(default=0)
+    remaining_media_items = models.IntegerField(default=0)
+    is_favourite = models.BooleanField(default=False)
+    digital_cover_quality = models.CharField(choices=CoverGrade, default=CoverGrade.NONE)
+    backup_state = models.CharField(choices=BackupState)
+    comment = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ('backup_state',)
+
+    def __str__(self):
+        return f"{self.issue.release.title} ({self.issue.release_year}: {self.backup_state})"

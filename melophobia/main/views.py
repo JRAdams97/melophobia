@@ -3,9 +3,9 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from melophobia.main.forms import CountryForm, RegionForm, LocationForm, GenreForm, LabelForm, ArtistForm, MediaForm, \
-    LanguageForm, ProducerForm, ReleaseForm, IssueVariantFormSet, IssueForm
+    LanguageForm, ProducerForm, ReleaseForm, IssueVariantFormSet, IssueForm, CollectionItemForm
 from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media, Language, Producer, Release, \
-    Issue, ReleaseType
+    Issue, ReleaseType, CollectionItem
 
 
 class ArtistCreateView(CreateView):
@@ -35,6 +35,34 @@ class ArtistUpdateView(UpdateView):
 class ArtistDeleteView(DeleteView):
     model = Artist
     success_url = reverse_lazy('artist_list')
+
+
+class CollectionCreateView(CreateView):
+    model = CollectionItem
+    form_class = CollectionItemForm
+    template_name = 'collection/form.html'
+    success_url = reverse_lazy('collection_list')
+
+
+class CollectionListView(ListView):
+    model = CollectionItem
+    template_name = 'collection/list.html'
+    context_object_name = 'collection'
+    paginate_by = 25
+
+    def get_queryset(self) -> QuerySet:
+        return CollectionItem.objects.all()
+
+class CollectionUpdateView(UpdateView):
+    model = CollectionItem
+    form_class = CollectionItemForm
+    template_name = 'collection/form.html'
+    success_url = reverse_lazy('collection_list')
+
+
+class CollectionDeleteView(DeleteView):
+    model = CollectionItem
+    success_url = reverse_lazy('collection_list')
 
 
 class CountryCreateView(CreateView):

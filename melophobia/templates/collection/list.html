@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1>Collection Items</h1>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Artist(s)</th>
+            <th>Genre(s)</th>
+            <th>Release Date</th>
+            <th>Packaging Grade</th>
+            <th>Media Grade</th>
+            <th>Remaining Tracks</th>
+            <th>Remaining Media Items</th>
+            <th>Cover Quality</th>
+            <th>Backup State</th>
+            <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for collection_item in collection %}
+
+        <tr>
+            <td>{{ collection_item.issue.parent_release.title }}</td>
+            <td>
+                {% for artist in collection_item.issue.parent_release.artists.all %}
+                {{ artist.name }}{% if not forloop.last %} / {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for genre in collection_item.issue.parent_release.genres.all %}
+                {{ genre.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ collection_item.issue.parent_release.release_date }}</td>
+            <td>{{ collection_item.packaging_grade }}</td>
+            <td>{{ collection_item.media_grade }}</td>
+            <td>{{ collection_item.remaining_tracks }}</td>
+            <td>{{ collection_item.remaining_media_items }}</td>
+            <td>{{ collection_item.digital_cover_quality }}</td>
+            <td>{{ collection_item.backup_state }}</td>
+            <td>{{ country.alpha2_code }}</td>
+            <td>
+                <form action="{% url 'collection_delete' collection_item.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

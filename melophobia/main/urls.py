@@ -7,13 +7,18 @@ from melophobia.main.views import CountryListView, CountryCreateView, CountryUpd
     ArtistUpdateView, ArtistDeleteView, MediaListView, MediaCreateView, MediaUpdateView, MediaDeleteView, \
     LanguageListView, LanguageCreateView, LanguageUpdateView, LanguageDeleteView, ProducerListView, ProducerCreateView, \
     ProducerUpdateView, ProducerDeleteView, ReleaseListView, ReleaseCreateView, ReleaseUpdateView, ReleaseDeleteView, \
-    IssueListView, IssueCreateView, IssueUpdateView, IssueDeleteView
+    IssueListView, IssueCreateView, IssueUpdateView, IssueDeleteView, CollectionListView, CollectionCreateView, \
+    CollectionUpdateView, CollectionDeleteView
 
 urlpatterns = [
     path('artist/list', ArtistListView.as_view(), name='artist_list'),
     path('artist/add', ArtistCreateView.as_view(), name='artist_add'),
     path('artist/edit/<int:pk>', ArtistUpdateView.as_view(), name='artist_edit'),
     path('artist/delete/<int:pk>', ArtistDeleteView.as_view(), name='artist_delete'),
+    path('collection/list', CollectionListView.as_view(), name='collection_list'),
+    path('collection/add', CollectionCreateView.as_view(), name='collection_add'),
+    path('collection/edit/<int:pk>', CollectionUpdateView.as_view(), name='collection_edit'),
+    path('collection/delete/<int:pk>', CollectionDeleteView.as_view(), name='collection_delete'),
     path('country/list', CountryListView.as_view(), name='country_list'),
     path('country/add', CountryCreateView.as_view(), name='country_add'),
     path('country/edit/<int:pk>', CountryUpdateView.as_view(), name='country_edit'),

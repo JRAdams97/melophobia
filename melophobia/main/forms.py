@@ -2,7 +2,7 @@ from django import forms
 from django.forms import inlineformset_factory
 
 from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media, Language, Producer, Release, \
-    Issue, IssueVariant, ReleaseTypeValue
+    Issue, IssueVariant, ReleaseTypeValue, CollectionItem
 
 FAVOURITE_LABEL = 'Favourite?'
 SORT_NAME_LABEL = 'Sort Name'
@@ -23,6 +23,30 @@ class ArtistForm(forms.ModelForm):
             'disband_year': 'Disband Year',
             'genres': 'Genres',
             'is_favourite': FAVOURITE_LABEL
+        }
+
+
+class CollectionItemForm(forms.ModelForm):
+    class Meta:
+        model = CollectionItem
+        fields = ['issue', 'packaging_grade', 'packaging_comment', 'media_grade', 'media_comment', 'is_missing_content',
+                  'missing_content_comment', 'has_promo_material', 'remaining_tracks', 'remaining_media_items',
+                  'is_favourite', 'digital_cover_quality', 'backup_state', 'comment']
+        labels = {
+            'issue': 'Issue',
+            'packaging_grade': 'Packaging Grade',
+            'packaging_comment': 'Packaging Comment',
+            'media_grade': 'Media Grade',
+            'media_comment': 'Media Comment',
+            'is_missing_content': 'Is Missing Content?',
+            'missing_content_comment': 'Missing Content Comment',
+            'has_promo_material': 'Has Promo Material?',
+            'remaining_tracks': 'Remaining Tracks',
+            'remaining_media_items': 'Remaining Media Items',
+            'is_favourite': FAVOURITE_LABEL,
+            'digital_cover_quality': 'Digital Cover Quality',
+            'backup_state': 'Backup State',
+            'comment': 'Comment'
         }
 
 
