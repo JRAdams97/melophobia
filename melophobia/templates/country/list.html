@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div>
-    <h1>Countries</h1>
-    <hr/>
-    <table>
+<h1 class="font-title text-2xl font-bold">Countries</h1>
+<div class="divider"></div>
+<div class="overflow-x-auto">
+    <table class="table">
         <thead>
         <tr>
             <th>Name</th>
@@ -22,7 +22,7 @@
             <td>
                 <form action="{% url 'country_delete' country.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn" type="submit">Delete</button>
                 </form>
             </td>
         </tr>
