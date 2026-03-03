@@ -2,9 +2,9 @@
 {% block content %}
 
 <div>
-    <h1>Regions</h1>
-    <hr/>
-    <table>
+    <h1 class="font-title text-2xl font-bold">Regions</h1>
+    <div class="divider"></div>
+    <table class="table">
         <thead>
         <tr>
             <th>Name</th>
@@ -24,7 +24,7 @@
             <td>
                 <form action="{% url 'region_delete' region.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
             </td>
         </tr>

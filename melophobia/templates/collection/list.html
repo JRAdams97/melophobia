@@ -2,9 +2,9 @@
 {% block content %}
 
 <div>
-    <h1>Collection Items</h1>
-    <hr/>
-    <table>
+    <h1 class="font-title text-2xl font-bold">Collection Items</h1>
+    <div class="divider"></div>
+    <table class="table">
         <thead>
         <tr>
             <th>Title</th>
@@ -37,17 +37,17 @@
                 {% endfor %}
             </td>
             <td>{{ collection_item.issue.parent_release.release_date }}</td>
-            <td>{{ collection_item.packaging_grade }}</td>
-            <td>{{ collection_item.media_grade }}</td>
+            <td>{{ collection_item.packaging_grade|title }}</td>
+            <td>{{ collection_item.media_grade|title }}</td>
             <td>{{ collection_item.remaining_tracks }}</td>
             <td>{{ collection_item.remaining_media_items }}</td>
-            <td>{{ collection_item.digital_cover_quality }}</td>
-            <td>{{ collection_item.backup_state }}</td>
+            <td>{{ collection_item.digital_cover_quality|title }}</td>
+            <td>{{ collection_item.backup_state|title }}</td>
             <td>{{ country.alpha2_code }}</td>
             <td>
                 <form action="{% url 'collection_delete' collection_item.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
             </td>
         </tr>

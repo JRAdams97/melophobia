@@ -2,63 +2,63 @@
 {% block content %}
 
 <div>
-    <h1>Releases</h1>
-    <hr/>
-    <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Release Date</th>
-            <th>Artist(s)</th>
-            <th>Genre(s)</th>
-            <th>AOTY Rank</th>
-            <th>BEA Rank</th>
-            <th>RYM Rating</th>
-            <th>Type</th>
-            <th>Total Issues</th>
-            <th>Favourite?</th>
-            <th>Action(s)</th>
-        </tr>
-        </thead>
-        <tbody>
+    <h1 class="font-title text-2xl font-bold">Releases</h1>
+    <div class="divider"></div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Release Date</th>
+                <th>Title</th>
+                <th>Artist(s)</th>
+                <th>Genre(s)</th>
+                <th>AOTY Rank</th>
+                <th>BEA Rank</th>
+                <th>RYM Rating</th>
+                <th>Type</th>
+                <th>Total Issues</th>
+                <th>Favourite?</th>
+                <th>Action(s)</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        {% for release in releases %}
+            {% for release in releases %}
 
-        <tr>
-            <td>{{ release.title }}</td>
-            <td>{{ release.release_date }}</td>
-            <td>
-                {% for artist in release.artists.all %}
-                {{ artist.name }}{% if not forloop.last %} / {% endif %}
-                {% endfor %}
-            </td>
-            <td>
-                {% for genre in release.genres.all %}
-                {{ genre.name }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </td>
-            <td>{{ release.aoty_rank }}</td>
-            <td>{{ release.bea_rank }}</td>
-            <td>{{ release.rym_rating }}{% if release.rym_rank %}({{ release.rym_rank }}){% endif %}</td>
-            <td>
-                {% for type in release.types.all %}
-                {{ type|title }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </td>
-            <td>{{ release.issues.all|length }}</td>
-            <td>{{ release.is_favourite }}</td>
-            <td>
-                <form action="{% url 'release_delete' release.pk %}" method="POST">
-                    {% csrf_token %}
-                    <input type="submit" value="Delete">
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <td>{{ release.release_date }}</td>
+                <td>{{ release.title }}</td>
+                <td>
+                    {% for artist in release.artists.all %}
+                    {{ artist.name }}{% if not forloop.last %} / {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for genre in release.genres.all %}
+                    {{ genre.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ release.aoty_rank }}</td>
+                <td>{{ release.bea_rank }}</td>
+                <td>{{ release.rym_rating }}{% if release.rym_rank %}({{ release.rym_rank }}){% endif %}</td>
+                <td>
+                    {% for type in release.types.all %}
+                    {{ type|title }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ release.issues.all|length }}</td>
+                <td>{{ release.is_favourite }}</td>
+                <td>
+                    <form action="{% url 'release_delete' release.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-error" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
 
-        {% endfor %}
+            {% endfor %}
 
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
 
-{% endblock %}
+    {% endblock %}

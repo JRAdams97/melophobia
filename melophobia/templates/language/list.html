@@ -2,9 +2,9 @@
 {% block content %}
 
 <div>
-    <h1>Languages</h1>
-    <hr/>
-    <table>
+    <h1 class="font-title text-2xl font-bold">Languages</h1>
+    <div class="divider"></div>
+    <table class="table">
         <thead>
         <tr>
             <th>Name</th>
@@ -22,7 +22,7 @@
             <td>
                 <form action="{% url 'language_delete' language.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
             </td>
         </tr>

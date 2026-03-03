@@ -2,9 +2,9 @@
 {% block content %}
 
 <div>
-    <h1>Media</h1>
-    <hr/>
-    <table>
+    <h1 class="font-title text-2xl font-bold">Media</h1>
+    <div class="divider"></div>
+    <table class="table">
         <thead>
         <tr>
             <th>Name</th>
@@ -17,16 +17,21 @@
         <tbody>
 
         {% for media in media_list %}
+        {% load filters %}
 
         <tr>
             <td>{{ media.name }}</td>
             <td>{{ media.abbreviation }}</td>
-            <td>{{ media.classification }}</td>
+            <td>
+                {% with classification=media.classification|format_enum %}
+                {{ classification|title }}
+                {% endwith %}
+            </td>
             <td>{{ media.origin_year }}</td>
             <td>
                 <form action="{% url 'media_delete' media.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
             </td>
         </tr>

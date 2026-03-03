@@ -2,9 +2,9 @@
 {% block content %}
 
 <div>
-    <h1>Record Labels</h1>
-    <hr/>
-    <table>
+    <h1 class="font-title text-2xl font-bold">Record Labels</h1>
+    <div class="divider"></div>
+    <table class="table">
         <thead>
         <tr>
             <th>Name</th>
@@ -30,7 +30,7 @@
             <td>
                 <form action="{% url 'label_delete' label.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
             </td>
         </tr>

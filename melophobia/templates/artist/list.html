@@ -2,9 +2,9 @@
 {% block content %}
 
 <div>
-    <h1>Artists</h1>
-    <hr/>
-    <table>
+    <h1 class="font-title text-2xl font-bold">Artists</h1>
+    <div class="divider"></div>
+    <table class="table">
         <thead>
         <tr>
             <th>Name</th>
@@ -21,18 +21,18 @@
 
         <tr>
             <td>{{ artist.name }}</td>
-            <td>{{ artist.formation_year }} - {% if artist.disband_year %}{{ artist.disband_year }}{% endif %}</td>
+            <td>{{ artist.formation_year }}–{% if artist.disband_year %}{{ artist.disband_year }}{% endif %}</td>
             <td>{{ artist.formation_location }}</td>
             <td>
                 {% for genre in artist.genres.all %}
-                {{ genre.name }}{% if not forloop.last %}, {% endif %}
+                {{ genre.name }}{% if not forloop.last %} / {% endif %}
                 {% endfor %}
             </td>
             <td>{{ artist.is_favourite }}</td>
             <td>
                 <form action="{% url 'artist_delete' artist.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
             </td>
         </tr>

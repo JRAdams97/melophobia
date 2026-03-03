@@ -2,9 +2,9 @@
 {% block content %}
 
 <div>
-    <h1>Issues</h1>
-    <hr/>
-    <table>
+    <h1 class="font-title text-2xl font-bold">Issues</h1>
+    <div class="divider"></div>
+    <table class="table">
         <thead>
         <tr>
             <th>Title</th>
@@ -42,7 +42,7 @@
             <td>
                 <form action="{% url 'issue_delete' issue.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
             </td>
         </tr>

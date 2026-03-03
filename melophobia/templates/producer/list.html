@@ -2,9 +2,9 @@
 {% block content %}
 
 <div>
-    <h1>Producers</h1>
-    <hr/>
-    <table>
+    <h1 class="font-title text-2xl font-bold">Producers</h1>
+    <div class="divider"></div>
+    <table class="table">
         <thead>
         <tr>
             <th>Name</th>
@@ -22,7 +22,7 @@
 
         <tr>
             <td>{{ producer.name }}</td>
-            <td>{{ producer.gender }}</td>
+            <td>{{ producer.gender|title }}</td>
             <td>{{ producer.birth_date }}</td>
             <td>{{ producer.birth_location }}</td>
             <td>{{ producer.death_date }}</td>
@@ -30,7 +30,7 @@
             <td>
                 <form action="{% url 'producer_delete' producer.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
             </td>
         </tr>

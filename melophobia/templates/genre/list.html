@@ -2,9 +2,9 @@
 {% block content %}
 
 <div>
-    <h1>Genres</h1>
-    <hr/>
-    <table>
+    <h1 class="font-title text-2xl font-bold">Genres</h1>
+    <div class="divider"></div>
+    <table class="table">
         <thead>
         <tr>
             <th>Name</th>
@@ -22,7 +22,7 @@
             <td>{{ genre.name }}</td>
             <td>
                 {% for parent_genre in genre.parent_genres.all %}
-                {{ parent_genre.name }}{% if not forloop.last %}, {% endif %}
+                {{ parent_genre.name }}{% if not forloop.last %} / {% endif %}
                 {% endfor %}
             </td>
             <td>{{ genre.origin_year }}</td>
@@ -30,7 +30,7 @@
             <td>
                 <form action="{% url 'genre_delete' genre.pk %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Delete">
+                    <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
             </td>
         </tr>
