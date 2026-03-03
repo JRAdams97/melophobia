@@ -4,11 +4,209 @@
 <html lang="en">
 <head>
     <title>Melophobia</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
 </head>
 <body>
+<div class="navbar bg-base-100 shadow-sm">
+    <div class="flex-1">
+        <a class="btn btn-ghost text-xl">melophobia</a>
+    </div>
+    <div class="flex gap-2">
+        <input class="input input-bordered w-24 md:w-auto" placeholder="Search" type="text"/>
+        <div class="dropdown dropdown-end">
+            <div class="btn btn-ghost btn-circle avatar" role="button" tabindex="0">
+                <div class="w-10 rounded-full"></div>
+            </div>
+            <ul class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                tabindex="-1">
+                <li><a>Profile</a></li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="drawer lg:drawer-open">
+    <input class="drawer-toggle" id="nav-drawer" type="checkbox"/>
+    <div class="drawer-content">
+        <!-- Main content area -->
+        <main class="flex-1 p-6">
+            <article class="prose max-w-none">
+                {% block content %}
+                {% endblock %}
+            </article>
+        </main>
+    </div>
+    <div class="drawer-side is-drawer-close:overflow-visible">
+        <label aria-label="close sidebar" class="drawer-overlay" for="nav-drawer"></label>
+        <div class="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-16 is-drawer-open:w-64">
+            <!-- Sidebar content here -->
+            <ul class="menu w-full grow">
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Home">
+                        <!-- Home icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z"/>
+                            <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z"/>
+                        </svg>
 
-{% block content %}
-{% endblock %}
+                        <span class="is-drawer-close:hidden">Home</span>
+                    </button>
+                </li>
 
+                <!-- Home page divider -->
+                <div class="divider"></div>
+
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Artists">
+                        <!-- Artist icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.25 4.5a3.75 3.75 0 1 1 7.5 0v8.25a3.75 3.75 0 1 1-7.5 0V4.5Z"/>
+                            <path d="M6 10.5a.75.75 0 0 1 .75.75v1.5a5.25 5.25 0 1 0 10.5 0v-1.5a.75.75 0 0 1 1.5 0v1.5a6.751 6.751 0 0 1-6 6.709v2.291h3a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1 0-1.5h3v-2.291a6.751 6.751 0 0 1-6-6.709v-1.5A.75.75 0 0 1 6 10.5Z"/>
+                        </svg>
+                        <span class="is-drawer-close:hidden">Artists</span>
+                    </button>
+                </li>
+
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Collection">
+                        <!-- Collection icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375Z"/>
+                            <path clip-rule="evenodd"
+                                  d="m3.087 9 .54 9.176A3 3 0 0 0 6.62 21h10.757a3 3 0 0 0 2.995-2.824L20.913 9H3.087Zm6.163 3.75A.75.75 0 0 1 10 12h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1-.75-.75Z"
+                                  fill-rule="evenodd"/>
+                        </svg>
+                        <span class="is-drawer-close:hidden">Collection</span>
+                    </button>
+                </li>
+
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Genres">
+                        <!-- Genre icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                  d="M19.952 1.651a.75.75 0 0 1 .298.599V16.303a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.403-4.909l2.311-.66a1.5 1.5 0 0 0 1.088-1.442V6.994l-9 2.572v9.737a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.402-4.909l2.31-.66a1.5 1.5 0 0 0 1.088-1.442V5.25a.75.75 0 0 1 .544-.721l10.5-3a.75.75 0 0 1 .658.122Z"
+                                  fill-rule="evenodd"/>
+                        </svg>
+                        <span class="is-drawer-close:hidden">Genres</span>
+                    </button>
+                </li>
+
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Labels">
+                        <!-- Label icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.223 2.25c-.497 0-.974.198-1.325.55l-1.3 1.298A3.75 3.75 0 0 0 7.5 9.75c.627.47 1.406.75 2.25.75.844 0 1.624-.28 2.25-.75.626.47 1.406.75 2.25.75.844 0 1.623-.28 2.25-.75a3.75 3.75 0 0 0 4.902-5.652l-1.3-1.299a1.875 1.875 0 0 0-1.325-.549H5.223Z"/>
+                            <path clip-rule="evenodd"
+                                  d="M3 20.25v-8.755c1.42.674 3.08.673 4.5 0A5.234 5.234 0 0 0 9.75 12c.804 0 1.568-.182 2.25-.506a5.234 5.234 0 0 0 2.25.506c.804 0 1.567-.182 2.25-.506 1.42.674 3.08.675 4.5.001v8.755h.75a.75.75 0 0 1 0 1.5H2.25a.75.75 0 0 1 0-1.5H3Zm3-6a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75v-3Zm8.25-.75a.75.75 0 0 0-.75.75v5.25c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-5.25a.75.75 0 0 0-.75-.75h-3Z"
+                                  fill-rule="evenodd"/>
+                        </svg>
+                        <span class="is-drawer-close:hidden">Labels</span>
+                    </button>
+                </li>
+
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Languages">
+                        <!-- Language icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                  d="M9 2.25a.75.75 0 0 1 .75.75v1.506a49.384 49.384 0 0 1 5.343.371.75.75 0 1 1-.186 1.489c-.66-.083-1.323-.151-1.99-.206a18.67 18.67 0 0 1-2.97 6.323c.318.384.65.753 1 1.107a.75.75 0 0 1-1.07 1.052A18.902 18.902 0 0 1 9 13.687a18.823 18.823 0 0 1-5.656 4.482.75.75 0 0 1-.688-1.333 17.323 17.323 0 0 0 5.396-4.353A18.72 18.72 0 0 1 5.89 8.598a.75.75 0 0 1 1.388-.568A17.21 17.21 0 0 0 9 11.224a17.168 17.168 0 0 0 2.391-5.165 48.04 48.04 0 0 0-8.298.307.75.75 0 0 1-.186-1.489 49.159 49.159 0 0 1 5.343-.371V3A.75.75 0 0 1 9 2.25ZM15.75 9a.75.75 0 0 1 .68.433l5.25 11.25a.75.75 0 1 1-1.36.634l-1.198-2.567h-6.744l-1.198 2.567a.75.75 0 0 1-1.36-.634l5.25-11.25A.75.75 0 0 1 15.75 9Zm-2.672 8.25h5.344l-2.672-5.726-2.672 5.726Z"
+                                  fill-rule="evenodd"/>
+                        </svg>
+                        <span class="is-drawer-close:hidden">Languages</span>
+                    </button>
+                </li>
+
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Locations">
+                        <!-- Location icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                  d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                                  fill-rule="evenodd"/>
+                        </svg>
+                        <span class="is-drawer-close:hidden">Locations</span>
+                    </button>
+                </li>
+
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Media">
+                        <!-- Media icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06Z"/>
+                            <path d="M15.932 7.757a.75.75 0 0 1 1.061 0 6 6 0 0 1 0 8.486.75.75 0 0 1-1.06-1.061 4.5 4.5 0 0 0 0-6.364.75.75 0 0 1 0-1.06Z"/>
+                        </svg>
+                        <span class="is-drawer-close:hidden">Media</span>
+                    </button>
+                </li>
+
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Producers">
+                        <!-- Producer icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                  d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                  fill-rule="evenodd"/>
+                        </svg>
+                        <span class="is-drawer-close:hidden">Producers</span>
+                    </button>
+                </li>
+
+                <!-- Nav item -->
+                <li>
+                    <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Releases">
+                        <!-- Location icon -->
+                        <svg class="my-1.5 inline-block size-6" fill="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"/>
+                            <path d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"/>
+                            <path d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"/>
+                        </svg>
+                        <span class="is-drawer-close:hidden">Releases</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<footer class="footer sm:footer-horizontal footer-center bg-base-200 text-base-content p-10">
+    <aside>
+        <svg
+                class="fill-current"
+                clip-rule="evenodd"
+                fill-rule="evenodd"
+                height="50"
+                viewBox="0 0 24 24"
+                width="50"
+                xmlns="http://www.w3.org/2000/svg">
+            <path
+                    d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"></path>
+        </svg>
+        <p>
+            melophobia
+            <br/>
+            © 2026 Justin Adams
+        </p>
+    </aside>
+</footer>
 </body>
 </html>
