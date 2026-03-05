@@ -2,13 +2,194 @@
 {% block content %}
 
 <div>
-    <h1>Artist Form</h1>
-    <hr/>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+    <h1 class="font-title text-2xl font-bold">Artist Form</h1>
+    <div class="divider"></div>
+    <div class="flex items-center justify-center">
+        <form method="POST">
+            <div class="space-y-12">
+                {% csrf_token %}
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 w-80">
+                    <!-- Name field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.name.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="name"
+                               value="{{ form.name.value|default:'' }}"/>
+
+                        {% if form.name.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.name.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Sort Name field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.sort_name.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="sort_name"
+                               value="{{ form.sort_name.value|default:'' }}"/>
+
+                        {% if form.sort_name.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.sort_name.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Type field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.type.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="type">
+
+                            {% for value, label in form.type.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.type.value %}selected {% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.type.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.type.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Gender field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.gender.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="gender">
+
+                            {% for value, label in form.gender.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.gender.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.gender.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.gender.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Formation Year field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.formation_year.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="formation_year"
+                               value="{{ form.formation_year.value|default:'' }}"/>
+
+                        {% if form.formation_year.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.formation_year.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Formation Location field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.formation_location.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="formation_location">
+
+                            {% for value, label in form.formation_location.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.formation_location.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.formation_location.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.formation_location.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Disband Year field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.disband_year.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="disband_year"
+                               value="{{ form.disband_year.value|default:'' }}"/>
+
+                        {% if form.disband_year.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.disband_year.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Genres field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.genres.label }}</span>
+                        </div>
+                        <select multiple class="select select-bordered w-full mt-2" name="genres">
+
+                            {% for value, label in form.genres.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value in form.genres.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.genres.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.genres.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Is Favourite field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.is_favourite.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" type="checkbox" name="is_favourite"
+                               {% if form.is_favourite.value %}checked{% endif %} />
+                    </label>
+                </div>
+                <button class="btn btn-neutral mt-6" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% endblock %}

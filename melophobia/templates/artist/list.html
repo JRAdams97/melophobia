@@ -21,8 +21,12 @@
 
         <tr>
             <td>{{ artist.name }}</td>
-            <td>{{ artist.formation_year }}–{% if artist.disband_year %}{{ artist.disband_year }}{% endif %}</td>
-            <td>{{ artist.formation_location }}</td>
+            <td>
+                {{ artist.formation_year|default_if_none:""}}
+                –
+                {% if artist.disband_year %}{{ artist.disband_year }}{% endif %}
+            </td>
+            <td>{{ artist.formation_location|default_if_none:"" }}</td>
             <td>
                 {% for genre in artist.genres.all %}
                 {{ genre.name }}{% if not forloop.last %} / {% endif %}
@@ -30,7 +34,10 @@
             </td>
             <td>{{ artist.is_favourite }}</td>
             <td>
-                <form action="{% url 'artist_delete' artist.pk %}" method="POST">
+                <button class="btn btn-sm btn-info">
+                    <a href="{% url 'artist_edit' artist.pk %}">Edit</a>
+                </button>
+                <form action="{% url 'artist_delete' artist.pk %}" class="inline" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
@@ -41,6 +48,9 @@
 
         </tbody>
     </table>
+    <a href="{% url 'artist_add' %}">
+        <button class="btn btn-neutral">Add</button>
+    </a>
 </div>
 
 {% endblock %}

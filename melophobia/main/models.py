@@ -198,9 +198,9 @@ class Artist(models.Model):
     type = models.CharField(choices=ArtistType)
     gender = models.CharField(choices=Gender, blank=True)
     formation_year = models.IntegerField(blank=True, null=True)
-    formation_location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    formation_location = models.ForeignKey(Location, on_delete=models.SET_NULL, blank=True, null=True)
     disband_year = models.IntegerField(blank=True, null=True)
-    genres = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(Genre, blank=True)
     is_favourite = models.BooleanField(default=False)
 
     class Meta:
