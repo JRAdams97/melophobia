@@ -20,7 +20,10 @@
             <td>{{ language.name }}</td>
             <td>{{ language.script }}</td>
             <td>
-                <form action="{% url 'language_delete' language.pk %}" method="POST">
+                <button class="btn btn-sm btn-info">
+                    <a href="{% url 'language_edit' language.pk %}">Edit</a>
+                </button>
+                <form action="{% url 'language_delete' language.pk %}" class="inline" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
@@ -31,6 +34,9 @@
 
         </tbody>
     </table>
+    <a href="{% url 'language_add' %}">
+        <button class="btn btn-neutral">Add</button>
+    </a>
 </div>
 
 {% endblock %}
