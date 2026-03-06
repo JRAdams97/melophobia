@@ -40,7 +40,10 @@
             <td>{{ issue.barcode }}</td>
             <td>{{ issue.issue_variants.all|length }}</td>
             <td>
-                <form action="{% url 'issue_delete' issue.pk %}" method="POST">
+                <button class="btn btn-sm btn-info">
+                    <a href="{% url 'issue_edit' issue.pk %}">Edit</a>
+                </button>
+                <form action="{% url 'issue_delete' issue.pk %}" class="inline" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
@@ -51,6 +54,9 @@
 
         </tbody>
     </table>
+    <a href="{% url 'issue_add' %}">
+        <button class="btn btn-neutral">Add</button>
+    </a>
 </div>
 
 {% endblock %}

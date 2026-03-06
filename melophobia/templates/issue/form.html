@@ -2,22 +2,249 @@
 {% block content %}
 
 <div>
-    <h1>Issue Form</h1>
-    <hr/>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <h1 class="font-title text-2xl font-bold">Issue Form</h1>
+    <div class="divider"></div>
+    <div class="flex items-center justify-center">
+        <form method="POST">
+            <div class="space-y-12">
+                {% csrf_token %}
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 w-80">
+                    <!-- Parent Release field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.parent_release.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="parent_release">
 
-        {{ issue_variant_formset.management_form }}
+                            {% for value, label in form.parent_release.field.choices %}
 
-        {% for form in issue_variant_formset %}
-        <div class="variant-form">
-            {{ form.as_p }}
-        </div>
-        {% endfor %}
+                            <option value="{{ value }}"
+                                    {% if value == form.parent_release.value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
 
-        <button type="submit">Submit</button>
-    </form>
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.parent_release.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.parent_release.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Label field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.label.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="parent_release">
+
+                            {% for value, label in form.label.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.label.value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.label.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.label.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Release Year field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.release_year.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="release_year"
+                               value="{{ form.release_year.value|default:'' }}"/>
+
+                        {% if form.release_year.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.release_year.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Release Country field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.release_country.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="release_country">
+
+                            {% for value, label in form.release_country.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.release_country.value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.release_country.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.release_country.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Catalogue Number field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.catalogue_number.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="catalogue_number"
+                               value="{{ form.catalogue_number.value|default:'' }}"/>
+
+                        {% if form.catalogue_number.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.catalogue_number.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Media field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.media.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="media">
+
+                            {% for value, label in form.media.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.media.value %}selected {% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.media.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.media.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Edition field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.edition.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="edition"
+                               value="{{ form.edition.value|default:'' }}"/>
+
+                        {% if form.edition.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.edition.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Is Re-Issue? field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.is_reissue.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" type="checkbox" name="is_reissue"
+                               {% if form.is_reissue.value %}checked{% endif %} />
+                    </label>
+                    <!-- Is Official? field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.is_official.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" type="checkbox" name="is_official"
+                               {% if form.is_official.value %}checked{% endif %} />
+                    </label>
+                    <!-- Is Promo? field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.is_promo.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" type="checkbox" name="is_promo"
+                               {% if form.is_promo.value %}checked{% endif %} />
+                    </label>
+                    <!-- Has Pregap? field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.has_pregap.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" type="checkbox" name="has_pregap"
+                               {% if form.has_pregap.value %}checked{% endif %} />
+                    </label>
+                    <!-- Has Data Track? field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.has_data_track.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" type="checkbox" name="has_data_track"
+                               {% if form.has_data_track.value %}checked{% endif %} />
+                    </label>
+                    <!-- Barcode field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.barcode.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="barcode"
+                               value="{{ form.barcode.value|default:'' }}"/>
+
+                        {% if form.barcode.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.barcode.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Comment field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.comment.label }}</span>
+                        </div>
+                        <textarea class="block textarea w-80 mt-2"
+                                  name="comment">{{ form.comment.value|default:'' }}</textarea>
+
+                        {% if form.comment.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.comment.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                </div>
+                <button class="btn btn-neutral mt-6" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% endblock %}

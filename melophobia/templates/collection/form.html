@@ -111,7 +111,7 @@
                         <div class="label">
                             <span class="label-text text-neutral">{{ form.media_comment.label }}</span>
                         </div>
-                        <textarea class="textarea mt-2"
+                        <textarea class="block textarea w-80 mt-2"
                                   name="media_comment">{{ form.media_comment.value|default:'' }}</textarea>
 
                         {% if form.media_comment.errors %}
@@ -257,8 +257,9 @@
                         <div class="label">
                             <span class="label-text text-neutral">{{ form.comment.label }}</span>
                         </div>
-                        <textarea class="textarea mt-2"
-                                  name="media_comment">{{ form.comment.value|default:'' }}</textarea>
+                        <textarea class="textarea mt-2" name="comment">
+                            {{ form.comment.value|default:'' }}
+                        </textarea>
 
                         {% if form.comment.errors %}
 
