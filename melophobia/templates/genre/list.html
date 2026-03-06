@@ -28,7 +28,10 @@
             <td>{{ genre.origin_year }}</td>
             <td>{{ genre.is_favourite }}</td>
             <td>
-                <form action="{% url 'genre_delete' genre.pk %}" method="POST">
+                <button class="btn btn-sm btn-info">
+                    <a href="{% url 'genre_edit' genre.pk %}">Edit</a>
+                </button>
+                <form action="{% url 'genre_delete' genre.pk %}" class="inline" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
@@ -39,6 +42,9 @@
 
         </tbody>
     </table>
+    <a href="{% url 'genre_add' %}">
+        <button class="btn btn-neutral">Add</button>
+    </a>
 </div>
 
 {% endblock %}
