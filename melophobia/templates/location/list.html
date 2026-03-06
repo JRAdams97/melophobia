@@ -32,7 +32,10 @@
             <td>{{ location.latitude }}</td>
             <td>{{ location.longitude }}</td>
             <td>
-                <form action="{% url 'location_delete' location.pk %}" method="POST">
+                <button class="btn btn-sm btn-info">
+                    <a href="{% url 'location_edit' location.pk %}">Edit</a>
+                </button>
+                <form action="{% url 'location_delete' location.pk %}" class="inline" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
@@ -43,6 +46,9 @@
 
         </tbody>
     </table>
+    <a href="{% url 'location_add' %}">
+        <button class="btn btn-neutral">Add</button>
+    </a>
 </div>
 
 {% endblock %}

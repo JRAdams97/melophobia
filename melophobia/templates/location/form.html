@@ -2,13 +2,94 @@
 {% block content %}
 
 <div>
-    <h1>Location Form</h1>
-    <hr/>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+    <h1 class="font-title text-2xl font-bold">Location Form</h1>
+    <div class="divider"></div>
+    <div class="flex items-center justify-center">
+        <form method="POST">
+            <div class="space-y-12">
+                {% csrf_token %}
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 w-80">
+                    <!-- Name field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.name.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="name"
+                               value="{{ form.name.value|default:'' }}"/>
+
+                        {% if form.name.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.name.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Region field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.region.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="region">
+
+                            {% for value, label in form.region.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.region.value %}selected {% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.region.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.region.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Latitude field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.latitude.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="latitude"
+                               value="{{ form.latitude.value|default:'' }}"/>
+
+                        {% if form.latitude.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.latitude.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Longitude field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.longitude.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="longitude"
+                               value="{{ form.longitude.value|default:'' }}"/>
+
+                        {% if form.longitude.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.longitude.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                </div>
+                <button class="btn btn-neutral mt-6" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% endblock %}
