@@ -2,13 +2,277 @@
 {% block content %}
 
 <div>
-    <h1>Collection Item Form</h1>
-    <hr/>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-</div>
+    <h1 class="font-title text-2xl font-bold">Collection Item Form</h1>
+    <div class="divider"></div>
+    <div class="flex items-center justify-center">
+        <form method="POST">
+            <div class="space-y-12">
+                {% csrf_token %}
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 w-80">
+                    <!-- Issue field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.issue.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="issue">
 
-{% endblock %}
+                            {% for value, label in form.issue.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.issue.value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.issue.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.issue.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Packaging Grade field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.packaging_grade.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="packaging_grade">
+
+                            {% for value, label in form.packaging_grade.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.packaging_grade.value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.packaging_grade.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.packaging_grade.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Packaging Comment field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.packaging_comment.label }}</span>
+                        </div>
+                        <textarea class="block textarea w-80 mt-2" name="packaging_comment">{{ form.packaging_comment.value|default:'' }}</textarea>
+
+                        {% if form.packaging_comment.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.packaging_comment.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Media Grade field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.media_grade.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="media_grade">
+
+                            {% for value, label in form.media_grade.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.media_grade.value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.media_grade.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.media_grade.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Media Comment field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.media_comment.label }}</span>
+                        </div>
+                        <textarea class="textarea mt-2"
+                                  name="media_comment">{{ form.media_comment.value|default:'' }}</textarea>
+
+                        {% if form.media_comment.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.media_comment.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Is Missing Content field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.is_missing_content.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" name="is_favourite" type="checkbox"
+                               {% if form.is_missing_content.value %}checked{% endif %}/>
+                    </label>
+                    <!-- Missing Content Comment field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.missing_content_comment.label }}</span>
+                        </div>
+                        <textarea class="textarea mt-2"
+                                  name="media_comment">{{ form.missing_content_comment.value|default:'' }}</textarea>
+
+                        {% if form.missing_content_comment.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.missing_content_comment.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Has Promo Material field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.has_promo_material.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" name="is_favourite" type="checkbox"
+                               {% if form.has_promo_material.value %}checked{% endif %}/>
+                    </label>
+                    <!-- Remaining Tracks field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.remaining_tracks.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" name="remaining_tracks" type="text"
+                               value="{{ form.remaining_tracks.value }}"/>
+
+                        {% if form.remaining_tracks.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.remaining_tracks.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Remaining Media Items field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.remaining_media_items.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" name="remaining_media_items" type="text"
+                               value="{{ form.remaining_media_items.value }}"/>
+
+                        {% if form.remaining_media_items.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.remaining_media_items.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Is Favourite field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.is_favourite.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" name="is_favourite" type="checkbox"
+                               {% if form.is_favourite.value %}checked{% endif %}/>
+                    </label>
+                    <!-- Digital Cover Quality field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.digital_cover_quality.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="digital_cover_quality">
+
+                            {% for value, label in form.digital_cover_quality.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.digital_cover_quality.value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.digital_cover_quality.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.digital_cover_quality.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Backup State field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.backup_state.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="backup_state">
+
+                            {% for value, label in form.backup_state.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.backup_state.value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.backup_state.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.backup_state.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Comment field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.comment.label }}</span>
+                        </div>
+                        <textarea class="textarea mt-2"
+                                  name="media_comment">{{ form.comment.value|default:'' }}</textarea>
+
+                        {% if form.comment.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.comment.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                </div>
+                <button class="btn btn-neutral mt-6" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    {% endblock %}

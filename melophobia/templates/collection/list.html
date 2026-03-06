@@ -43,9 +43,11 @@
             <td>{{ collection_item.remaining_media_items }}</td>
             <td>{{ collection_item.digital_cover_quality|title }}</td>
             <td>{{ collection_item.backup_state|title }}</td>
-            <td>{{ country.alpha2_code }}</td>
             <td>
-                <form action="{% url 'collection_delete' collection_item.pk %}" method="POST">
+                <button class="btn btn-sm btn-info">
+                    <a href="{% url 'collection_edit' collection_item.pk %}">Edit</a>
+                </button>
+                <form action="{% url 'collection_delete' collection_item.pk %}" class="inline" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
@@ -56,6 +58,9 @@
 
         </tbody>
     </table>
+    <a href="{% url 'collection_add' %}">
+        <button class="btn btn-neutral">Add</button>
+    </a>
 </div>
 
 {% endblock %}
