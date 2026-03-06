@@ -24,11 +24,14 @@
             <td>{{ label.name }}</td>
             <td>{{ label.formation_year }}</td>
             <td>{{ label.formation_location }}</td>
-            <td>{{ label.closure_year }}</td>
-            <td>{{ label.labelcode }}</td>
+            <td>{{ label.closure_year|default:'' }}</td>
+            <td>{{ label.labelcode|default:'' }}</td>
             <td>{{ label.is_favourite }}</td>
             <td>
-                <form action="{% url 'label_delete' label.pk %}" method="POST">
+                <button class="btn btn-sm btn-info">
+                    <a href="{% url 'label_edit' label.pk %}">Edit</a>
+                </button>
+                <form action="{% url 'label_delete' label.pk %}" class="inline" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
@@ -39,6 +42,9 @@
 
         </tbody>
     </table>
+    <a href="{% url 'label_add' %}">
+        <button class="btn btn-neutral">Add</button>
+    </a>
 </div>
 
 {% endblock %}
