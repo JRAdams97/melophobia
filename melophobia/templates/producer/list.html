@@ -28,7 +28,10 @@
             <td>{{ producer.death_date }}</td>
             <td>{{ producer.is_favourite }}</td>
             <td>
-                <form action="{% url 'producer_delete' producer.pk %}" method="POST">
+                <button class="btn btn-sm btn-info">
+                    <a href="{% url 'producer_edit' producer.pk %}">Edit</a>
+                </button>
+                <form action="{% url 'producer_delete' producer.pk %}" class="inline" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
@@ -39,6 +42,9 @@
 
         </tbody>
     </table>
+    <a href="{% url 'producer_add' %}">
+        <button class="btn btn-neutral">Add</button>
+    </a>
 </div>
 
 {% endblock %}
