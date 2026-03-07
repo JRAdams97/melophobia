@@ -124,7 +124,7 @@ class Location(models.Model):
 
 class Media(models.Model):
     name = models.CharField(db_index=True, max_length=100)
-    abbreviation = models.CharField(max_length=30)
+    abbreviation = models.CharField(max_length=30, blank=True, null=True)
     classification = models.CharField(choices=MediaClass)
     origin_year = models.IntegerField(blank=True, null=True)
 

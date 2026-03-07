@@ -21,7 +21,7 @@
 
         <tr>
             <td>{{ media.name }}</td>
-            <td>{{ media.abbreviation }}</td>
+            <td>{{ media.abbreviation|default:'' }}</td>
             <td>
                 {% with classification=media.classification|format_enum %}
                 {{ classification|title }}
@@ -29,7 +29,10 @@
             </td>
             <td>{{ media.origin_year }}</td>
             <td>
-                <form action="{% url 'media_delete' media.pk %}" method="POST">
+                <button class="btn btn-sm btn-info">
+                    <a href="{% url 'media_edit' media.pk %}">Edit</a>
+                </button>
+                <form action="{% url 'media_delete' media.pk %}" class="inline" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-sm btn-error" type="submit">Delete</button>
                 </form>
@@ -40,6 +43,9 @@
 
         </tbody>
     </table>
+    <a href="{% url 'media_add' %}">
+        <button class="btn btn-neutral">Add</button>
+    </a>
 </div>
 
 {% endblock %}
