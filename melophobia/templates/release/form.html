@@ -2,13 +2,312 @@
 {% block content %}
 
 <div>
-    <h1>Release Form</h1>
-    <hr/>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+    <h1 class="font-title text-2xl font-bold">Release Form</h1>
+    <div class="divider"></div>
+    <div class="flex items-center justify-center">
+        <form method="POST">
+            <div class="space-y-12">
+                {% csrf_token %}
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 w-80">
+                    <!-- Title field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.title.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="title"
+                               value="{{ form.title.value|default:'' }}"/>
+
+                        {% if form.title.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.title.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Alternate Title field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.alternate_title.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="alternate_title"
+                               value="{{ form.alternate_title.value|default:'' }}"/>
+
+                        {% if form.alternate_title.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.alternate_title.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Release Date field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.release_date.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="release_date"
+                               value="{{ form.release_date.value }}"/>
+
+                        {% if form.release_date.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.release_date.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Artists field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.artists.label }}</span>
+                        </div>
+                        <select multiple class="select select-bordered w-full mt-2" name="artists">
+
+                            {% for value, label in form.artists.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value in form.artists.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.artists.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.artists.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Genres field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.genres.label }}</span>
+                        </div>
+                        <select multiple class="select select-bordered w-full mt-2" name="genres">
+
+                            {% for value, label in form.genres.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value in form.genres.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.genres.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.genres.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Is Favourite? field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.is_favourite.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" type="checkbox" name="is_favourite"
+                               {% if form.is_favourite.value %}checked{% endif %} />
+                    </label>
+                    <!-- Languages field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.languages.label }}</span>
+                        </div>
+                        <select multiple class="select select-bordered w-full mt-2" name="languages">
+
+                            {% for value, label in form.languages.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value in form.languages.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.languages.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.languages.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Producers field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.producers.label }}</span>
+                        </div>
+                        <select multiple class="select select-bordered w-full mt-2" name="producers">
+
+                            {% for value, label in form.producers.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value in form.producers.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.producers.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.producers.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- AOTY Rank field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.aoty_rank.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="aoty_rank"
+                               value="{{ form.aoty_rank.value|default:'' }}"/>
+
+                        {% if form.aoty_rank.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.aoty_rank.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- BEA Rank field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.bea_rank.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="bea_rank"
+                               value="{{ form.bea_rank.value|default:'' }}"/>
+
+                        {% if form.bea_rank.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.bea_rank.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Christgau Rating field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.christgau_rating.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="christgau_rating"
+                               value="{{ form.christgau_rating.value|default:'' }}"/>
+
+                        {% if form.christgau_rating.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.christgau_rating.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Metacritic Rating field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.metacritic_rating.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="metacritic_rating"
+                               value="{{ form.metacritic_rating.value|default:'' }}"/>
+
+                        {% if form.metacritic_rating.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.metacritic_rating.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- RYM Rank field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.rym_rank.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="rym_rank"
+                               value="{{ form.rym_rank.value|default:'' }}"/>
+
+                        {% if form.rym_rank.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.rym_rank.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- RYM Rating field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.rym_rating.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="rym_rating"
+                               value="{{ form.rym_rating.value|default:'' }}"/>
+
+                        {% if form.rym_rating.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.rym_rating.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Is Official? field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.is_official.label }}</span>
+                        </div>
+                        <input class="block checkbox mt-2" type="checkbox" name="is_official"
+                               {% if form.is_official.value %}checked{% endif %} />
+                    </label>
+                    <!-- Types field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.types.label }}</span>
+                        </div>
+                        <select multiple class="select select-bordered w-full mt-2" name="types">
+
+                            {% for value, label in form.types.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value in form.types.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.types.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.types.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                </div>
+                <button class="btn btn-neutral mt-6" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% endblock %}
