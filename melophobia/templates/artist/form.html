@@ -53,7 +53,7 @@
                             {% for value, label in form.type.field.choices %}
 
                             <option value="{{ value }}"
-                                    {% if value == form.type.value %}selected {% endif %}>{{ label }}</option>
+                                    {% if value == form.type.value %}selected{% endif %}>{{ label }}</option>
 
                             {% endfor %}
 

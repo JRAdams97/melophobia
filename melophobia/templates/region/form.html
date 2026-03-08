@@ -2,13 +2,77 @@
 {% block content %}
 
 <div>
-    <h1>Region Form</h1>
-    <hr/>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+    <h1 class="font-title text-2xl font-bold">Region Form</h1>
+    <div class="divider"></div>
+    <div class="flex items-center justify-center">
+        <form method="POST">
+            <div class="space-y-12">
+                {% csrf_token %}
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 w-80">
+                    <!-- Name field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.name.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="name"
+                               value="{{ form.name.value|default:'' }}"/>
+
+                        {% if form.name.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.name.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Abbreviation field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.abbreviation.label }}</span>
+                        </div>
+                        <input class="input input-bordered mt-2" type="text" name="abbreviation"
+                               value="{{ form.abbreviation.value|default:'' }}"/>
+
+                        {% if form.abbreviation.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.abbreviation.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                    <!-- Country field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.country.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="country">
+
+                            {% for value, label in form.country.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.country.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.country.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.country.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
+                  </div>
+                <button class="btn btn-neutral mt-6" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% endblock %}

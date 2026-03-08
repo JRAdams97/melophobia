@@ -36,7 +36,7 @@
                             {% for value, label in form.region.field.choices %}
 
                             <option value="{{ value }}"
-                                    {% if value == form.region.value %}selected {% endif %}>{{ label }}</option>
+                                    {% if value == form.region.value %}selected{% endif %}>{{ label }}</option>
 
                             {% endfor %}
 

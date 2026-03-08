@@ -53,7 +53,7 @@
                             {% for value, label in form.classification.field.choices %}
 
                             <option value="{{ value }}"
-                                    {% if value == form.classification.value %}selected {% endif %}>{{ label }}</option>
+                                    {% if value == form.classification.value %}selected{% endif %}>{{ label }}</option>
 
                             {% endfor %}
 

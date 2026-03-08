@@ -134,7 +134,7 @@
                             {% for value, label in form.media.field.choices %}
 
                             <option value="{{ value }}"
-                                    {% if value == form.media.value %}selected {% endif %}>{{ label }}</option>
+                                    {% if value == form.media.value %}selected{% endif %}>{{ label }}</option>
 
                             {% endfor %}
 
