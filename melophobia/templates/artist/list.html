@@ -20,7 +20,7 @@
         {% for artist in artists %}
 
         <tr>
-            <td>{{ artist.name }}</td>
+            <td><a href="{% url 'artist_info' artist.pk %}">{{ artist.name }}</a></td>
             <td>
                 {{ artist.formation_year|default_if_none:""}}
                 –

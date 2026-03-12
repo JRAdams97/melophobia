@@ -202,9 +202,14 @@ class Artist(models.Model):
     disband_year = models.IntegerField(blank=True, null=True)
     genres = models.ManyToManyField(Genre, blank=True)
     is_favourite = models.BooleanField(default=False)
+    image_ref = models.CharField(max_length=80, blank=True)
 
     class Meta:
         ordering = ('name',)
+
+    @property
+    def image_or_default(self):
+        return self.image_ref if self.image_ref else '../fallback.png'
 
     def __str__(self):
         return self.name

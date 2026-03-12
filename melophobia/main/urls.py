@@ -8,11 +8,12 @@ from melophobia.main.views import CountryListView, CountryCreateView, CountryUpd
     LanguageListView, LanguageCreateView, LanguageUpdateView, LanguageDeleteView, ProducerListView, ProducerCreateView, \
     ProducerUpdateView, ProducerDeleteView, ReleaseListView, ReleaseCreateView, ReleaseUpdateView, ReleaseDeleteView, \
     IssueListView, IssueCreateView, IssueUpdateView, IssueDeleteView, CollectionListView, CollectionCreateView, \
-    CollectionUpdateView, CollectionDeleteView
+    CollectionUpdateView, CollectionDeleteView, ArtistDetailView
 
 urlpatterns = [
     path('artist/list', ArtistListView.as_view(), name='artist_list'),
     path('artist/add', ArtistCreateView.as_view(), name='artist_add'),
+    path('artist/info/<int:pk>', ArtistDetailView.as_view(), name='artist_info'),
     path('artist/edit/<int:pk>', ArtistUpdateView.as_view(), name='artist_edit'),
     path('artist/delete/<int:pk>', ArtistDeleteView.as_view(), name='artist_delete'),
     path('collection/list', CollectionListView.as_view(), name='collection_list'),

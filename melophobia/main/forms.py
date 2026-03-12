@@ -3,6 +3,7 @@ from django.forms import inlineformset_factory
 
 from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media, Language, Producer, Release, \
     Issue, IssueVariant, ReleaseTypeValue, CollectionItem
+from melophobia.main.utils import get_artist_images
 
 FAVOURITE_LABEL = 'Favourite?'
 SORT_NAME_LABEL = 'Sort Name'
@@ -12,7 +13,7 @@ class ArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
         fields = ['name', 'sort_name', 'type', 'gender', 'formation_year', 'formation_location', 'disband_year',
-                  'genres', 'is_favourite']
+                  'genres', 'is_favourite', 'image_ref']
         labels = {
             'name': 'Name',
             'sort_name': SORT_NAME_LABEL,
@@ -22,8 +23,14 @@ class ArtistForm(forms.ModelForm):
             'formation_location': 'Formation Location',
             'disband_year': 'Disband Year',
             'genres': 'Genres',
-            'is_favourite': FAVOURITE_LABEL
+            'is_favourite': FAVOURITE_LABEL,
+            'image_ref': 'Image Reference',
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['image_ref'].choices = [("", "---------")] + get_artist_images()
 
 
 class CollectionItemForm(forms.ModelForm):

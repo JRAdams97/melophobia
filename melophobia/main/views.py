@@ -1,6 +1,6 @@
 from django.db.models import QuerySet
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from melophobia.main.forms import CountryForm, RegionForm, LocationForm, GenreForm, LabelForm, ArtistForm, MediaForm, \
     LanguageForm, ProducerForm, ReleaseForm, IssueVariantFormSet, IssueForm, CollectionItemForm
@@ -13,6 +13,12 @@ class ArtistCreateView(CreateView):
     form_class = ArtistForm
     template_name = 'artist/form.html'
     success_url = reverse_lazy('artist_list')
+
+
+class ArtistDetailView(DetailView):
+    model = Artist
+    template_name = 'artist/info.html'
+    context_object_name = 'artist'
 
 
 class ArtistListView(ListView):
