@@ -223,6 +223,12 @@ class LabelListView(ListView):
         return Label.objects.all()
 
 
+class LabelDetailView(DetailView):
+    model = Label
+    template_name = 'label/info.html'
+    context_object_name = 'label'
+
+
 class LabelUpdateView(UpdateView):
     model = Label
     form_class = LabelForm

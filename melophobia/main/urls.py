@@ -8,7 +8,7 @@ from melophobia.main.views import CountryListView, CountryCreateView, CountryUpd
     LanguageListView, LanguageCreateView, LanguageUpdateView, LanguageDeleteView, ProducerListView, ProducerCreateView, \
     ProducerUpdateView, ProducerDeleteView, ReleaseListView, ReleaseCreateView, ReleaseUpdateView, ReleaseDeleteView, \
     IssueListView, IssueCreateView, IssueUpdateView, IssueDeleteView, CollectionListView, CollectionCreateView, \
-    CollectionUpdateView, CollectionDeleteView, ArtistDetailView
+    CollectionUpdateView, CollectionDeleteView, ArtistDetailView, LabelDetailView
 
 urlpatterns = [
     path('artist/list', ArtistListView.as_view(), name='artist_list'),
@@ -34,6 +34,7 @@ urlpatterns = [
     path('issue/delete/<int:pk>', IssueDeleteView.as_view(), name='issue_delete'),
     path('label/list', LabelListView.as_view(), name='label_list'),
     path('label/add', LabelCreateView.as_view(), name='label_add'),
+    path('label/info/<int:pk>', LabelDetailView.as_view(), name='label_info'),
     path('label/edit/<int:pk>', LabelUpdateView.as_view(), name='label_edit'),
     path('label/delete/<int:pk>', LabelDeleteView.as_view(), name='label_delete'),
     path('language/list', LanguageListView.as_view(), name='language_list'),

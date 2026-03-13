@@ -3,7 +3,7 @@ from django.forms import inlineformset_factory
 
 from melophobia.main.models import Country, Region, Location, Genre, Label, Artist, Media, Language, Producer, Release, \
     Issue, IssueVariant, ReleaseTypeValue, CollectionItem
-from melophobia.main.utils import get_artist_images
+from melophobia.main.utils import get_images
 
 FAVOURITE_LABEL = 'Favourite?'
 SORT_NAME_LABEL = 'Sort Name'
@@ -24,13 +24,13 @@ class ArtistForm(forms.ModelForm):
             'disband_year': 'Disband Year',
             'genres': 'Genres',
             'is_favourite': FAVOURITE_LABEL,
-            'image_ref': 'Image Reference',
+            'image_ref': 'Image Reference'
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['image_ref'].choices = [("", "---------")] + get_artist_images()
+        self.fields['image_ref'].choices = [("", "---------")] + get_images('artist')
 
 
 class CollectionItemForm(forms.ModelForm):
@@ -83,7 +83,7 @@ class LabelForm(forms.ModelForm):
     class Meta:
         model = Label
         fields = ['name', 'sort_name', 'formation_year', 'formation_location', 'closure_year', 'is_favourite',
-                  'labelcode', 'type']
+                  'labelcode', 'type', 'image_ref']
         labels = {
             'name': 'Name',
             'sort_name': SORT_NAME_LABEL,
@@ -92,8 +92,14 @@ class LabelForm(forms.ModelForm):
             'closure_year': 'Closure Year',
             'is_favourite': FAVOURITE_LABEL,
             'labelcode': 'Labelcode',
-            'type': 'Type'
+            'type': 'Type',
+            'image_ref': 'Image Reference'
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['image_ref'].choices = [("", "---------")] + get_images('label')
 
 
 class LanguageForm(forms.ModelForm):

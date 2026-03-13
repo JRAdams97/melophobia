@@ -154,6 +154,31 @@
                         {% endif %}
 
                     </label>
+                    <!-- Image Reference field -->
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-neutral">{{ form.image_ref.label }}</span>
+                        </div>
+                        <select class="select select-bordered w-full mt-2" name="image_ref">
+
+                            {% for value, label in form.image_ref.field.choices %}
+
+                            <option value="{{ value }}"
+                                    {% if value == form.image_ref.value %}selected{% endif %}>{{ label }}</option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% if form.image_ref.errors %}
+
+                        <div class="label">
+                            <span class="label-text-alt text-error text-xs">{{ form.image_ref.errors }}</span>
+                        </div>
+
+                        {% endif %}
+
+                    </label>
                 </div>
                 <button class="btn btn-neutral mt-6" type="submit">Submit</button>
             </div>

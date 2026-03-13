@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h1 class="font-title text-2xl font-bold">Label Info</h1>
+    <div class="divider"></div>
+    <div class="grid grid-cols-2 gap-16 max-w-6xl mx-auto">
+        <div class="flex justify-end">
+            {% load static %}
+
+            <img class="rounded-full w-80" src="{% static 'image/label/'|add:label.image_or_default %}"/>
+        </div>
+        <div>
+            <h2 class="text-4xl font-bold">{{ label.name }}</h2>
+            <h3>
+                {{ label.formation_year }} – {% if label.closure_year %}{{ label.closure_year }}{% endif %}
+                <br/>
+                {{ label.formation_location }}
+            </h3>
+            {% if label.labelcode %}<h4>{{ label.labelcode }}</h4>{% endif %}
+            <div class="divider"></div>
+            <p>
+                {% if label.sort_name %}Sort Name: {{ label.sort_name }}<br/>{% endif %}
+                Type: {{ label.type|title }}<br/>
+                Favourite? {{ label.is_favourite }}
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

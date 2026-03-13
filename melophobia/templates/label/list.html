@@ -21,7 +21,7 @@
         {% for label in labels %}
 
         <tr>
-            <td>{{ label.name }}</td>
+            <td><a href="{% url 'label_info' label.pk %}">{{ label.name }}</a></td>
             <td>{{ label.formation_year }}</td>
             <td>{{ label.formation_location }}</td>
             <td>{{ label.closure_year|default:'' }}</td>
