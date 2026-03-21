@@ -154,9 +154,14 @@ class Producer(models.Model):
     birth_location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     death_date = models.CharField(blank=True)
     is_favourite = models.BooleanField(default=False)
+    image_ref = models.CharField(max_length=80, blank=True)
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('sort_name',)
+
+    @property
+    def image_or_default(self):
+        return self.image_ref if self.image_ref else '../fallback.png'
 
     def __str__(self):
         return self.name

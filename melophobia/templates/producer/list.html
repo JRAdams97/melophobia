@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load filters %}
 
 <div>
     <h1 class="font-title text-2xl font-bold">Producers</h1>
@@ -21,9 +22,9 @@
         {% for producer in producers %}
 
         <tr>
-            <td>{{ producer.name }}</td>
+            <td><a href="{% url 'producer_info' producer.pk %}">{{ producer.sort_name }}</a></td>
             <td>{{ producer.gender|title }}</td>
-            <td>{{ producer.birth_date }}</td>
+            <td>{{ producer.birth_date|format_partial_date }}</td>
             <td>{{ producer.birth_location }}</td>
             <td>{{ producer.death_date }}</td>
             <td>{{ producer.is_favourite }}</td>

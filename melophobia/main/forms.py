@@ -129,7 +129,8 @@ class MediaForm(forms.ModelForm):
 class ProducerForm(forms.ModelForm):
     class Meta:
         model = Producer
-        fields = ['name', 'sort_name', 'gender', 'birth_date', 'birth_location', 'death_date', 'is_favourite']
+        fields = ['name', 'sort_name', 'gender', 'birth_date', 'birth_location', 'death_date', 'is_favourite',
+                  'image_ref']
         labels = {
             'name': 'Name',
             'sort_name': SORT_NAME_LABEL,
@@ -137,8 +138,14 @@ class ProducerForm(forms.ModelForm):
             'birth_date': 'Birth Date',
             'birth_location': 'Birth Location',
             'death_date': 'Death Date',
-            'is_favourite': FAVOURITE_LABEL
+            'is_favourite': FAVOURITE_LABEL,
+            'image_ref': 'Image Reference'
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['image_ref'].choices = [("", "---------")] + get_images('producer')
 
 
 class RegionForm(forms.ModelForm):

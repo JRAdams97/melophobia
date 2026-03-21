@@ -345,6 +345,12 @@ class ProducerListView(ListView):
         return Producer.objects.all()
 
 
+class ProducerDetailView(DetailView):
+    model = Producer
+    template_name = 'producer/info.html'
+    context_object_name = 'producer'
+
+
 class ProducerUpdateView(UpdateView):
     model = Producer
     form_class = ProducerForm
