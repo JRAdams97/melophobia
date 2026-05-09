@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% load humanize %}
+
 <div>
     <h1 class="font-title text-2xl font-bold">Releases</h1>
     <div class="divider"></div>
@@ -34,15 +36,15 @@
             </td>
             <td>
                 {% for genre in release.genres.all %}
-                {{ genre.name }}{% if not forloop.last %}, {% endif %}
+                {{ genre.name }}{% if not forloop.last %} / {% endif %}
                 {% endfor %}
             </td>
-            <td>{{ release.aoty_rank }}</td>
-            <td>{{ release.bea_rank }}</td>
-            <td>{{ release.rym_rating }}{% if release.rym_rank %} ({{ release.rym_rank }}){% endif %}</td>
+            <td>{{ release.aoty_rank|intcomma }}</td>
+            <td>{{ release.bea_rank|intcomma }}</td>
+            <td>{{ release.rym_rating }}{% if release.rym_rank %} ({{ release.rym_rank|intcomma }}){% endif %}</td>
             <td>
                 {% for type in release.types.all %}
-                {{ type|title }}{% if not forloop.last %}, {% endif %}
+                {{ type|title }}{% if not forloop.last %} / {% endif %}
                 {% endfor %}
             </td>
             <td>{{ release.issues.all|length }}</td>

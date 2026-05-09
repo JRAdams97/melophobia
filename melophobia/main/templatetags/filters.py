@@ -21,6 +21,11 @@ def format_partial_date(value):
         return ''
 
     parts = value.split('/')
+
+    if len(parts) != 3:
+        print(f'Invalid date format: {parts}')
+        return value
+
     year, month, day = parts
 
     if month == '00':

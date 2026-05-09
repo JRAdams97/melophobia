@@ -57,7 +57,7 @@
                             <span class="label-text text-neutral">{{ form.latitude.label }}</span>
                         </div>
                         <input class="input input-bordered mt-2" type="text" name="latitude"
-                               value="{{ form.latitude.value|default:'' }}"/>
+                               value="{{ form.latitude.value|default:'' }}" placeholder="To nearest 4th decimal"/>
 
                         {% if form.latitude.errors %}
 
@@ -74,7 +74,7 @@
                             <span class="label-text text-neutral">{{ form.longitude.label }}</span>
                         </div>
                         <input class="input input-bordered mt-2" type="text" name="longitude"
-                               value="{{ form.longitude.value|default:'' }}"/>
+                               value="{{ form.longitude.value|default:'' }}" placeholder="To nearest 4th decimal"/>
 
                         {% if form.longitude.errors %}
 

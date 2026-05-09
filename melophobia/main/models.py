@@ -119,7 +119,7 @@ class Location(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return self.name + ', ' + str(self.region.name) + ', ' + str(self.region.country.alpha2_code)
+        return self.name + ', ' + str(self.region.name) + ', ' + str(self.region.country.name)
 
 
 class Media(models.Model):
@@ -150,7 +150,7 @@ class Producer(models.Model):
     name = models.CharField(db_index=True)
     sort_name = models.CharField(blank=True)
     gender = models.CharField(choices=Gender)
-    birth_date = models.CharField(default='0000-00-00')
+    birth_date = models.CharField(default='0000/00/00')
     birth_location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     death_date = models.CharField(blank=True)
     is_favourite = models.BooleanField(default=False)
@@ -238,7 +238,7 @@ class ReleaseType(models.Model):
 class Release(models.Model):
     title = models.CharField(db_index=True)
     alternate_title = models.CharField(blank=True)
-    release_date = models.CharField(default='0000-00-00')
+    release_date = models.CharField(default='0000/00/00')
     artists = models.ManyToManyField(Artist)
     genres = models.ManyToManyField(Genre)
     is_favourite = models.BooleanField(default=False)

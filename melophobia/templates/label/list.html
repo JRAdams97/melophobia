@@ -25,7 +25,13 @@
             <td>{{ label.formation_year }}</td>
             <td>{{ label.formation_location }}</td>
             <td>{{ label.closure_year|default:'' }}</td>
-            <td>{{ label.labelcode|default:'' }}</td>
+            <td>
+                {% if label.labelcode %}
+                    {% with labelcode=label.labelcode|default:'' %}
+                        LC {{ label.labelcode|stringformat:"05d" }}
+                    {% endwith %}
+                {% endif %}
+            </td>
             <td>{{ label.is_favourite }}</td>
             <td>
                 <button class="btn btn-sm btn-info">

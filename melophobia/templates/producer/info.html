@@ -12,16 +12,18 @@
         </div>
         <div>
             <h2 class="text-4xl font-bold">{{ producer.name }}</h2>
+            {% if producer.birth_date != '0000/00/00' or producer.death_date %}
             <h3>
-
-                {% load filters %}
-
-                {{ producer.birth_date|format_partial_date }}
+                {% if producer.birth_date != '0000/00/00' %}
+                    {% load filters %}
+                    {{ producer.birth_date|format_partial_date }}
+                {% endif %}
                 –
                 {% if producer.death_date %}{{ producer.death_date|format_partial_date }}{% endif %}
                 <br/>
                 {{ producer.birth_location }}
             </h3>
+            {% endif %}
             <div class="divider"></div>
             <p>
                 {% if producer.sort_name %}Sort Name: {{ producer.sort_name }}<br/>{% endif %}
